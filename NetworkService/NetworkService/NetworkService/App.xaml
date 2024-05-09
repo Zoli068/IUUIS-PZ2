@@ -3,7 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:NetworkService"
              StartupUri="MainWindow.xaml">
+    
+    
     <Application.Resources>
-         
+        
+        <!--#region  Colors-->
+        
+        <SolidColorBrush x:Key="FontColor" Color="#003459" />
+        <SolidColorBrush x:Key="SecondaryFontColor" Color="Black" />
+        <SolidColorBrush x:Key="BackGroundColor" Color="#edf8fa"/>
+        <SolidColorBrush x:Key="SecondaryBackGroundColor" Color="#00a7e1"/>
+        <SolidColorBrush x:Key="InvalidStatusColor" Color="#dd0426"/>
+
+        <!--#endregion-->
+        
+        <!--#region Effects-->
+        <DropShadowEffect
+                    Opacity="9"
+                    ShadowDepth="3"
+                    Color="#0281ad"
+                    x:Key="ClickedDropShadowEffect"
+                    Direction="320"/>
+
+        <DropShadowEffect
+                    Opacity="90"
+                    ShadowDepth="2"
+                    Color="Gray"
+                    x:Key="SecondaryClickedDropShadowEffect"
+                    Direction="320"/>
+        <!--#endregion-->
+        
+        
     </Application.Resources>
+
 </Application>

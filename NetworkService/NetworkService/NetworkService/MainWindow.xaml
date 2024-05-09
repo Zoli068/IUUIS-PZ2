@@ -3,10 +3,205 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:NetworkService"
+        xmlns:views="clr-namespace:NetworkService.Views"
+        xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" 
+        ResizeMode="NoResize"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+	    WindowStartupLocation="CenterScreen"
+        Height="650" Width="360">
+    
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NetworkEntitiesViewModel}">
+            <views:NetworkEntitiesView/>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Border 
+        Background="{StaticResource BackGroundColor}"
+        BorderThickness="1">
+   
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--#region ContentControl-->
+            <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
+            <!--#endregion-->
+            
+            <!--#region MENU BAR -->
+            <Menu Width="358"
+                Grid.Row="1"
+                BorderBrush="{StaticResource FontColor}"
+                BorderThickness="0 1 0 0"
+                Background="Transparent">
+
+                <MenuItem
+                        Command="{Binding NavCommand}"
+                        CommandParameter="shortCut">
+
+                    <MenuItem.Style>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                                        <Border
+                                            Height="50"
+                                            Padding="54 0 34 0"
+                                            Background="Transparent">
+
+                                            <fa5:SvgAwesome
+                                                Height="35"
+                                                Width="30"
+                                                Foreground="{StaticResource FontColor}"
+                                                Icon="Solid_EllipsisH"/>
+
+                                        </Border>
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                     Property="IsPressed" 
+                                     Value="True">
+
+                                    <Setter
+                                         Property="Effect"
+                                         Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                    
+                </MenuItem>
+
+                <MenuItem 
+                    Command="{Binding NavCommand}"
+                    CommandParameter="home">
+                    
+                    <MenuItem.Style>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                                        <Border
+                                            Height="50"
+                                            Padding="44 0 44 0"
+                                            Background="Transparent">
+
+                                            <fa5:SvgAwesome
+                                                Height="35"
+                                                Width="30"
+                                                Foreground="{StaticResource FontColor}"
+                                                Icon="Solid_Home"/>
+
+                                        </Border>
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                     Property="IsPressed" 
+                                     Value="True">
+
+                                    <Setter
+                                         Property="Effect"
+                                         Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                    
+                </MenuItem>
+
+                <MenuItem
+                    Command="{Binding NavCommand}"
+                    CommandParameter="undo">
+
+                    <MenuItem.Style>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                                        <Border
+                                            Height="50"
+                                            Padding="34 0 54 0"
+                                            Background="Transparent">
+
+                                            <fa5:SvgAwesome
+                                                Height="35"
+                                                Width="30"
+                                                Foreground="{StaticResource FontColor}"
+                                                Icon="Solid_UndoAlt"/>
+
+                                        </Border>
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                     Property="IsPressed" 
+                                     Value="True">
+
+                                    <Setter
+                                         Property="Effect"
+                                         Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+                </MenuItem>
+
+            </Menu>
+            <!--#endregion-->
+            
+        </Grid>
+    </Border>
 </Window>

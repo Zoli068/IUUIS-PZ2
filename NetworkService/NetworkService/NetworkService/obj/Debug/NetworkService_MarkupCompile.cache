@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\NetworkService\NetworkService\NetworkService\obj\Debug\
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\
 NetworkService
 none
 false
 DEBUG;TRACE
-D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\NetworkService\NetworkService\NetworkService\App.xaml
-1219584333
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\App.xaml
+31314775419
 
-7-788331692
-13-1310406943
-MainWindow.xaml;
+13-121013512
+15309366780
+MainWindow.xaml;Views\HomeView.xaml;Views\NetworkEntitiesView.xaml;
 
-True
+False
 

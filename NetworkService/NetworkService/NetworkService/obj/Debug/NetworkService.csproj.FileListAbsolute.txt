@@ -13,3 +13,29 @@ D:\!FTN\!HCI VEZBE\2023-24\PZ2\Visual Studio\NetworkService\NetworkService\Netwo
 D:\!FTN\!HCI VEZBE\2023-24\PZ2\Visual Studio\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.CoreCompileInputs.cache
 D:\!FTN\!HCI VEZBE\2023-24\PZ2\Visual Studio\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.exe
 D:\!FTN\!HCI VEZBE\2023-24\PZ2\Visual Studio\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.pdb
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\NetworkService.exe.config
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\NetworkService.exe
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\NetworkService.pdb
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.AssemblyReference.cache
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\MainWindow.g.cs
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\App.g.cs
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService_MarkupCompile.cache
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService_MarkupCompile.lref
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\MainWindow.baml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.g.resources
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.Properties.Resources.resources
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.GenerateResource.cache
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.csproj.CoreCompileInputs.cache
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.exe
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkService.pdb
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\FontAwesome5.dll
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\FontAwesome5.Net.dll
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\FontAwesome5.xml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\FontAwesome5.Net.xml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\NetworkS.954836E0.Up2Date
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\HomeView.g.cs
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\App.baml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\HomeView.baml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\NetworkEntitiesView.g.cs
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\NetworkEntitiesView.baml
