@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views" 
+             xmlns:model="clr-namespace:NetworkService.Model"
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
              mc:Ignorable="d" 
@@ -15,6 +16,38 @@
         <viewModel:NetworkEntitiesViewModel/>
     </UserControl.DataContext>
 
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type model:Server}">
+
+            <Border 
+                CornerRadius="15"
+                BorderThickness="1"
+                Margin="0 0 0 5"
+                Height="50" 
+                Background="{StaticResource FontColor}">
+
+                <StackPanel
+                    Margin="15 0 0 0"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Margin="0 0 30 0"
+                        Foreground="{StaticResource BackGroundColor}"
+                        VerticalAlignment="Center"
+                        Text="{Binding Identificator}"/>
+
+                    <TextBlock
+                        Foreground="{StaticResource BackGroundColor}"
+                        VerticalAlignment="Center"
+                        Text="{Binding Name}"/>
+
+                </StackPanel>
+                
+            </Border>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+
     <Grid Background="{StaticResource BackGroundColor}">
 
         <Grid.RowDefinitions>
@@ -23,19 +56,57 @@
         </Grid.RowDefinitions>
 
         <DockPanel
-            Background="{StaticResource SecondaryBackGroundColor}">
+            Background="{StaticResource FontColor}">
 
-            <Button
-                Background="Transparent"
-                BorderThickness="0">
-                <fa5:SvgAwesome
-                    Width="30"                    
-                    Icon="Solid_CaretLeft"
-                    />
-            </Button>
+            <Menu Background="Transparent">
+                <MenuItem
+                    Command="{Binding DataContext.NavCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                    CommandParameter="undo">
+
+                    <MenuItem.Style>
+                        <Style TargetType="{x:Type MenuItem}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="SnapsToDevicePixels" Value="True"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type MenuItem}">
+
+                                        <fa5:SvgAwesome
+                                            Height="35"
+                                            Width="30" 
+                                            Foreground="{StaticResource BackGroundColor}"
+                                            Icon="Solid_CaretLeft"/>
+
+                                    </ControlTemplate>
+
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                 Property="IsPressed" 
+                                 Value="True">
+
+                                    <Setter
+                                     Property="Effect"
+                                     Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </MenuItem.Style>
+
+                </MenuItem>
+            </Menu>
             
             <TextBlock
-                Foreground="{StaticResource SecondaryFontColor}"
+                Foreground="{StaticResource BackGroundColor}"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Padding="0 0 30 0"
@@ -44,6 +115,100 @@
                 Text="Network Entities"/>
             
         </DockPanel>
+
+        <StackPanel 
+            Grid.Row="1"
+            Margin="0 10 0 0"
+            Width="315">
+
+            <StackPanel 
+                Margin="0 0 0 10"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+
+
+                <Button>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                            Background="{StaticResource SecondaryBackGroundColor}"
+                                            Width="75"
+                                            BorderThickness="1"
+                                            CornerRadius="15"
+                                            Height="30">
+
+                                            <StackPanel 
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Right">
+
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    FontWeight="Bold"
+                                                    FontSize="13"
+                                                    Text="Filter"
+                                                    />
+                                                <fa5:SvgAwesome
+                                                    Margin="0 0 8 0"
+                                                    Height="20"
+                                                    Width="24"
+                                                    Icon="Solid_Filter"
+                                                    />
+
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            
+                            <Style.Triggers>
+                                <Trigger 
+                                     Property="IsPressed" 
+                                     Value="True">
+
+                                    <Setter
+                                         Property="Effect"
+                                         Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        
+                    </Button.Style>
+                    
+                    
+                </Button>
+                
+            </StackPanel>
+
+            <ListView
+                ItemsSource="{Binding Servers}"
+                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                x:Name="ServersListView">
+
+                <ListView.ItemContainerStyle>
+                    
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                    
+                </ListView.ItemContainerStyle>
+                
+                
+                
+            </ListView>
+
+
+        </StackPanel>
         
 
     </Grid>

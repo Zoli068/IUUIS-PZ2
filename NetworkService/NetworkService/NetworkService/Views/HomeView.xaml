@@ -23,7 +23,9 @@
                     <ControlTemplate TargetType="{x:Type MenuItem}">
                         <Border 
                             Height="55"
-                            Background="{StaticResource SecondaryBackGroundColor}" BorderThickness="1" CornerRadius="15">
+                            Background="{StaticResource SecondaryBackGroundColor}" 
+                            BorderThickness="1" 
+                            CornerRadius="15">
 
                             <TextBlock 
                                 HorizontalAlignment="Center"
@@ -68,7 +70,7 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
         
         <!--#endregion-->
@@ -87,7 +89,7 @@
                 Text=" Network Service "/>
 
             <Image 
-                Margin="20 40 0 60"
+                Margin="20 40 0 70"
                 Width="190"
                 Source="/Resources/Images/Monitoring.png">
                 
