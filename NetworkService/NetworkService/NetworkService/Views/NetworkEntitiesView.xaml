@@ -28,14 +28,22 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
 
-                            
-                        <Border Background="{TemplateBinding Background}"
-                                Width="15"
+                        <Border Width="25"
                                 CornerRadius="15"
-                                Height="15"
-                                >
+                                Background="{StaticResource BackGroundColor}"
+                                Height="25">
+                            
+                        
+                            <Border Background="{TemplateBinding Background}"
+                                    Width="15"
+                                    CornerRadius="15"
+                                    Height="15"
+                                    >
+                            </Border>
                         </Border>
 
+                                
+                                
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
 
@@ -264,7 +272,7 @@
                 Orientation="Horizontal">
 
 
-                <Button>
+                <Button >
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Template">
@@ -321,6 +329,33 @@
                         </Style>
                         
                     </Button.Style>
+
+
+                    <Button.Triggers>
+
+                        <EventTrigger RoutedEvent="Button.Click">
+
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="FilterStackPanel"
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="140" Duration="0:0:0.2" AutoReverse="False" >
+
+                                    </DoubleAnimation>
+
+                                    <DoubleAnimation 
+                                        Storyboard.TargetName="OpacityForTable"  
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="358"
+                                        Duration="0:0:0"
+                                        ></DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
                     
                     
                 </Button>
@@ -452,7 +487,63 @@
 
 
         </StackPanel>
-        
 
+
+        <Rectangle 
+            x:Name="OpacityForTable"
+            Grid.Row="1"
+            Panel.ZIndex="1"
+            Height="563"
+            Width="0"
+            HorizontalAlignment="Right"
+            Fill="Gray" Opacity="0.7"/>
+
+
+        <StackPanel 
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            x:Name="FilterStackPanel"
+            VerticalAlignment="Bottom"
+            Panel.ZIndex="2" 
+            Width="0"
+            Background="Green"
+            Height="563">
+
+            <Button>x
+
+                <Button.Triggers>
+
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                
+                                    <DoubleAnimation
+                                                    Storyboard.TargetName="FilterStackPanel"
+                                                    Storyboard.TargetProperty="Width"
+                                                    From="140"
+                                                    To="0" Duration="0:0:0.2" AutoReverse="False" >
+
+                                    </DoubleAnimation>
+
+                                    <DoubleAnimation 
+                                                    Storyboard.TargetName="OpacityForTable"  
+                                                    Storyboard.TargetProperty="Width"
+                                                    From="358"
+                                                    To="0"
+                                                    Duration="0:0:0"
+                                                    ></DoubleAnimation>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                     </EventTrigger> 
+
+                </Button.Triggers>
+
+            </Button>
+            <Button Width="50" Margin="40">ASD</Button>
+            
+        </StackPanel>
+        
+        
     </Grid>
 </UserControl>
