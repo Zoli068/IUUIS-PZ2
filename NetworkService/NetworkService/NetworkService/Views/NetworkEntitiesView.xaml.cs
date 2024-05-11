@@ -24,5 +24,8 @@ namespace NetworkService.Views
         {
             InitializeComponent();
         }
+
+
+
     }
 }

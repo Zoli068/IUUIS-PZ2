@@ -61,9 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BindableBase.cs" />
+    <Compile Include="Assets\BindableBase.cs" />
+    <Compile Include="Assets\EnumToStringConverter.cs" />
     <Compile Include="Model\Server.cs" />
-    <Compile Include="MyICommand.cs" />
+    <Compile Include="Assets\MyICommand.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntitiesViewModel.cs" />

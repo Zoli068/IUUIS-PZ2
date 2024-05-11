@@ -1,21 +1,23 @@
-﻿using System;
+﻿using NetworkService.Assets;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NetworkService.Model
 {
     public enum ServerType 
-    { 
-        WebServer,
-        FileServer,
-        DataBaseServer
+    {
+        Web_Server,
+        File_Server,
+        Database_Server
     }
 
-    public class Server:INotifyPropertyChanged
+    public class Server:BindableBase
     {
         private int _identificator;
         private string _name;
@@ -102,17 +104,6 @@ namespace NetworkService.Model
                     _usage = value;
                     OnPropertyChanged(nameof(Usage));
                 }
-            }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

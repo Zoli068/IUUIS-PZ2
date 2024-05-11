@@ -5,43 +5,178 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NetworkService.Views" 
              xmlns:model="clr-namespace:NetworkService.Model"
+             xmlns:assets="clr-namespace:NetworkService.Assets"
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="606" 
              d:DesignWidth="358">
 
-
+   <!--TO COMMENT IF WANNA ONPROPERTY UPDATE-->
     <UserControl.DataContext>
         <viewModel:NetworkEntitiesViewModel/>
     </UserControl.DataContext>
 
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type model:Server}">
+
+        <assets:EnumToStringConverter x:Key="addNewLineConv" />
+
+        <Style x:Key="CheckBoxListViewStyle"  TargetType="{x:Type CheckBox}" >
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="{StaticResource BackGroundColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+
+                            
+                        <Border Background="{TemplateBinding Background}"
+                                Width="15"
+                                CornerRadius="15"
+                                Height="15"
+                                >
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+
+                                <Setter Property="Background" Value="{StaticResource FontColor}"/>
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+        </Style>
+
+
+
+        <DataTemplate 
+            
+            DataType="{x:Type model:Server}">
 
             <Border 
                 CornerRadius="15"
                 BorderThickness="1"
-                Margin="0 0 0 5"
-                Height="50" 
+                Margin="0 4 0 1"
+                Padding="0 0 0 2"
+                Height="80" 
                 Background="{StaticResource FontColor}">
 
-                <StackPanel
-                    Margin="15 0 0 0"
-                    Orientation="Horizontal">
+                <Grid>
 
-                    <TextBlock
-                        Margin="0 0 30 0"
-                        Foreground="{StaticResource BackGroundColor}"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="2.4*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
                         VerticalAlignment="Center"
-                        Text="{Binding Identificator}"/>
+                        Grid.Column="0">
+                    
+                        <TextBlock
+                            Width="26"
+                            Margin="8 0 4 0"
+                            Foreground="{StaticResource BackGroundColor}"
+                            FontSize="15"
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            Text="{Binding Identificator}"/>
+                        
+                        
+                        <Separator 
+                            Width="70"
+                            Background="{StaticResource BackGroundColor}"
+                            Style="{StaticResource VerticalSeparatorStyle}" />
+                        
+                    </DockPanel>
 
                     <TextBlock
+                        HorizontalAlignment="Center"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontSize="15"
                         Foreground="{StaticResource BackGroundColor}"
                         VerticalAlignment="Center"
                         Text="{Binding Name}"/>
 
-                </StackPanel>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        FontSize="15"
+                        Foreground="{StaticResource BackGroundColor}"
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=Type,Converter={StaticResource addNewLineConv}}"
+                        />
+
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        FontSize="15"
+                        Foreground="{StaticResource BackGroundColor}"
+                        VerticalAlignment="Center"
+                        Text="{Binding IpAddress}"
+                        />
+
+                    <DockPanel
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
+                        VerticalAlignment="Center"
+                        Grid.Column="2">
+
+                        <Separator 
+                            Width="70"
+                            Background="{StaticResource BackGroundColor}"
+                            Style="{StaticResource VerticalSeparatorStyle}" />
+
+                        <TextBlock
+                            Width="47"
+                            Margin="4 0 0 0"
+                            Foreground="{StaticResource BackGroundColor}"
+                            TextAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            VerticalAlignment="Center"
+                            Text="{Binding Usage, Mode=OneWay,StringFormat={}{0}%}"/>
+
+                        <Separator 
+                            Width="70"
+                            Background="{StaticResource BackGroundColor}"
+                            Style="{StaticResource VerticalSeparatorStyle}" />
+       
+                    </DockPanel>
+
+
+
+                        <Border                         
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Grid.Column="3"
+                            Width="25" 
+                            Height="25"
+                            Margin="0 0 4 0"
+                            CornerRadius="15"
+                            Background="{StaticResource BackGroundColor}">
+                        
+                            <CheckBox
+                                    Style="{StaticResource CheckBoxListViewStyle}"/>
+                            
+                        </Border>
+
+                    
+                </Grid>
                 
             </Border>
         </DataTemplate>
@@ -113,7 +248,9 @@
                 FontSize="20"
                 FontWeight="Bold"
                 Text="Network Entities"/>
-            
+
+
+
         </DockPanel>
 
         <StackPanel 
@@ -190,22 +327,128 @@
                 
             </StackPanel>
 
-            <ListView
-                ItemsSource="{Binding Servers}"
-                ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                x:Name="ServersListView">
+            <Border
+                BorderBrush="{StaticResource FontColor}"
+                Height="35"
+                CornerRadius="10 10 0 0"
+                Padding="2 5 2 0"
+                Background="Transparent"
+                BorderThickness="2 2 2 0">
 
-                <ListView.ItemContainerStyle>
+                <StackPanel Orientation="Horizontal">
+
+                    <Border 
+                        Height="28"
+                        CornerRadius="10"
+                        Width="38" 
+                        Background="{StaticResource FontColor}">
+
+                        <TextBlock 
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            Padding="0 0 0 2"
+                            HorizontalAlignment="Center"
+                            Foreground="{StaticResource BackGroundColor}"
+                            FontSize="15"
+                            Text="ID"/>
+                        
+                    </Border>
+
+                    <Border 
+                        Height="28"
+                        Margin="1 0 0 0"
+                        CornerRadius="10"
+                        Width="158" 
+                        Background="{StaticResource FontColor}">
+
+                        <TextBlock 
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="{StaticResource BackGroundColor}"
+                            Padding="0 0 0 2"
+                            FontSize="15"
+                            Text="Informations"/>
+
+                    </Border>
+
+                    <Border 
+                        Height="28"
+                        Margin="1 0 0 0"
+                        Padding="0 0 0 2"
+                        CornerRadius="10"
+                        Width="56" 
+                        Background="{StaticResource FontColor}">
+
+                        <TextBlock 
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="{StaticResource BackGroundColor}"
+                            FontSize="15"
+                            Text="Usage"/>
+
+                    </Border>
                     
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
+                    <Border 
+                        Height="28"
+                        Margin="1 0 0 0"
+                        Padding="0 0 0 2"
+                        CornerRadius="10"
+                        Width="52" 
+                        Background="{StaticResource FontColor}">
+
+                        <TextBlock 
+                            TextAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="{StaticResource BackGroundColor}"
+                            FontSize="15"
+                            Text="Select"/>
+
+                    </Border>
+
+                </StackPanel>
+
+            </Border>
+            
+            <Border 
+                BorderBrush="{StaticResource FontColor}"
+                Background="Transparent"
+                BorderThickness="2 0 2 2"
+                Height="410"
+                CornerRadius="0 0 10 10">
+
+                <ListView
+                        ItemsSource="{Binding Servers,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                        x:Name="ServersListView"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        >
+
+                        <ListView.ItemContainerStyle>
                     
-                </ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Focusable" Value="false"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </Style>
+                    
+                        </ListView.ItemContainerStyle>
                 
                 
                 
-            </ListView>
+                    </ListView>
+                
+            </Border>
 
 
         </StackPanel>

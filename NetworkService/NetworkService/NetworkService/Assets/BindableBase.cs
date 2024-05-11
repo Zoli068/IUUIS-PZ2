@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace NetworkService
+namespace NetworkService.Assets
 {
     public class BindableBase : INotifyPropertyChanged
     {

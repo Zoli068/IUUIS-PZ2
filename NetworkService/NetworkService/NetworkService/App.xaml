@@ -33,7 +33,22 @@
                     Direction="320"/>
         <!--#endregion-->
         
-        
+        <!--#region VerticalSeparator-->
+        <Style x:Key="VerticalSeparatorStyle" 
+               TargetType="{x:Type Separator}">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <TransformCollection>
+                                <RotateTransform Angle="90"/>
+                            </TransformCollection>
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
     </Application.Resources>
 
 </Application>

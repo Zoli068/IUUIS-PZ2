@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MVVM1
+namespace NetworkService.Assets
 {
     public class MyICommand : ICommand
     {

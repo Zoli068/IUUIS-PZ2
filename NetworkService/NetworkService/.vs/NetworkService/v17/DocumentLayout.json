@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|d:\\fakultet\\iii godina\\inzenjerstvo upotr.  -hci\\predmetni zadatak 2\\iuuis-pz2\\networkservice\\networkservice\\networkservice\\views\\networkentitiesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\views\\networkentitiesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|d:\\fakultet\\iii godina\\inzenjerstvo upotr.  -hci\\predmetni zadatak 2\\iuuis-pz2\\networkservice\\networkservice\\networkservice\\views\\networkentitiesview.xaml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\views\\networkentitiesview.xaml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\viewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\viewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|d:\\fakultet\\iii godina\\inzenjerstvo upotr.  -hci\\predmetni zadatak 2\\iuuis-pz2\\networkservice\\networkservice\\networkservice\\views\\networkentitiesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\views\\networkentitiesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\viewmodel\\networkentitiesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\viewmodel\\networkentitiesviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|d:\\fakultet\\iii godina\\inzenjerstvo upotr.  -hci\\predmetni zadatak 2\\iuuis-pz2\\networkservice\\networkservice\\networkservice\\views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\viewmodel\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\viewmodel\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\mainwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
-      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\mainwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|d:\\fakultet\\iii godina\\inzenjerstvo upotr.  -hci\\predmetni zadatak 2\\iuuis-pz2\\networkservice\\networkservice\\networkservice\\views\\networkentitiesview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\views\\networkentitiesview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\viewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\viewmodel\\mainwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\model\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,8 +39,24 @@
       "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\views\\homeview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\assets\\bindablebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\assets\\bindablebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\assets\\enumtostringconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\assets\\enumtostringconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\assets\\myicommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\assets\\myicommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\networkservice\\mainwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|",
+      "RelativeMoniker": "D:0:0:{6AE2C93C-D3CE-4614-9394-158338AD45C1}|NetworkService\\NetworkService.csproj|solutionrelative:networkservice\\mainwindow.xaml.cs||{8B382828-6202-11D1-8870-0000F87579D2}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,11 +66,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\App.xaml",
               "RelativeDocumentMoniker": "NetworkService\\App.xaml",
@@ -63,13 +83,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Server.cs",
               "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Model\\Server.cs",
               "RelativeDocumentMoniker": "NetworkService\\Model\\Server.cs",
               "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Model\\Server.cs",
               "RelativeToolTip": "NetworkService\\Model\\Server.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAcwGYAAAA1AAAA",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAGwAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-08T12:33:16.108Z",
               "IsPinned": true,
@@ -83,7 +103,7 @@
               "RelativeDocumentMoniker": "NetworkService\\ViewModel\\NetworkEntitiesViewModel.cs",
               "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\NetworkEntitiesViewModel.cs",
               "RelativeToolTip": "NetworkService\\ViewModel\\NetworkEntitiesViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAATAAAA",
+              "ViewState": "AQIAADQAAAAAAAAAAAAgwDoAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-08T19:35:05.789Z",
               "EditorCaption": ""
@@ -96,26 +116,65 @@
               "RelativeDocumentMoniker": "NetworkService\\Views\\NetworkEntitiesView.xaml",
               "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\NetworkEntitiesView.xaml",
               "RelativeToolTip": "NetworkService\\Views\\NetworkEntitiesView.xaml",
+              "ViewState": "AQIAAK4AAAAAAAAAAAAAACUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-08T19:32:36.387Z",
+              "WhenOpened": "2024-05-11T12:14:05.193Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "HomeView.xaml",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\HomeView.xaml",
+              "RelativeDocumentMoniker": "NetworkService\\Views\\HomeView.xaml",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\HomeView.xaml",
+              "RelativeToolTip": "NetworkService\\Views\\HomeView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-11T13:15:05.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NetworkEntitiesView.xaml.cs",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\NetworkEntitiesView.xaml.cs",
+              "RelativeDocumentMoniker": "NetworkService\\Views\\NetworkEntitiesView.xaml.cs",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\NetworkEntitiesView.xaml.cs",
+              "RelativeToolTip": "NetworkService\\Views\\NetworkEntitiesView.xaml.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAkwBgAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-11T12:14:21.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "NetworkService\\ViewModel\\HomeViewModel.cs",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\HomeViewModel.cs",
+              "RelativeToolTip": "NetworkService\\ViewModel\\HomeViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T11:37:46.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "MainWindowViewModel.cs",
               "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\MainWindowViewModel.cs",
               "RelativeDocumentMoniker": "NetworkService\\ViewModel\\MainWindowViewModel.cs",
               "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\MainWindowViewModel.cs",
               "RelativeToolTip": "NetworkService\\ViewModel\\MainWindowViewModel.cs",
-              "ViewState": "AQIAAFIAAAAAAAAAAAAcwGAAAAAIAAAA",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAADUAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-07T19:00:00.08Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\MainWindow.xaml",
               "RelativeDocumentMoniker": "NetworkService\\MainWindow.xaml",
@@ -127,7 +186,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
+              "Title": "BindableBase.cs",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Assets\\BindableBase.cs",
+              "RelativeDocumentMoniker": "NetworkService\\Assets\\BindableBase.cs",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Assets\\BindableBase.cs",
+              "RelativeToolTip": "NetworkService\\Assets\\BindableBase.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAswBAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T21:57:08.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "EnumToStringConverter.cs",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Assets\\EnumToStringConverter.cs",
+              "RelativeDocumentMoniker": "NetworkService\\Assets\\EnumToStringConverter.cs",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Assets\\EnumToStringConverter.cs",
+              "RelativeToolTip": "NetworkService\\Assets\\EnumToStringConverter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T21:51:43.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MyICommand.cs",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Assets\\MyICommand.cs",
+              "RelativeDocumentMoniker": "NetworkService\\Assets\\MyICommand.cs",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Assets\\MyICommand.cs",
+              "RelativeToolTip": "NetworkService\\Assets\\MyICommand.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-09T21:57:11.48Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "NetworkService\\MainWindow.xaml.cs",
@@ -135,32 +232,39 @@
               "RelativeToolTip": "NetworkService\\MainWindow.xaml.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAABkAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-07T20:37:09.512Z",
-              "EditorCaption": ""
-            },
+              "WhenOpened": "2024-05-07T20:37:09.512Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "f469d4a8-af8a-4f26-a858-298e3950131d",
+        "Display": 1,
+        "X": 79,
+        "Y": 0,
+        "Width": 1292,
+        "Height": 675,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "HomeView.xaml",
-              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\HomeView.xaml",
-              "RelativeDocumentMoniker": "NetworkService\\Views\\HomeView.xaml",
-              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\HomeView.xaml",
-              "RelativeToolTip": "NetworkService\\Views\\HomeView.xaml",
+              "DocumentIndex": 1,
+              "Title": "NetworkEntitiesView.xaml",
+              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\NetworkEntitiesView.xaml",
+              "RelativeDocumentMoniker": "NetworkService\\Views\\NetworkEntitiesView.xaml",
+              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\Views\\NetworkEntitiesView.xaml",
+              "RelativeToolTip": "NetworkService\\Views\\NetworkEntitiesView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-05-08T11:31:58.337Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeViewModel.cs",
-              "DocumentMoniker": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\HomeViewModel.cs",
-              "RelativeDocumentMoniker": "NetworkService\\ViewModel\\HomeViewModel.cs",
-              "ToolTip": "D:\\Fakultet\\III godina\\Inzenjerstvo upotr.  -HCI\\Predmetni zadatak 2\\IUUIS-PZ2\\NetworkService\\NetworkService\\NetworkService\\ViewModel\\HomeViewModel.cs",
-              "RelativeToolTip": "NetworkService\\ViewModel\\HomeViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T11:37:46.415Z",
+              "WhenOpened": "2024-05-08T19:32:36.387Z",
               "EditorCaption": ""
             }
           ]

@@ -1,4 +1,4 @@
-﻿using MVVM1;
+﻿using NetworkService.Assets;
 using NetworkService.Model;
 using NetworkService.Views;
 using System;
@@ -76,15 +76,9 @@ namespace NetworkService.ViewModel
 
                             string[] messageParts=incomming.Split(new string[] {"_",":"},StringSplitOptions.None);
 
-                            foreach(Server s in NetworkEntitiesViewModel.Servers)
-                            {
-                                if (s.Identificator.ToString() == messageParts[1])
-                                {
-                                    s.Usage = int.Parse(messageParts[2]);
-                                    LogWriter(s);
-                                    break;
-                                }
-                            }
+                            NetworkEntitiesViewModel.Servers.ElementAt(int.Parse(messageParts[1])).Usage = int.Parse(messageParts[2]);
+
+                            
              
                         }
                     }, null);
