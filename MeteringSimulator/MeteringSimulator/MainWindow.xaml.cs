@@ -34,6 +34,7 @@ namespace MeteringSimulator
             ProjectTopics.ItemsSource = new List<string>() { "T1", "T2", "T3", "T4", "T5", "T6", "T7" };
             ProjectTopics.SelectedItem = "T6";
 
+            StartButton_Click(null, null);
             RestartButton.IsEnabled = false;
         }
 
@@ -72,6 +73,9 @@ namespace MeteringSimulator
         private void startReporting()
         {
             //Na radnom vreme posalji izmenu vrednosti nekog random objekta i nastavi da to radis u rekurziji
+
+            askForCount();
+
             int waitTime = r.Next(1000, 5000);
             Task.Delay(waitTime).ContinueWith(_ =>
             {
@@ -149,7 +153,7 @@ namespace MeteringSimulator
             this.Close();
         }
 
-        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        public void RestartButton_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();

@@ -10,20 +10,23 @@ using System.Threading.Tasks;
 
 namespace NetworkService.Model
 {
-    public enum ServerType 
-    {
-        Web_Server,
-        File_Server,
-        Database_Server
-    }
 
-    public class Server:BindableBase
+    public class Server:ValidationBase
     {
         private int _identificator;
         private string _name;
         private ServerType _type;
         private string _ipAddress;
         private int _usage;
+
+        public Server()
+        {
+            _identificator = 0;
+            _name = "";
+            _ipAddress = "";
+            _usage = 0;
+        }
+
 
         public int Identificator
         {
@@ -105,6 +108,37 @@ namespace NetworkService.Model
                     OnPropertyChanged(nameof(Usage));
                 }
             }
+        }
+
+        protected override void ValidateSelf()
+        {
+            if(string.IsNullOrEmpty(this.Name))
+            {
+                this.ValidationErrors["Name"] = "Name is required.";
+            }
+
+            if(this.Name.Length > 12)
+            {
+                this.ValidationErrors["Name"] = "Name can't exceed 12 characters";
+            }
+
+            if (string.IsNullOrEmpty(this.IpAddress))
+            {
+                this.ValidationErrors["Address"] = "Address is required";
+            }
+            else
+            {
+                IPAddress iP;
+                
+                if(!IPAddress.TryParse(this.IpAddress, out iP))
+                {
+                    this.ValidationErrors["Address"] = "Invalid Address format";
+
+                }
+
+            }
+
+
         }
     }
 }

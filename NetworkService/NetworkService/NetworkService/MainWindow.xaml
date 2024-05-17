@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:NetworkService"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
         xmlns:views="clr-namespace:NetworkService.Views"
         xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
         mc:Ignorable="d"
@@ -30,24 +31,31 @@
     </Window.Resources>
     
     <Border 
-        Background="{StaticResource BackGroundColor}"
-        BorderThickness="1">
-   
+        Background="{StaticResource UIThirdColor}"
+        BorderThickness="0">
+        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            
+                <notifications:NotificationArea
+                        x:Name="WindowNotificationArea"
+                        Panel.ZIndex="1000"
+                        MaxItems="1"
+                        Position="TopCenter" />
 
             <!--#region ContentControl-->
             <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
             <!--#endregion-->
             
             <!--#region MENU BAR -->
-            <Menu Width="358"
+            <Menu Width="360"
                 Grid.Row="1"
-                BorderBrush="{StaticResource FontColor}"
-                BorderThickness="0 1 0 0"
+                BorderBrush="{StaticResource UIPrimaryColor}"
+                BorderThickness="0 1.2 0 0"
                 Background="Transparent">
 
                 <MenuItem
@@ -63,13 +71,13 @@
                                     <ControlTemplate TargetType="{x:Type MenuItem}">
                                         <Border
                                             Height="50"
-                                            Padding="54 0 34 0"
+                                            Padding="49 0 39 0"
                                             Background="Transparent">
 
                                             <fa5:SvgAwesome
                                                 Height="35"
                                                 Width="30"
-                                                Foreground="{StaticResource FontColor}"
+                                                Foreground="{StaticResource UIPrimaryColor}"
                                                 Icon="Solid_EllipsisH"/>
 
                                         </Border>
@@ -119,7 +127,7 @@
                                             <fa5:SvgAwesome
                                                 Height="35"
                                                 Width="30"
-                                                Foreground="{StaticResource FontColor}"
+                                                Foreground="{StaticResource UIPrimaryColor}"
                                                 Icon="Solid_Home"/>
 
                                         </Border>
@@ -163,13 +171,13 @@
                                     <ControlTemplate TargetType="{x:Type MenuItem}">
                                         <Border
                                             Height="50"
-                                            Padding="34 0 54 0"
+                                            Padding="39 0 49 0"
                                             Background="Transparent">
 
                                             <fa5:SvgAwesome
                                                 Height="35"
                                                 Width="30"
-                                                Foreground="{StaticResource FontColor}"
+                                                Foreground="{StaticResource UIPrimaryColor}"
                                                 Icon="Solid_UndoAlt"/>
 
                                         </Border>

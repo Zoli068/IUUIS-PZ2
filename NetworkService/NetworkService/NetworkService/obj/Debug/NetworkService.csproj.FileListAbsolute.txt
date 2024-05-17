@@ -39,3 +39,13 @@ D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\N
 D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\HomeView.baml
 D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\NetworkEntitiesView.g.cs
 D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\NetworkEntitiesView.baml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\Microsoft.Xaml.Behaviors.dll
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\Notification.Wpf.dll
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\System.ValueTuple.dll
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\Microsoft.Xaml.Behaviors.xml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\Notification.Wpf.pdb
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\Notification.Wpf.xml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\System.ValueTuple.xml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\MVVMLight.Messaging.dll
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\MVVMLight.Messaging.xml

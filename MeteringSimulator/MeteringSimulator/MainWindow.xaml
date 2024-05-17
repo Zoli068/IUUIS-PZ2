@@ -11,10 +11,10 @@
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <TextBlock Text="Metering Simulator" Foreground="White" FontSize="18" FontFamily="Consolas"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Background="Black" Margin="5">
-                    <ComboBox Name="ProjectTopics" Width="70"/>
-                    <Button Name="StartButton" Margin="5,0,0,0" Content="Start" Foreground="White" Width="100" Background="Black" BorderBrush="White" Click="StartButton_Click"/>
+                    <ComboBox IsEnabled="False" Name="ProjectTopics" Width="70"/>
+                    <Button IsEnabled="False" Name="StartButton" Margin="5,0,0,0" Content="Start" Foreground="White" Width="100" Background="Black" BorderBrush="White" Click="StartButton_Click"/>
                     <Separator Margin="5,0,0,0" Foreground="White"/>
-                    <Button Name="RestartButton" Margin="5,0,0,0" Content="Restart" Foreground="White" Width="100" Background="Black" BorderBrush="White" Click="RestartButton_Click"/>
+                    <Button IsEnabled="False" Name="RestartButton" Margin="5,0,0,0" Content="Restart" Foreground="White" Width="100" Background="Black" BorderBrush="White" Click="RestartButton_Click"/>
                     <Button Name="CloseButton" Margin="5,0,0,0" Content="Exit" Foreground="White" Width="100" BorderBrush="White" Background="Black" Click="CloseButton_Click"/>
                 </StackPanel>
             </StackPanel>

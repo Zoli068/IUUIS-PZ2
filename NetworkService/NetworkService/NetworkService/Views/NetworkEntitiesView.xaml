@@ -9,48 +9,47 @@
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="606" 
-             d:DesignWidth="358">
+             d:DesignHeight="600" 
+             d:DesignWidth="360">
 
    <!--TO COMMENT IF WANNA ONPROPERTY UPDATE-->
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModel:NetworkEntitiesViewModel/>
     </UserControl.DataContext>
-
+     -->
     <UserControl.Resources>
 
-        <assets:EnumToStringConverter x:Key="addNewLineConv" />
-
+        <!--#region  Styles,Datatemplates-->
+        
         <Style x:Key="CheckBoxListViewStyle"  TargetType="{x:Type CheckBox}" >
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="{StaticResource BackGroundColor}"/>
+            <Setter Property="Background" Value="{StaticResource UIThirdColor}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
 
                         <Border Width="25"
                                 CornerRadius="15"
-                                Background="{StaticResource BackGroundColor}"
+                                Background="{StaticResource UIThirdColor}"
                                 Height="25">
-                            
-                        
+                                                 
                             <Border Background="{TemplateBinding Background}"
                                     Width="15"
                                     CornerRadius="15"
-                                    Height="15"
-                                    >
+                                    Height="15">
                             </Border>
                         </Border>
 
-                                
-                                
+
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
 
-                                <Setter Property="Background" Value="{StaticResource FontColor}"/>
+                                <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
 
                             </Trigger>
                         </ControlTemplate.Triggers>
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -58,9 +57,262 @@
         </Style>
 
 
+        <ControlTemplate
+			x:Key="ComboBoxToggleButton"
+			TargetType="{x:Type ToggleButton}">
+
+            <Border
+					Grid.Column="0"
+					CornerRadius="15"
+					Margin="2 0 4 3"
+                    Padding="2"
+                    BorderThickness="0"
+					Background="{StaticResource TextBoxBackGround}">
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+                    
+                <fa5:SvgAwesome
+                    Height="16"
+                    Foreground="{StaticResource UISecondaryColor}"
+                    Grid.Column="1"
+                    Icon="Solid_ChevronDown"/>
+                </StackPanel>
+
+            </Border>
+        </ControlTemplate>
+        
+        <ControlTemplate
+			x:Key="ComboBoxTextBox"
+			TargetType="{x:Type TextBox}">
+            <Border
+				x:Name="PART_ContentHost"
+				Focusable="False"
+				Background="{TemplateBinding Background}" />
+            
+        </ControlTemplate>
+        
+        <Style
+			x:Key="{x:Type ComboBox}"
+			TargetType="{x:Type ComboBox}">
+            <Setter
+				Property="SnapsToDevicePixels"
+				Value="true" />
+            <Setter
+				Property="OverridesDefaultStyle"
+				Value="true" />
+            <Setter
+				Property="ScrollViewer.HorizontalScrollBarVisibility"
+				Value="Auto" />
+            <Setter
+				Property="ScrollViewer.VerticalScrollBarVisibility"
+				Value="Auto" />
+            <Setter
+				Property="ScrollViewer.CanContentScroll"
+				Value="true" />
+            <Setter
+				Property="MinWidth"
+				Value="120" />
+            <Setter
+				Property="MinHeight"
+				Value="20" />
+            <Setter
+				Property="Foreground"
+				Value="White" />
+            <Setter
+				Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+						TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            
+                            <ToggleButton
+								Name="ToggleButton"
+								Template="{StaticResource ComboBoxToggleButton}"
+								Grid.Column="2"
+								Focusable="false"
+								IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+								ClickMode="Press"></ToggleButton>
+                            
+                            
+                            <ContentPresenter
+								Name="ContentSite"
+								IsHitTestVisible="False"
+								Content="{TemplateBinding SelectionBoxItem}"
+								ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+								ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+								Margin="3,3,12,7"
+                                TextBlock.FontSize="15"
+                                TextBlock.Foreground="{StaticResource UISecondaryColor}"
+                                TextBlock.FontWeight="SemiBold"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center" />
+                            
+                            <TextBox
+								x:Name="PART_EditableTextBox"
+								Style="{x:Null}"
+								Template="{StaticResource ComboBoxTextBox}"
+								HorizontalAlignment="Left"
+								VerticalAlignment="Center"
+								Margin="3,3,3,3"
+								Focusable="True"
+								Background="{StaticResource TextBoxBackGround}"
+								Foreground="{StaticResource UISecondaryColor}"
+								Visibility="Hidden"
+								IsReadOnly="{TemplateBinding IsReadOnly}" />
+                            
+                            <Popup
+								Name="Popup"
+								Placement="Bottom"
+								IsOpen="{TemplateBinding IsDropDownOpen}"
+								AllowsTransparency="True"
+								Focusable="False"
+								PopupAnimation="Slide">
+                                
+                                <Grid
+									Name="DropDown"
+									SnapsToDevicePixels="True"
+									MinWidth="{TemplateBinding ActualWidth}"
+									MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border
+										x:Name="DropDownBorder"
+										Background="{StaticResource TextBoxBackGround}"
+										BorderThickness="1"
+										BorderBrush="{StaticResource ButtonColor}" />
+                                    <ScrollViewer
+										Margin="4,6,4,6"
+										SnapsToDevicePixels="True">
+                                        <StackPanel
+											IsItemsHost="True"
+											KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger
+								Property="HasItems"
+								Value="false">
+                                <Setter
+									TargetName="DropDownBorder"
+									Property="MinHeight"
+									Value="95" />
+                            </Trigger>
+                            <Trigger
+								Property="IsEnabled"
+								Value="false">
+                                <Setter
+									Property="Foreground"
+									Value="{StaticResource UISecondaryColor}" />
+                            </Trigger>
+                            
+                            <Trigger
+								SourceName="Popup"
+								Property="Popup.AllowsTransparency"
+								Value="true">
+                                <Setter
+									TargetName="DropDownBorder"
+									Property="CornerRadius"
+									Value="15" />
+                                <Setter
+									TargetName="DropDownBorder"
+									Property="Margin"
+									Value="0,4,0,0" />
+                            </Trigger>
+                            
+                            <Trigger
+								Property="IsEditable"
+								Value="true">
+                                <Setter
+									Property="IsTabStop"
+									Value="false" />
+                                <Setter
+									TargetName="PART_EditableTextBox"
+									Property="Visibility"
+									Value="Visible" />
+                                <Setter
+									TargetName="ContentSite"
+									Property="Visibility"
+									Value="Hidden" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style
+			x:Key="{x:Type ComboBoxItem}"
+			TargetType="{x:Type ComboBoxItem}">
+            <Setter
+				Property="SnapsToDevicePixels"
+				Value="true" />
+            <Setter
+				Property="Foreground"
+				Value="{StaticResource UISecondaryColor}" />
+            <Setter
+				Property="OverridesDefaultStyle"
+				Value="true" />
+            <Setter
+				Property="FontSize"
+				Value="15" />
+            <Setter
+                Property="FontWeight"
+                Value="SemiBold"/>
+
+            <Setter
+				Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+						TargetType="{x:Type ComboBoxItem}">
+                        <Border
+                            Margin="0 4 0 0"
+                            Padding="0 6 0 0"
+							Name="Border"
+                            Height="36"
+                            CornerRadius="10"
+                            BorderBrush="{StaticResource ButtonColor}"
+                            BorderThickness="1.8"
+                            Background="{StaticResource TextBoxBackGround}"
+							SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <Style TargetType="{x:Type RadioButton}" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent" Cursor="Hand">
+                            
+                            <BulletDecorator.Bullet>
+                                <Grid Height="25" Width="25">
+                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="{StaticResource UIPrimaryColor}" BorderThickness="2" CornerRadius="15" />
+                                    <Border CornerRadius="15" Margin="4" Name="RadioMark" Background="{StaticResource UIPrimaryColor}" Visibility="Hidden" />
+                                </Grid>
+                            </BulletDecorator.Bullet>
+
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="{StaticResource ResourceKey=UIPrimaryColor}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
 
         <DataTemplate 
-            
             DataType="{x:Type model:Server}">
 
             <Border 
@@ -69,7 +321,7 @@
                 Margin="0 4 0 1"
                 Padding="0 0 0 2"
                 Height="80" 
-                Background="{StaticResource FontColor}">
+                Background="{StaticResource UIPrimaryColor}">
 
                 <Grid>
 
@@ -95,7 +347,7 @@
                         <TextBlock
                             Width="26"
                             Margin="8 0 4 0"
-                            Foreground="{StaticResource BackGroundColor}"
+                            Foreground="{StaticResource UIThirdColor}"
                             FontSize="15"
                             TextAlignment="Center"
                             VerticalAlignment="Center"
@@ -104,7 +356,7 @@
                         
                         <Separator 
                             Width="70"
-                            Background="{StaticResource BackGroundColor}"
+                            Background="{StaticResource UIThirdColor}"
                             Style="{StaticResource VerticalSeparatorStyle}" />
                         
                     </DockPanel>
@@ -114,7 +366,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         FontSize="15"
-                        Foreground="{StaticResource BackGroundColor}"
+                        Foreground="{StaticResource UIThirdColor}"
                         VerticalAlignment="Center"
                         Text="{Binding Name}"/>
 
@@ -123,9 +375,9 @@
                         Grid.Row="1"
                         Grid.Column="1"
                         FontSize="15"
-                        Foreground="{StaticResource BackGroundColor}"
+                        Foreground="{StaticResource UIThirdColor}"
                         VerticalAlignment="Center"
-                        Text="{Binding Path=Type,Converter={StaticResource addNewLineConv}}"
+                        Text="{Binding Path=Type.ServerTypeName}"
                         />
 
                     <TextBlock
@@ -133,7 +385,7 @@
                         Grid.Row="2"
                         Grid.Column="1"
                         FontSize="15"
-                        Foreground="{StaticResource BackGroundColor}"
+                        Foreground="{StaticResource UIThirdColor}"
                         VerticalAlignment="Center"
                         Text="{Binding IpAddress}"
                         />
@@ -146,13 +398,13 @@
 
                         <Separator 
                             Width="70"
-                            Background="{StaticResource BackGroundColor}"
+                            Background="{StaticResource UIThirdColor}"
                             Style="{StaticResource VerticalSeparatorStyle}" />
 
                         <TextBlock
                             Width="47"
                             Margin="4 0 0 0"
-                            Foreground="{StaticResource BackGroundColor}"
+                            Foreground="{StaticResource UIThirdColor}"
                             TextAlignment="Center"
                             FontSize="18"
                             FontWeight="Bold"
@@ -161,27 +413,27 @@
 
                         <Separator 
                             Width="70"
-                            Background="{StaticResource BackGroundColor}"
+                            Background="{StaticResource UIThirdColor}"
                             Style="{StaticResource VerticalSeparatorStyle}" />
        
                     </DockPanel>
 
-
-
-                        <Border                         
-                            Grid.Row="0"
-                            Grid.RowSpan="3"
-                            Grid.Column="3"
-                            Width="25" 
-                            Height="25"
-                            Margin="0 0 4 0"
-                            CornerRadius="15"
-                            Background="{StaticResource BackGroundColor}">
+                    <Border                         
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
+                        Grid.Column="3"
+                        Width="25" 
+                        Height="25"
+                        Margin="0 0 6 0"
+                        CornerRadius="15"
+                        Background="{StaticResource UIThirdColor}">
                         
-                            <CheckBox
-                                    Style="{StaticResource CheckBoxListViewStyle}"/>
+                        <CheckBox
+                                Command="{Binding ElementName=ServersListView,Path=DataContext.AddToDelete}"
+                                CommandParameter="{Binding}"
+                                Style="{StaticResource CheckBoxListViewStyle}"/>
                             
-                        </Border>
+                    </Border>
 
                     
                 </Grid>
@@ -189,22 +441,29 @@
             </Border>
         </DataTemplate>
         
+        <!--#endregion-->
+        
     </UserControl.Resources>
 
-    <Grid Background="{StaticResource BackGroundColor}">
+    <Grid Background="{StaticResource UIThirdColor}">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
 
+        <!--#region  Title Header-->
+        
         <DockPanel
-            Background="{StaticResource FontColor}">
+            Width="360"      
+            Background="{StaticResource UIPrimaryColor}">
 
-            <Menu Background="Transparent">
+            <Menu 
+                Background="Transparent">
                 <MenuItem
+                    Margin="1 0 0 0"
                     Command="{Binding DataContext.NavCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                    CommandParameter="undo">
+                    CommandParameter="home">
 
                     <MenuItem.Style>
                         <Style TargetType="{x:Type MenuItem}">
@@ -217,7 +476,7 @@
                                         <fa5:SvgAwesome
                                             Height="35"
                                             Width="30" 
-                                            Foreground="{StaticResource BackGroundColor}"
+                                            Foreground="{StaticResource UIThirdColor}"
                                             Icon="Solid_CaretLeft"/>
 
                                     </ControlTemplate>
@@ -249,30 +508,38 @@
             </Menu>
             
             <TextBlock
-                Foreground="{StaticResource BackGroundColor}"
+                Foreground="{StaticResource UIThirdColor}"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"
+                VerticalAlignment="Bottom"
                 Padding="0 0 30 0"
-                FontSize="20"
-                FontWeight="Bold"
+                FontSize="28"
+                FontWeight="Semibold"
                 Text="Network Entities"/>
 
-
+        
 
         </DockPanel>
-
+    
+        <!--#endregion-->
+        
+        
+        <!--#region View Body-->
         <StackPanel 
             Grid.Row="1"
+            VerticalAlignment="Top"
             Margin="0 10 0 0"
             Width="315">
 
+            
+            <!--#region Filter Button-->
+            
             <StackPanel 
                 Margin="0 0 0 10"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
 
 
-                <Button >
+                <Button>
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Template">
@@ -280,11 +547,11 @@
                                     <ControlTemplate>
 
                                         <Border 
-                                            Background="{StaticResource SecondaryBackGroundColor}"
-                                            Width="75"
+                                            Background="{StaticResource ButtonColor}"
+                                            Width="85"
                                             BorderThickness="1"
-                                            CornerRadius="15"
-                                            Height="30">
+                                            CornerRadius="11"
+                                            Height="35">
 
                                             <StackPanel 
                                                 Orientation="Horizontal"
@@ -297,7 +564,7 @@
                                                     Text="Filter"
                                                     />
                                                 <fa5:SvgAwesome
-                                                    Margin="0 0 8 0"
+                                                    Margin="0 0 13 0"
                                                     Height="20"
                                                     Width="24"
                                                     Icon="Solid_Filter"
@@ -341,7 +608,7 @@
                                         Storyboard.TargetName="FilterStackPanel"
                                         Storyboard.TargetProperty="Width"
                                         From="0"
-                                        To="140" Duration="0:0:0.2" AutoReverse="False" >
+                                        To="200" Duration="0:0:0.2" AutoReverse="False" >
 
                                     </DoubleAnimation>
 
@@ -349,7 +616,7 @@
                                         Storyboard.TargetName="OpacityForTable"  
                                         Storyboard.TargetProperty="Width"
                                         From="0"
-                                        To="358"
+                                        To="360"
                                         Duration="0:0:0"
                                         ></DoubleAnimation>
                                 </Storyboard>
@@ -362,8 +629,15 @@
                 
             </StackPanel>
 
+            <!--#endregion-->
+            
+            <!--#region Entity Table-->
+
+
+            <!--#region Table Header-->
+            
             <Border
-                BorderBrush="{StaticResource FontColor}"
+                BorderBrush="{StaticResource UIPrimaryColor}"
                 Height="35"
                 CornerRadius="10 10 0 0"
                 Padding="2 5 2 0"
@@ -376,14 +650,14 @@
                         Height="28"
                         CornerRadius="10"
                         Width="38" 
-                        Background="{StaticResource FontColor}">
+                        Background="{StaticResource UIPrimaryColor}">
 
                         <TextBlock 
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Padding="0 0 0 2"
                             HorizontalAlignment="Center"
-                            Foreground="{StaticResource BackGroundColor}"
+                            Foreground="{StaticResource UIThirdColor}"
                             FontSize="15"
                             Text="ID"/>
                         
@@ -394,13 +668,13 @@
                         Margin="1 0 0 0"
                         CornerRadius="10"
                         Width="158" 
-                        Background="{StaticResource FontColor}">
+                        Background="{StaticResource UIPrimaryColor}">
 
                         <TextBlock 
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
-                            Foreground="{StaticResource BackGroundColor}"
+                            Foreground="{StaticResource UIThirdColor}"
                             Padding="0 0 0 2"
                             FontSize="15"
                             Text="Informations"/>
@@ -413,13 +687,13 @@
                         Padding="0 0 0 2"
                         CornerRadius="10"
                         Width="56" 
-                        Background="{StaticResource FontColor}">
+                        Background="{StaticResource UIPrimaryColor}">
 
                         <TextBlock 
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
-                            Foreground="{StaticResource BackGroundColor}"
+                            Foreground="{StaticResource UIThirdColor}"
                             FontSize="15"
                             Text="Usage"/>
 
@@ -431,13 +705,13 @@
                         Padding="0 0 0 2"
                         CornerRadius="10"
                         Width="52" 
-                        Background="{StaticResource FontColor}">
+                        Background="{StaticResource UIPrimaryColor}">
 
                         <TextBlock 
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
-                            Foreground="{StaticResource BackGroundColor}"
+                            Foreground="{StaticResource UIThirdColor}"
                             FontSize="15"
                             Text="Select"/>
 
@@ -447,15 +721,18 @@
 
             </Border>
             
+            <!--#endregion-->
+            
+            
             <Border 
-                BorderBrush="{StaticResource FontColor}"
+                BorderBrush="{StaticResource UIPrimaryColor}"
                 Background="Transparent"
                 BorderThickness="2 0 2 2"
-                Height="410"
+                Height="379"
                 CornerRadius="0 0 10 10">
 
                 <ListView
-                        ItemsSource="{Binding Servers,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        ItemsSource="{Binding FilteredServers,NotifyOnSourceUpdated=True,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
                         x:Name="ServersListView"
                         BorderThickness="0"
@@ -485,65 +762,981 @@
                 
             </Border>
 
+            <!--#endregion-->
+            
+            <!--#region ADD,DELETE buttons-->
+            
+            <StackPanel 
+                Margin="0 20 0 20"
+                Orientation="Horizontal">
+
+                <Button 
+                    Margin="0 0 20 0"
+                    Height="55" 
+                    Width="147.5">
+
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                            Background="{StaticResource ButtonColor}"
+                                            CornerRadius="15">
+
+                                            <StackPanel 
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    FontWeight="SemiBold"
+                                                    FontSize="24"
+                                                    Text="Add"
+                                                    />
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                     Property="IsPressed" 
+                                     Value="True">
+
+                                    <Setter
+                                         Property="Effect"
+                                         Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Triggers>
+
+                        <EventTrigger RoutedEvent="Button.Click">
+
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="AddStackPanel"
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="200" Duration="0:0:0.2" AutoReverse="False"/>
+
+                                    <DoubleAnimation 
+                                        Storyboard.TargetName="OpacityForTable"  
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="360"
+                                        Duration="0:0:0"/>
+
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+
+                </Button>
+
+
+                <Button 
+                    Command="{Binding RemoveSelected}"    
+                    Height="55" 
+                    Width="147.5">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                            Background="{StaticResource ButtonColor}"
+                                            CornerRadius="15">
+
+                                            <StackPanel 
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    FontWeight="SemiBold"
+                                                    FontSize="24"
+                                                    Text="Delete"
+                                                    />
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                     Property="IsPressed" 
+                                     Value="True">
+
+                                    <Setter
+                                         Property="Effect"
+                                         Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                                    
+            </StackPanel>
+            
+            <!--#endregion -->
+
 
         </StackPanel>
+        <!--#endregion-->
 
+
+        <!--#region  Opacity-->
 
         <Rectangle 
             x:Name="OpacityForTable"
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
             Panel.ZIndex="1"
-            Height="563"
+            StrokeThickness="0"
+            Height="607"
             Width="0"
-            HorizontalAlignment="Right"
-            Fill="Gray" Opacity="0.7"/>
+            Fill="Gray" Opacity="0.7"> 
+            
 
 
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="MouseUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+
+                                <DoubleAnimation
+                                    Storyboard.TargetName="AddStackPanel"
+                                    Storyboard.TargetProperty="Width"
+                                    To="0" Duration="0:0:0.2" AutoReverse="False" >
+
+                                 </DoubleAnimation>                                
+                            
+                                <DoubleAnimation
+                                    Storyboard.TargetName="FilterStackPanel"
+                                    Storyboard.TargetProperty="Width"
+                                    To="0" Duration="0:0:0.2" AutoReverse="False" >
+
+                                 </DoubleAnimation>
+
+                               <DoubleAnimation 
+                                    Storyboard.TargetName="OpacityForTable"  
+                                    Storyboard.TargetProperty="Width"
+                                    To="0"
+                                    Duration="0:0:0"
+                                ></DoubleAnimation>                               
+
+
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+            </Rectangle.Triggers>
+            
+        </Rectangle>
+
+        <Border
+           Panel.ZIndex="5"
+           Visibility="{Binding DeleteConfirm}">
+            
+                <Rectangle 
+                        x:Name="OpacityForDelete"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+
+                        StrokeThickness="0"
+                        Height="607"
+                        Width="360"
+                        Fill="Gray" Opacity="0.7"/>
+        </Border>
+
+        <!--#endregion -->
+
+        <!--#region Filter SideBar-->
         <StackPanel 
-            Grid.Row="1"
+            Grid.Row="0"
+            Grid.RowSpan="2"
             HorizontalAlignment="Right"
             x:Name="FilterStackPanel"
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"  
             Panel.ZIndex="2" 
             Width="0"
-            Background="Green"
-            Height="563">
+            Background="{StaticResource UIThirdColor}"
+            Height="600">
 
-            <Button>x
+            <Border 
+                    BorderBrush="{StaticResource UIPrimaryColor}"
+                    BorderThickness="1.3 0 0 0" 
+                    Height="600" 
+                    Width="200">
 
-                <Button.Triggers>
+                
+                <StackPanel
+                        VerticalAlignment="Top">
 
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard>
-                            <Storyboard>
+                        <StackPanel
+                            Background="{StaticResource UIPrimaryColor}"
+                            Orientation="Horizontal">
+                        
+                            <TextBlock
+                                Foreground="{StaticResource UIThirdColor}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                TextAlignment="Center"
+                                Width="160"
+                                Padding="35 0 0 0"
+                                Margin="0 0 0 1"
+                               
+                                Height="35.6"
+                                FontSize="26"
+                                FontWeight="SemiBold"
+                                Text="Filter"/>
+
+                            <Button
+                                Height="35.6"
+                                >
+
+                                <Button.Triggers>
+
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard>
+                                            <Storyboard>
                                 
-                                    <DoubleAnimation
-                                                    Storyboard.TargetName="FilterStackPanel"
-                                                    Storyboard.TargetProperty="Width"
-                                                    From="140"
-                                                    To="0" Duration="0:0:0.2" AutoReverse="False" >
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetName="FilterStackPanel"
+                                                        Storyboard.TargetProperty="Width"
+                                                        From="140"
+                                                        To="0" Duration="0:0:0.2" AutoReverse="False" >
 
-                                    </DoubleAnimation>
+                                                    </DoubleAnimation>
 
-                                    <DoubleAnimation 
-                                                    Storyboard.TargetName="OpacityForTable"  
-                                                    Storyboard.TargetProperty="Width"
-                                                    From="358"
-                                                    To="0"
-                                                    Duration="0:0:0"
-                                                    ></DoubleAnimation>
+                                                    <DoubleAnimation 
+                                                        Storyboard.TargetName="OpacityForTable"  
+                                                        Storyboard.TargetProperty="Width"
+                                                        From="360"
+                                                        To="0"
+                                                        Duration="0:0:0"
+                                                        ></DoubleAnimation>
 
-                            </Storyboard>
-                        </BeginStoryboard>
-                     </EventTrigger> 
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                     </EventTrigger> 
 
-                </Button.Triggers>
+                                </Button.Triggers>
 
-            </Button>
-            <Button Width="50" Margin="40">ASD</Button>
-            
+                                <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+
+                                                <Border 
+                                                    Background="Transparent"
+                                                    Width="35"
+                                                    BorderThickness="1"
+                                                    CornerRadius="15"
+                                                    Height="35">
+
+
+                                                    <fa5:SvgAwesome
+                                                        Foreground="{StaticResource UIThirdColor}"
+                                                        Height="26"
+                                                        Icon="Solid_Times"
+                                                        />
+
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+
+
+                                    <Style.Triggers>
+                                        <Trigger 
+                                                 Property="IsPressed" 
+                                                 Value="True">
+
+                                            <Setter
+                                                     Property="Effect"
+                                                     Value="{StaticResource ClickedDropShadowEffect}"/>
+
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="0.980" ScaleY="0.980"  />
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+                        </Button>
+
+                    </StackPanel>
+
+                    <Border 
+                        Height="38"
+                        Margin="10 10 10 10"
+                        Background="{StaticResource UIPrimaryColor}"
+                        CornerRadius="15" >
+                        
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 0 0 3"
+                            FontSize="18"
+                            Foreground="{StaticResource UIThirdColor}"
+                            Text="Identificator"/>
+                        
+                    </Border>
+
+
+                    <Grid
+                        Margin="30 0 0 12">
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="9*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <RadioButton 
+                            Margin="0 6 0 6"
+                            IsChecked="{Binding LessThan}"
+                            Grid.Row="0"/>
+
+                        <TextBlock
+                            Margin="0 6 0 6"
+                            VerticalAlignment="Center"
+                            Text="Less Than"
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Grid.Column="1"
+                            />
+                        
+                        <RadioButton
+                            Margin="0 6 0 6"
+                            IsChecked="{Binding Equal}"
+                            Grid.Row="1"/>
+
+                        <TextBlock
+                            Margin="0 6 0 6"
+                            VerticalAlignment="Center"
+                            Text="Equals"
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Grid.Row="1"
+                            Grid.Column="1"/>
+
+
+                        <RadioButton 
+                            Margin="0 6 0 6"
+                            IsChecked="{Binding GreaterThan}"
+                            Grid.Row="2"/>
+
+
+                        <TextBlock
+                            Margin="0 6 0 6"
+                            VerticalAlignment="Center"
+                            Text="Greater Than"
+                            FontSize="18"
+                            FontWeight="SemiBold"
+                            Grid.Row="2"
+                            Grid.Column="1"/>
+
+                    </Grid>
+
+
+                    <Border
+                        Background="{StaticResource TextBoxBackGround}"
+                        BorderBrush="{StaticResource ButtonColor}"
+                        BorderThickness="1.8"
+                        CornerRadius="15"
+                        Width="150"
+                        Height="38">
+                        
+                        <TextBox
+                            TextAlignment="Center"
+                            Padding="0 0 0 4"
+                            Margin="2 0 2 0"
+                            VerticalAlignment="Center"
+                            MaxLines="1"
+                            FontSize="18"
+                            Text="{Binding Id_Filter}"
+                            CaretBrush="{StaticResource UIPrimaryColor}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="146">
+                        </TextBox>
+                    </Border>
+
+                    <TextBlock 
+                        FontSize="14"
+                        TextAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="{StaticResource InvalidStatusColor}"
+                        Text="{Binding InvalidIdFilter}"/>
+
+                    <Border 
+                        Height="38"
+                        Margin="10 2 10 16"
+                        Background="{StaticResource UIPrimaryColor}"
+                        CornerRadius="15" >
+
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 0 0 3"
+                            FontSize="18"
+                            Foreground="{StaticResource UIThirdColor}"
+                            Text="Server Type"/>
+
+                        
+                    </Border>
+
+                    <Border 
+                        Width="151"
+                        Height="38"
+                        CornerRadius="15"
+                        BorderThickness="1.8"
+                        BorderBrush="{StaticResource ButtonColor}"
+                        Background="{StaticResource TextBoxBackGround}">
+
+                        <ComboBox 
+                            Width="148"
+                         
+                            Height="38"
+                            SelectedItem="{Binding ServerTypeFilter}"
+                            ItemsSource="{Binding FilterServerTypes}">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ServerTypeName}"/>
+                                </DataTemplate>
+                                
+                            </ComboBox.ItemTemplate>
+                            
+                        </ComboBox>
+                    </Border>
+
+                    <Button 
+                         Margin="0 81 0 0"
+                         Height="55" 
+                         Command="{Binding ResetFilter}"
+                         Width="147.5">
+
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+
+                                            <Border 
+                                                 Background="{StaticResource ButtonColor}"
+                                                 CornerRadius="15">
+
+                                                <StackPanel 
+                                                     Orientation="Horizontal"
+                                                     HorizontalAlignment="Center">
+
+                                                    <TextBlock
+                                                         VerticalAlignment="Center"
+                                                         TextAlignment="Center"
+                                                         FontWeight="SemiBold"
+                                                         FontSize="24"
+                                                         Text="Reset"
+                                                         />
+                                                </StackPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger 
+                                          Property="IsPressed" 
+                                          Value="True">
+
+                                        <Setter
+                                              Property="Effect"
+                                              Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <Button 
+                         Command="{Binding ApplyFilter}"
+                         Height="55"
+                         Margin="20"
+                         Width="147.5">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+
+                                            <Border 
+                                                 Background="{StaticResource ButtonColor}"
+                                                 CornerRadius="15">
+
+                                                <StackPanel 
+                                                     Orientation="Horizontal"
+                                                     HorizontalAlignment="Center">
+
+                                                    <TextBlock
+                                                         VerticalAlignment="Center"
+                                                         TextAlignment="Center"
+                                                         FontWeight="SemiBold"
+                                                         FontSize="24"
+                                                         Text="Apply"
+                                                         />
+                                                </StackPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger 
+                                      Property="IsPressed" 
+                                      Value="True">
+
+                                        <Setter
+                                          Property="Effect"
+                                          Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                      
+
+                    </Button>
+
+                </StackPanel>
+            </Border>
         </StackPanel>
-        
-        
+        <!--#endregion-->
+
+        <!--#region Add Entity SideBar-->
+        <StackPanel 
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            HorizontalAlignment="Left"
+            x:Name="AddStackPanel"
+            VerticalAlignment="Top"  
+            Panel.ZIndex="2" 
+            Width="0"
+            Background="{StaticResource UIThirdColor}"
+            Height="600">
+
+            <Border 
+                    BorderBrush="{StaticResource UIPrimaryColor}"
+                    BorderThickness="0 0 1.3 0" 
+                    Height="600" 
+                    Width="200">
+
+
+                <StackPanel
+                        VerticalAlignment="Top">
+
+                    <StackPanel
+                            Background="{StaticResource UIPrimaryColor}"
+                            Orientation="Horizontal">
+
+                        <TextBlock
+                                Foreground="{StaticResource UIThirdColor}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                TextAlignment="Center"
+                                Width="160"
+                                Padding="29 0 0 0"
+                                Margin="0 0 0 1"
+                               
+                                Height="35.6"
+                                FontSize="26"
+                                FontWeight="SemiBold"
+                                Text="Add Entity"/>
+
+                        <Button
+                            Height="35.6"
+                            >
+
+                            <Button.Triggers>
+
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="AddStackPanel"
+                                                Storyboard.TargetProperty="Width"
+                                                From="140"
+                                                To="0" Duration="0:0:0.2" AutoReverse="False" >
+
+                                            </DoubleAnimation>
+
+                                            <DoubleAnimation 
+                                                Storyboard.TargetName="OpacityForTable"  
+                                                Storyboard.TargetProperty="Width"
+                                                From="358"
+                                                To="0"
+                                                Duration="0:0:0"
+                                                ></DoubleAnimation>
+
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+
+                            </Button.Triggers>
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+
+                                                <Border 
+                                                    Background="Transparent"
+                                                    Width="35"
+                                                    BorderThickness="1"
+                                                    CornerRadius="15"
+                                                    Height="35">
+
+
+                                                    <fa5:SvgAwesome
+                                                        Foreground="{StaticResource UIThirdColor}"
+                                                        Height="26"
+                                                        Icon="Solid_Times"
+                                                        />
+
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+
+
+                                    <Style.Triggers>
+                                        <Trigger 
+                                                 Property="IsPressed" 
+                                                 Value="True">
+
+                                            <Setter
+                                                     Property="Effect"
+                                                     Value="{StaticResource ClickedDropShadowEffect}"/>
+
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <ScaleTransform ScaleX="0.980" ScaleY="0.980"  />
+                                                </Setter.Value>
+                                            </Setter>
+
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+
+                            </Button.Style>
+                        </Button>
+
+                    </StackPanel>
+
+                    <Border 
+                        Height="38"
+                        Margin="10 10 10 14"
+                        Background="{StaticResource UIPrimaryColor}"
+                        CornerRadius="15" >
+
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 0 0 3"
+                            FontSize="18"
+                            Foreground="{StaticResource UIThirdColor}"
+                            Text="Identificator"/>
+
+                    </Border>
+
+                    <Border
+                        Background="{StaticResource TextBoxBackGround}"
+                        BorderBrush="{StaticResource ButtonColor}"
+                        BorderThickness="1.8"
+                        CornerRadius="15"
+                        Width="150"
+                        Height="38">
+
+                        <TextBox
+                            TextAlignment="Center"
+                            Padding="0 0 0 4"
+                            Margin="2 0 2 0"
+                            VerticalAlignment="Center"
+                            MaxLines="1"
+                            FontSize="18"
+                            Text="{Binding IdAddServer}"
+                            CaretBrush="{StaticResource UIPrimaryColor}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="146">
+                        </TextBox>
+                    </Border>
+
+                    <TextBlock 
+                        Foreground="{StaticResource InvalidStatusColor}"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        FontSize="12" 
+                        Text="{Binding InvalidIdAddServer}"></TextBlock>
+
+                    <Border 
+                        Height="38"
+                        Margin="10 1 10 14"
+                        Background="{StaticResource UIPrimaryColor}"
+                        CornerRadius="15" >
+
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 0 0 3"
+                            FontSize="18"
+                            Foreground="{StaticResource UIThirdColor}"
+                            Text="Name"/>
+
+                    </Border>
+
+                    <Border
+                        Background="{StaticResource TextBoxBackGround}"
+                        BorderBrush="{StaticResource ButtonColor}"
+                        BorderThickness="1.8"
+                        CornerRadius="15"
+                        Width="150"
+                        Height="38">
+
+                        <TextBox
+                            TextAlignment="Center"
+                            Padding="0 0 0 4"
+                            Margin="2 0 2 0"
+                            VerticalAlignment="Center"
+                            MaxLines="1"
+                            FontSize="18"
+                            Text="{Binding AddServer.Name}"
+                            CaretBrush="{StaticResource UIPrimaryColor}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="146">
+                        </TextBox>
+                    </Border>
+
+                    <TextBlock 
+                        Foreground="{StaticResource InvalidStatusColor}"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        FontSize="12" 
+                        Text="{Binding AddServer.ValidationErrors[Name]}"></TextBlock>
+
+                    <Border 
+                        Height="38"
+                        Margin="10 1 10 14"
+                        Background="{StaticResource UIPrimaryColor}"
+                        CornerRadius="15" >
+
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 0 0 3"
+                            FontSize="18"
+                            Foreground="{StaticResource UIThirdColor}"
+                            Text="Address"/>
+
+                    </Border>
+
+                    <Border
+                        Background="{StaticResource TextBoxBackGround}"
+                        BorderBrush="{StaticResource ButtonColor}"
+                        BorderThickness="1.8"
+                        CornerRadius="15"
+                        Width="150"
+                        Height="38">
+
+                        <TextBox
+                            TextAlignment="Center"
+                            Padding="0 0 0 4"
+                            Margin="2 0 2 0"
+                            VerticalAlignment="Center"
+                            MaxLines="1"
+                            FontSize="18"
+                            Text="{Binding AddServer.IpAddress}"
+                            CaretBrush="{StaticResource UIPrimaryColor}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Width="146">
+                        </TextBox>
+                    </Border>
+                    
+                    <TextBlock 
+                        Foreground="{StaticResource InvalidStatusColor}"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        FontSize="12" 
+                        Text="{Binding AddServer.ValidationErrors[Address]}"></TextBlock>
+
+                    <Border 
+                        Height="38"
+                        Margin="10 1 10 14"
+                        Background="{StaticResource UIPrimaryColor}"
+                        CornerRadius="15" >
+
+                        <TextBlock 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0 0 0 3"
+                            FontSize="18"
+                            Foreground="{StaticResource UIThirdColor}"
+                            Text="Server Type"/>
+
+                    </Border>
+
+                    <Border 
+                        Width="151"
+                        Height="38"
+                        CornerRadius="15"
+                        BorderThickness="1.8"
+                        BorderBrush="{StaticResource ButtonColor}"
+                        Background="{StaticResource TextBoxBackGround}">
+
+                        <ComboBox 
+                            Width="148"
+                            
+                            Height="38"
+                            SelectedIndex="0"
+                            SelectedItem="{Binding AddServer.Type,Mode=OneWayToSource}"
+                            ItemsSource="{Binding ServerTypes}">
+                            
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ServerTypeName}"/>
+                                </DataTemplate>
+
+                            </ComboBox.ItemTemplate>
+
+                        </ComboBox>
+                    </Border>
+
+
+                    <Button 
+                         Command="{Binding AddEntity}"
+                         Height="55"
+                         Margin="0 66 0 0"
+                         Width="147.5">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+
+                                            <Border 
+                                                 Background="{StaticResource ButtonColor}"
+                                                 CornerRadius="15">
+
+                                                <StackPanel 
+                                                     Orientation="Horizontal"
+                                                     HorizontalAlignment="Center">
+
+                                                    <TextBlock
+                                                         VerticalAlignment="Center"
+                                                         TextAlignment="Center"
+                                                         FontWeight="SemiBold"
+                                                         FontSize="24"
+                                                         Text="Add"
+                                                         />
+                                                </StackPanel>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger 
+                                      Property="IsPressed" 
+                                      Value="True">
+
+                                        <Setter
+                                              Property="Effect"
+                                              Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <!--#endregion-->
+
+
+
     </Grid>
 </UserControl>

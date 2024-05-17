@@ -9,11 +9,12 @@
         
         <!--#region  Colors-->
         
-        <SolidColorBrush x:Key="FontColor" Color="#003459" />
-        <SolidColorBrush x:Key="SecondaryFontColor" Color="Black" />
-        <SolidColorBrush x:Key="BackGroundColor" Color="#edf8fa"/>
-        <SolidColorBrush x:Key="SecondaryBackGroundColor" Color="#00a7e1"/>
+        <SolidColorBrush x:Key="UIPrimaryColor" Color="#003459" />
+        <SolidColorBrush x:Key="UISecondaryColor" Color="Black" />
+        <SolidColorBrush x:Key="UIThirdColor" Color="#edf8fa"/>
+        <SolidColorBrush x:Key="ButtonColor" Color="#00a7e1"/>
         <SolidColorBrush x:Key="InvalidStatusColor" Color="#dd0426"/>
+        <SolidColorBrush x:Key="TextBoxBackGround" Color="#94D4EA"/>
 
         <!--#endregion-->
         

@@ -8,75 +8,619 @@ using FontAwesome5;
 using System.Threading.Tasks;
 using NetworkService.Assets;
 using System.Windows.Data;
+using System.IO;
+using System.Windows;
+using Notification.Wpf;
+using System.Windows.Media;
+using MVVMLight.Messaging;
+using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace NetworkService.ViewModel
 {
     public class NetworkEntitiesViewModel:BindableBase
     {
+        #region DispatcherTimer
+
+        private DispatcherTimer dispatcherTimer;
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            InvalidIdAddServer = "";
+            InvalidIdFilter = "";
+
+            AddServer.ValidationErrors["Address"] ="";
+            AddServer.ValidationErrors["Name"] = "";
+            AddServer.Refresh();
+        }
+
+        #endregion
+
+        #region Lists
 
         public ObservableCollection<Server> Servers { get; set; }
+        public ObservableCollection<Server> FilteredServers { get; set; }
+        public List<ServerType> ServerTypes { get; set; }
+        public List<ServerType> FilterServerTypes { get; set; }
+        public List<Server> ToDeleteList { get; set; }
 
-        public NetworkEntitiesViewModel() { 
+        #endregion
+
+        #region Commands
+
+        public MyICommand ResetFilter { get; set; }
+        public MyICommand ApplyFilter { get; set; } 
+        public MyICommand<Server> AddToDelete { get; set; }
+        public MyICommand RemoveSelected { get; set; }
+        public MyICommand TrueRemoveSelected { get; set; }
+        public MyICommand AddEntity { get; set; }
+
+        private void ResetFilterValues()
+        {
+            dispatcherTimer.Stop();
+            dispatcherTimer.Start();
+
+            Equal = true;
+            Id_Filter = string.Empty;
+            ServerTypeFilter = FilterServerTypes.ElementAt(0);
+
+            FilteredServers.Clear();
+
+            foreach(Server s in Servers)
+            {
+                FilteredServers.Add(s);
+            }
+        }
+
+        private void TrueRemoveList()
+        {
+            Messenger.Default.Send<NotificationContent>(CreateDeleteToastNotification());
+
+            foreach (Server s in ToDeleteList)
+            {
+                if (Servers.Contains(s))
+                {
+                    Servers.Remove(s);
+                }
+
+                if (FilteredServers.Contains(s))
+                {
+                    FilteredServers.Remove(s);
+                }
+            }
+
+            ToDeleteList.Clear();
+        }
+
+        private void TableFilter()
+        {
+
+            dispatcherTimer.Stop();
+            dispatcherTimer.Start();
+
+            int id;
+            List<Server> tempServers = new List<Server>();
+
+            FilteredServers.Clear();
+            foreach (Server s in Servers)
+            {
+                FilteredServers.Add(s);
+            }
+
+
+            if (Id_Filter != null)
+            {
+                if (!id_Filter.Equals(string.Empty))
+                {
+                    if ( int.TryParse(Id_Filter,out id))
+                    {
+                        InvalidIdFilter = "";
+                        if (Equal)
+                        {
+                            foreach(Server s in Servers)
+                            {
+                                if (s.Identificator != id)
+                                {
+                                    FilteredServers.Remove(s);
+                                }
+                            }
+                        }else if (GreaterThan)
+                        {
+                            foreach (Server s in Servers)
+                            {
+                                if (s.Identificator <= id)
+                                {
+                                    FilteredServers.Remove(s);
+                                }
+                            }
+                        }else if (LessThan)
+                        {
+                            foreach (Server s in Servers)
+                            {
+                                if (s.Identificator >= id)
+                                {
+                                    FilteredServers.Remove(s);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        InvalidIdFilter = "Value must be a number";
+                    }
+                }
+                else
+                {
+                    InvalidIdFilter = "";
+                }
+
+            }
+
+            foreach (Server s in FilteredServers)
+            {
+                tempServers.Add(s);
+            }
+
+            if (!ServerTypeFilter.ServerTypeName.Equals("All Types"))
+            {
+                foreach (Server s in FilteredServers)
+                {
+                    if (!s.Type.ServerTypeName.Equals(ServerTypeFilter.ServerTypeName))
+                    {
+                        tempServers.Remove(s);
+                    }
+                }
+            }
+            FilteredServers.Clear();
+
+            foreach(Server s in tempServers)
+            {
+                FilteredServers.Add(s);
+            }
+
+        }
+
+
+        public void AddToDeleteList(Server server)
+        {
+            if (ToDeleteList.Contains(server))
+            {
+                ToDeleteList.Remove(server);
+            }
+            else
+            {
+                ToDeleteList.Add(server);
+            }
+        }
+
+        public void RemoveSelectedServers()
+        {
+            if (ToDeleteList.Count > 0)
+            {
+                DeleteConfirm = Visibility.Visible;
+            }
+            else
+            {
+                Messenger.Default.Send<NotificationContent>(CreateUnsuccessfullDeleteToastNotification());
+
+            }
+
+        }
+
+        private void OnAdd()
+        {
+            int id;
+
+            if (IdAddServer==null ||IdAddServer.Equals(string.Empty))
+            {
+                InvalidIdAddServer = "Identificator is required.";
+                id = -1;
+            }
+            else
+            {
+                if(int.TryParse(IdAddServer,out id))
+                {
+                    if (id < 1)
+                    {
+                        id = -1;
+                        InvalidIdAddServer = "Must be a positive number";
+                    }
+                    else
+                    {
+                        InvalidIdAddServer = "";
+
+                        if (id > 999)
+                        {
+                            id = -1;
+                            InvalidIdAddServer = "Identificator can't exceed 999";
+                        }
+                        else
+                        {
+                            foreach(Server s in Servers)
+                            {
+                                if (s.Identificator.Equals(id))
+                                {
+                                    id = -1;
+                                    InvalidIdAddServer="Identificator already in use";
+                                    break;
+                                }
+                            } 
+                        }
+
+                    }
+                }
+                else
+                {
+                    id = -1;
+                    InvalidIdAddServer = "Must be a positive number";
+                }
+            }
+
+            AddServer.Validate();
+            if (AddServer.IsValid && id != -1) 
+            {
+                Server server = new Server();
+                server.Identificator = int.Parse(IdAddServer);
+                server.Name=AddServer.Name;
+                server.IpAddress=AddServer.IpAddress;
+                server.Type=AddServer.Type;
+
+                Servers.Add(server);
+                TableFilter();
+
+                IdAddServer = "";
+                AddServer.Name = "";
+                AddServer.IpAddress = "";
+                AddServer.Type = ServerTypes.ElementAt(0);
+
+                Messenger.Default.Send<NotificationContent>(CreateSuccessToastNotification());
+            }
+            dispatcherTimer.Stop();
+            dispatcherTimer.Start();
+        }
+
+        #endregion
+
+        #region Values For Delete
+
+        private Visibility deleteConfirm = Visibility.Hidden;
+
+        private Visibility DeleteConfirm
+        {
+            get
+            {
+                return deleteConfirm;
+            }
+
+            set
+            {
+                deleteConfirm = value;
+                OnPropertyChanged(nameof(DeleteConfirm));
+            }
+        }
+
+        #endregion
+
+        #region Values For Filter
+
+        private string id_Filter;
+
+        public string Id_Filter
+        {
+            get 
+            {
+                return id_Filter;
+            }
+            set
+            {
+                if(id_Filter != value)
+                {
+                    id_Filter = value;
+                    OnPropertyChanged(nameof(Id_Filter));
+                }
+            }
+
+        }
+
+        private string invalidIdFilter;
+
+        public string InvalidIdFilter
+        {
+            get
+            {
+                return invalidIdFilter;
+            }
+            set
+            {
+                if (invalidIdFilter != value)
+                {
+                    invalidIdFilter = value;
+                    OnPropertyChanged(nameof(InvalidIdFilter));
+                }
+            }
+        }
+
+        private ServerType serverTypeFilter;
+
+        public ServerType ServerTypeFilter
+        {
+            get 
+            { 
+                return serverTypeFilter; 
+            }
+
+            set
+            {
+                if(serverTypeFilter != value)
+                {
+                    serverTypeFilter = value;
+                    OnPropertyChanged(nameof(ServerTypeFilter));
+                }
+            }
+
+        }
+
+        private bool lessThan;
+        private bool equal;
+        private bool greaterThan;
+
+        public bool LessThan
+        {
+            get 
+            { 
+                return lessThan; 
+            }
+            set
+            {
+                if(lessThan != value)
+                {
+                    lessThan = value;
+                    OnPropertyChanged(nameof(LessThan));
+                }
+            }
         
-            Servers = new ObservableCollection<Server>();
+        }
+
+        public bool Equal
+        {
+            get
+            {
+                return equal;
+            }
+            set
+            {
+                if (Equal != value)
+                {
+                    equal = value;
+                    OnPropertyChanged(nameof(Equal));
+                }
+            }
+
+        }
+
+        public bool GreaterThan
+        {
+            get
+            {
+                return greaterThan;
+            }
+            set
+            {
+                if (greaterThan != value)
+                {
+                    greaterThan = value;
+                    OnPropertyChanged(nameof(GreaterThan));
+                }
+            }
+
+        }
+        #endregion
+
+        #region Values For Add Entity
+
+        private Server addServer = new Server();
+
+        public Server AddServer
+        {
+            get 
+            { 
+                return addServer; 
+            }
             
+            set
+            {
+                if(addServer!= value)
+                {
+                    addServer = value;
+                    OnPropertyChanged(nameof(AddServer));
+                }
+
+            }
+        
+        }
+
+        private string idAddServer;
+
+        public string IdAddServer
+        {
+            get
+            {
+                return idAddServer;
+            }
+            set
+            {
+                if(idAddServer!= value)
+                {
+                    idAddServer = value;
+                    OnPropertyChanged(nameof(IdAddServer));
+                }
+            }
+        }
+
+        private string invalidIdAddServer;
+
+        public string InvalidIdAddServer
+        {
+            get
+            {
+                return invalidIdAddServer;
+            }
+            set
+            {
+                if(invalidIdAddServer != value)
+                {
+                    invalidIdAddServer = value;
+                    OnPropertyChanged(nameof(InvalidIdAddServer));
+                }
+            }
+        }
+
+
+        #endregion
+
+        #region Constructor
+
+        public NetworkEntitiesViewModel(ObservableCollection<Server> servers,List<ServerType> serverTypes) { 
+        
+            //Init the lists
+            Servers = servers;
+            ServerTypes =serverTypes;
+            FilterServerTypes = new List<ServerType>();
+            FilteredServers = new ObservableCollection<Server>();
+            ToDeleteList= new List<Server>();
+
+
+            //Init the commands
+            AddEntity = new MyICommand(OnAdd);
+            ResetFilter = new MyICommand(ResetFilterValues);
+            ApplyFilter = new MyICommand(TableFilter);
+            TrueRemoveSelected = new MyICommand(TrueRemoveList);
+            AddToDelete = new MyICommand<Server>(AddToDeleteList);
+            RemoveSelected = new MyICommand(RemoveSelectedServers);
             LoadData();
         }
 
-        //TO DELETE after the implementation of ADD function
+        #endregion
+
+        #region NotificationCreators
+        private NotificationContent CreateSuccessToastNotification()
+        {
+            var notificationContent = new NotificationContent
+            {
+                Title = "Success",
+                MessageTextSettings = new Notification.Wpf.Base.TextContentSettings { 
+                                                                                    FontSize = 17,
+                                                                                    FontWeight=FontWeights.SemiBold, 
+                                                                                    TextAlignment=TextAlignment.Center
+                                                                                    },
+                TitleTextSettings=new Notification.Wpf.Base.TextContentSettings
+                                                                                {
+                                                                                FontSize=20  ,  
+                                                                                FontWeight=FontWeights.Bold,
+                                                                                TextAlignment=TextAlignment.Center,
+                                                                                    
+                                                                                },
+                Message = "Entity successfully added",
+                Type = NotificationType.None,
+                TrimType = NotificationTextTrimType.NoTrim,
+                Background = new SolidColorBrush(Colors.LimeGreen),
+                Foreground = new SolidColorBrush(Colors.White),
+                CloseOnClick = true,
+
+            };
+
+            return notificationContent;
+        }
+
+        private NotificationContent CreateDeleteToastNotification()
+        {
+            var notificationContent = new NotificationContent
+            {
+                Title = "Deleted",
+                MessageTextSettings = new Notification.Wpf.Base.TextContentSettings
+                {
+                    FontSize = 17,
+                    FontWeight = FontWeights.SemiBold,
+                    TextAlignment = TextAlignment.Center
+                },
+                TitleTextSettings = new Notification.Wpf.Base.TextContentSettings
+                {
+                    FontSize = 20,
+                    FontWeight = FontWeights.Bold,
+                    TextAlignment = TextAlignment.Center,
+
+                },
+                Message = "Selected entities successfully deleted",
+                Type = NotificationType.None,
+                TrimType = NotificationTextTrimType.NoTrim,
+                Background = new SolidColorBrush(Colors.Blue),
+                Foreground = new SolidColorBrush(Colors.White),
+                CloseOnClick = true,
+
+            };
+
+            return notificationContent;
+        }
+
+        private NotificationContent CreateUnsuccessfullDeleteToastNotification()
+        {
+            var notificationContent = new NotificationContent
+            {
+                Title = "Unsuccessful delete",
+                MessageTextSettings = new Notification.Wpf.Base.TextContentSettings
+                {
+                    FontSize = 17,
+                    FontWeight = FontWeights.SemiBold,
+                    TextAlignment = TextAlignment.Center
+                },
+                TitleTextSettings = new Notification.Wpf.Base.TextContentSettings
+                {
+                    FontSize = 20,
+                    FontWeight = FontWeights.Bold,
+                    TextAlignment = TextAlignment.Center,
+
+                },
+                Message = "No entites selected for delete",
+                Type = NotificationType.None,
+                TrimType = NotificationTextTrimType.NoTrim,
+                Background = new SolidColorBrush(Colors.Red),
+                Foreground = new SolidColorBrush(Colors.White),
+                CloseOnClick = true,
+
+            };
+
+            return notificationContent;
+        }
+        #endregion
+
+        #region Loading the ServerTypes
+
         public void LoadData()
         {
 
-            Server s1 = new Server();
-            s1.Name = "Oracle";
-            s1.Identificator = 1;
-            s1.IpAddress = "127.0.0.1";
-            s1.Usage = 79;
-            s1.Type = ServerType.Web_Server;
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 6);
+            
 
-            Server s2 = new Server();
-            s2.Name = "Steam";
-            s2.Identificator = 2;
-            s1.Usage = 100;
-            s2.IpAddress = "127.0.0.1";
-            s2.Type = ServerType.File_Server;
 
-            Server s3 = new Server();
-            s3.Name = "www wwww23wwww";
-            s3.Identificator = 123;
-            s3.Usage = 2;
-            s3.IpAddress = "127.110.220.111";
-            s3.Type = ServerType.Database_Server;
+            Equal = true;
 
-            Server s4 = new Server();
-            s4.Name = "Microsoft";
-            s4.Identificator = 14;
-            s4.Usage = 50;
-            s4.IpAddress = "127.0.0.1";
-            s4.Type = ServerType.File_Server;
+            ServerTypeFilter = new ServerType("All Types", "");
+            FilterServerTypes.Add(ServerTypeFilter);
 
-            Server s5 = new Server();
-            s5.Name = "Ubisoft";
-            s5.Identificator = 13;
-            s4.Usage = 50;
-            s5.IpAddress = "192.0.0.1";
-            s5.Type = ServerType.File_Server;
+            foreach(ServerType serverType in ServerTypes)
+            {
+                FilterServerTypes.Add(serverType);
+            }
 
-            Server s6 = new Server();
-            s6.Name = "Riot games";
-            s6.Identificator = 7;
-            s6.Usage = 50;
-            s6.IpAddress = "127.0.120.1";
-            s6.Type = ServerType.Database_Server;
-
-            Servers.Add(s1);
-            Servers.Add(s2);
-            Servers.Add(s3);
-            Servers.Add(s4);
-            Servers.Add(s5);
-            Servers.Add(s6);
+            foreach(Server s in Servers)
+            {
+                FilteredServers.Add(s);
+            }
+            
         }
 
-
+        #endregion
     }
 }

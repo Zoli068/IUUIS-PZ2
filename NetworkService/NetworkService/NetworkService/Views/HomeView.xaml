@@ -23,14 +23,14 @@
                     <ControlTemplate TargetType="{x:Type MenuItem}">
                         <Border 
                             Height="55"
-                            Background="{StaticResource SecondaryBackGroundColor}" 
+                            Background="{StaticResource ButtonColor}" 
                             BorderThickness="1" 
                             CornerRadius="15">
 
                             <TextBlock 
                                 HorizontalAlignment="Center"
                                 FontSize="26"
-                                Foreground="{StaticResource SecondaryFontColor}"
+                                Foreground="{StaticResource UISecondaryColor}"
                                 Padding="0 0 0 3"
                                 FontWeight="DemiBold"
                                 VerticalAlignment="Center"
@@ -64,7 +64,7 @@
     </UserControl.Resources>
     
     
-    <Grid Background="{StaticResource BackGroundColor}">
+    <Grid Background="{StaticResource UIThirdColor}">
 
         <!--#region Grid Definitions-->
         
@@ -78,19 +78,20 @@
 
         <StackPanel 
             Grid.Row="1"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
             Grid.Column="1" 
             Grid.ColumnSpan="2">
 
             <TextBlock 
                 FontWeight="Bold"
-                Foreground="{StaticResource FontColor}"
+                Foreground="{StaticResource UIPrimaryColor}"
                 FontSize="38"
                 Text=" Network Service "/>
 
             <Image 
-                Margin="20 40 0 70"
-                Width="190"
+                Margin="20 45 0 70"
+                Width="220"
                 Source="/Resources/Images/Monitoring.png">
                 
             </Image>
@@ -120,6 +121,7 @@
                 </MenuItem>
 
                 <MenuItem                          
+                    Margin="0 0 0 20"
                     Command="{Binding DataContext.NavCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                     Header="Measurement Graph"
                     CommandParameter="networkDisplay">
