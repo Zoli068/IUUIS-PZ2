@@ -49,11 +49,21 @@ namespace NetworkService.ViewModel
         #region Commands
 
         public MyICommand ResetFilter { get; set; }
+        public MyICommand ShowFilter { get; set; }
+        public MyICommand ShowAdd { get; set; }
+        public MyICommand HideTheTabs { get; set; }
         public MyICommand ApplyFilter { get; set; } 
         public MyICommand<Server> AddToDelete { get; set; }
         public MyICommand RemoveSelected { get; set; }
         public MyICommand TrueRemoveSelected { get; set; }
         public MyICommand AddEntity { get; set; }
+        public MyICommand AbortDelete { get; set; }
+
+        private void AbbortDeleteAttempt()
+        {
+            OpacityBackGround = false;
+            DeleteConfirm = Visibility.Collapsed;
+        }
 
         private void ResetFilterValues()
         {
@@ -70,11 +80,16 @@ namespace NetworkService.ViewModel
             {
                 FilteredServers.Add(s);
             }
+            HideTheSideTabs();
+            ActiveFilter = Visibility.Hidden;
         }
 
         private void TrueRemoveList()
         {
             Messenger.Default.Send<NotificationContent>(CreateDeleteToastNotification());
+
+            OpacityBackGround = false;
+            DeleteConfirm =Visibility.Collapsed;
 
             foreach (Server s in ToDeleteList)
             {
@@ -88,7 +103,7 @@ namespace NetworkService.ViewModel
                     FilteredServers.Remove(s);
                 }
             }
-
+            HideTheSideTabs();
             ToDeleteList.Clear();
         }
 
@@ -115,6 +130,7 @@ namespace NetworkService.ViewModel
                     if ( int.TryParse(Id_Filter,out id))
                     {
                         InvalidIdFilter = "";
+                        ActiveFilter = Visibility.Visible;
                         if (Equal)
                         {
                             foreach(Server s in Servers)
@@ -163,6 +179,7 @@ namespace NetworkService.ViewModel
 
             if (!ServerTypeFilter.ServerTypeName.Equals("All Types"))
             {
+                ActiveFilter = Visibility.Visible;
                 foreach (Server s in FilteredServers)
                 {
                     if (!s.Type.ServerTypeName.Equals(ServerTypeFilter.ServerTypeName))
@@ -176,6 +193,19 @@ namespace NetworkService.ViewModel
             foreach(Server s in tempServers)
             {
                 FilteredServers.Add(s);
+            }
+
+            if(invalidIdFilter != null) 
+            { 
+                if(invalidIdFilter.Equals("") )
+                {
+                    HideTheSideTabs();
+
+                }
+            }
+            else
+            {
+                HideTheSideTabs();
             }
 
         }
@@ -197,12 +227,12 @@ namespace NetworkService.ViewModel
         {
             if (ToDeleteList.Count > 0)
             {
+                OpacityBackGround = true;
                 DeleteConfirm = Visibility.Visible;
             }
             else
             {
                 Messenger.Default.Send<NotificationContent>(CreateUnsuccessfullDeleteToastNotification());
-
             }
 
         }
@@ -274,9 +304,30 @@ namespace NetworkService.ViewModel
                 AddServer.Type = ServerTypes.ElementAt(0);
 
                 Messenger.Default.Send<NotificationContent>(CreateSuccessToastNotification());
+                HideTheSideTabs();
             }
             dispatcherTimer.Stop();
             dispatcherTimer.Start();
+        }
+
+        private void HideTheSideTabs()
+        {
+            AbbortDeleteAttempt();
+            OpacityBackGround = false;
+            AddTabVisibility = false;            
+            FilterTabVisibility = false;
+        }
+
+        private void ShowAddTab()
+        {
+            OpacityBackGround= true;
+            AddTabVisibility = true;            
+        }
+
+        private void ShowFilterTab()
+        {
+            OpacityBackGround= true;
+            FilterTabVisibility = true;
         }
 
         #endregion
@@ -285,7 +336,7 @@ namespace NetworkService.ViewModel
 
         private Visibility deleteConfirm = Visibility.Hidden;
 
-        private Visibility DeleteConfirm
+        public Visibility DeleteConfirm
         {
             get
             {
@@ -320,6 +371,25 @@ namespace NetworkService.ViewModel
                 }
             }
 
+        }
+
+        private Visibility activeFilter = Visibility.Hidden;
+
+        public Visibility ActiveFilter
+        {
+            get
+            {
+                return activeFilter;
+            }
+
+            set
+            {
+                if (activeFilter != value)
+                {
+                    activeFilter = value;
+                    OnPropertyChanged(nameof(ActiveFilter));
+                }
+            }
         }
 
         private string invalidIdFilter;
@@ -478,6 +548,67 @@ namespace NetworkService.ViewModel
 
         #endregion
 
+        #region Values For Hiding Tabs
+
+        private bool opacityBackGround = false;
+       
+        public bool OpacityBackGround
+        {
+            get
+            {
+                return opacityBackGround;
+            }
+
+            set
+            {
+                if(value!=opacityBackGround)
+                {
+                    opacityBackGround = value;
+                    OnPropertyChanged(nameof(OpacityBackGround));
+                }
+            }
+        }
+
+        private bool filterTabVisibility = false;
+
+        public bool FilterTabVisibility
+        {
+            get
+            {
+                return filterTabVisibility;
+            }
+
+            set
+            {
+                if (value != filterTabVisibility)
+                {
+                    filterTabVisibility = value;
+                    OnPropertyChanged(nameof(FilterTabVisibility));
+                }
+            }
+        }
+
+        private bool addTabVisibility = false;
+
+        public bool AddTabVisibility
+        {
+            get
+            {
+                return addTabVisibility;
+            }
+
+            set
+            {
+                if (value != addTabVisibility)
+                {
+                    addTabVisibility = value;
+                    OnPropertyChanged(nameof(AddTabVisibility));
+                }
+            }
+        }
+
+        #endregion
+
         #region Constructor
 
         public NetworkEntitiesViewModel(ObservableCollection<Server> servers,List<ServerType> serverTypes) { 
@@ -492,10 +623,14 @@ namespace NetworkService.ViewModel
 
             //Init the commands
             AddEntity = new MyICommand(OnAdd);
+            ShowAdd = new MyICommand(ShowAddTab);
+            ShowFilter = new MyICommand(ShowFilterTab);
             ResetFilter = new MyICommand(ResetFilterValues);
             ApplyFilter = new MyICommand(TableFilter);
             TrueRemoveSelected = new MyICommand(TrueRemoveList);
             AddToDelete = new MyICommand<Server>(AddToDeleteList);
+            AbortDelete = new MyICommand(AbbortDeleteAttempt);
+            HideTheTabs = new MyICommand(HideTheSideTabs);
             RemoveSelected = new MyICommand(RemoveSelectedServers);
             LoadData();
         }
@@ -536,7 +671,7 @@ namespace NetworkService.ViewModel
         {
             var notificationContent = new NotificationContent
             {
-                Title = "Deleted",
+                Title = "Successfully Deleted",
                 MessageTextSettings = new Notification.Wpf.Base.TextContentSettings
                 {
                     FontSize = 17,

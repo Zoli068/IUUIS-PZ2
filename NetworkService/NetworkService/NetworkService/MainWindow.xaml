@@ -11,11 +11,13 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         ResizeMode="NoResize"
-        Background="Transparent"
+        Background="Transparent"          MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStyle="None"
         AllowsTransparency="True"
 	    WindowStartupLocation="CenterScreen"
         Height="650" Width="360">
+    <!--TODELETE MOUSELEFTBUTTONDOWN-->
+    
     
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
