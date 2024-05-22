@@ -15,27 +15,15 @@ using System.Windows.Media;
 using MVVMLight.Messaging;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Reflection;
+using System.Xml.Linq;
+using System.Threading;
 
 namespace NetworkService.ViewModel
 {
     public class NetworkEntitiesViewModel:BindableBase
     {
-        #region DispatcherTimer
-
-        private DispatcherTimer dispatcherTimer;
-
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            InvalidIdAddServer = "";
-            InvalidIdFilter = "";
-
-            AddServer.ValidationErrors["Address"] ="";
-            AddServer.ValidationErrors["Name"] = "";
-            AddServer.Refresh();
-        }
-
-        #endregion
-
+        
         #region Lists
 
         public ObservableCollection<Server> Servers { get; set; }
@@ -50,25 +38,176 @@ namespace NetworkService.ViewModel
 
         public MyICommand ResetFilter { get; set; }
         public MyICommand ShowFilter { get; set; }
+        public MyICommand ApplyFilter { get; set; } 
+        public MyICommand AddEntity { get; set; }
         public MyICommand ShowAdd { get; set; }
         public MyICommand HideTheTabs { get; set; }
-        public MyICommand ApplyFilter { get; set; } 
         public MyICommand<Server> AddToDelete { get; set; }
         public MyICommand RemoveSelected { get; set; }
-        public MyICommand TrueRemoveSelected { get; set; }
-        public MyICommand AddEntity { get; set; }
         public MyICommand AbortDelete { get; set; }
+        public MyICommand TrueRemoveSelected { get; set; }
+        public MyICommand<string> KeyboardButtonPress { get; set; }
+        public MyICommand HideKeyboard { get; set; }
+        public MyICommand<string> FocusTextBox { get; set; }
+        #endregion
 
-        private void AbbortDeleteAttempt()
+        #region Command Functions
+
+        #region Keyboard Typing
+
+        private bool lastShift = false;
+
+        private void TypingWithKeyboard(string value)
         {
-            OpacityBackGround = false;
-            DeleteConfirm = Visibility.Collapsed;
+            PropertyInfo propertyInfo=null;
+            string oldValue;
+
+            if (!PropertyNameToType.Equals("AddServer.IpAddress") && !PropertyNameToType.Equals("AddServer.Name"))
+            {
+                 propertyInfo = GetType().GetProperty(PropertyNameToType);
+                 oldValue = propertyInfo.GetValue(this) as string;
+            }
+            else
+            {
+                if (PropertyNameToType.Equals("AddServer.IpAddress"))
+                {
+                    oldValue = addServer.IpAddress;
+                }
+                else
+                {
+                    oldValue = addServer.Name;
+                }
+            }
+
+
+            if (value.Equals("SPACE"))
+            {
+                oldValue += " ";
+                lastShift = false;
+            }
+            else if (value.Equals("ENTER"))
+            {
+                
+            }
+            else if (value.Equals("BACKSPACE"))
+            {
+                if (oldValue.Length > 0)
+                {
+                    oldValue=oldValue.Remove(oldValue.Length - 1);
+                }
+                lastShift = false;
+            }
+            else if (value.Equals("Shift"))
+            {
+                    if(LowerCaseKeyboardVisibility==Visibility.Visible && UpperCaseKeyboardVisibility == Visibility.Hidden)
+                    {
+                            LowerCaseKeyboardVisibility = Visibility.Hidden;
+                            UpperCaseKeyboardVisibility = Visibility.Visible;                    
+                    }
+                    else 
+                    {
+                            LowerCaseKeyboardVisibility = Visibility.Visible;
+                            UpperCaseKeyboardVisibility = Visibility.Hidden;
+                    }
+
+                    if (lastShift)
+                    {
+                        lastShift = false;
+                    }
+                    else
+                    {
+                        lastShift = true;
+                    }
+
+            }
+            else if (value.Equals("CAPS_LOCK"))
+            {
+                lastShift = false;
+                if (CapsLockIndiciator == Visibility.Visible)
+                {
+                    CapsLockIndiciator = Visibility.Hidden;
+                    LowerCaseKeyboardVisibility = Visibility.Visible;
+                    UpperCaseKeyboardVisibility = Visibility.Hidden;                    
+                }
+                else
+                {
+                    CapsLockIndiciator=Visibility.Visible;
+                    LowerCaseKeyboardVisibility = Visibility.Hidden;
+                    UpperCaseKeyboardVisibility = Visibility.Visible;
+                }
+            }
+            else
+            {           
+                oldValue += value;
+
+                if (lastShift)
+                {
+                    if (LowerCaseKeyboardVisibility == Visibility.Visible && UpperCaseKeyboardVisibility == Visibility.Hidden)
+                    {
+                        LowerCaseKeyboardVisibility = Visibility.Hidden;
+                        UpperCaseKeyboardVisibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        LowerCaseKeyboardVisibility = Visibility.Visible;
+                        UpperCaseKeyboardVisibility = Visibility.Hidden;
+                    }
+                    lastShift = false;
+                }           
+
+            }
+
+            if (!PropertyNameToType.Equals("AddServer.IpAddress") && !PropertyNameToType.Equals("AddServer.Name"))
+            {
+                propertyInfo.SetValue(this, oldValue);
+
+            }
+            else
+            {
+                if (PropertyNameToType.Equals("AddServer.IpAddress"))
+                {
+                    addServer.IpAddress = oldValue;
+                }
+                else
+                {
+                    addServer.Name = oldValue;
+                }
+            }
+
+            if (value.Equals("ENTER"))
+            {
+                HideKeyboardFunc();
+                lastShift = false;
+
+            }
         }
+
+        private void HideKeyboardFunc()
+        {
+            KeyBoardVisibility = false;
+            LowerCaseKeyboardVisibility = Visibility.Hidden; 
+            UpperCaseKeyboardVisibility=Visibility.Hidden;
+            CapsLockIndiciator = Visibility.Hidden;
+            PropertyNameToType = "";
+        }
+
+        private void FocusTheTextBox(string propertyName) 
+        {
+            PropertyNameToType = propertyName;
+            KeyBoardVisibility = true;
+            LowerCaseKeyboardVisibility = Visibility.Visible;
+            UpperCaseKeyboardVisibility=Visibility.Hidden;
+        }
+
+        #endregion
+
+        #region Filter Functions
 
         private void ResetFilterValues()
         {
             dispatcherTimer.Stop();
             dispatcherTimer.Start();
+            dispatcherTimer_Tick(null,null);
 
             Equal = true;
             Id_Filter = string.Empty;
@@ -84,29 +223,6 @@ namespace NetworkService.ViewModel
             ActiveFilter = Visibility.Hidden;
         }
 
-        private void TrueRemoveList()
-        {
-            Messenger.Default.Send<NotificationContent>(CreateDeleteToastNotification());
-
-            OpacityBackGround = false;
-            DeleteConfirm =Visibility.Collapsed;
-
-            foreach (Server s in ToDeleteList)
-            {
-                if (Servers.Contains(s))
-                {
-                    Servers.Remove(s);
-                }
-
-                if (FilteredServers.Contains(s))
-                {
-                    FilteredServers.Remove(s);
-                }
-            }
-            HideTheSideTabs();
-            ToDeleteList.Clear();
-        }
-
         private void TableFilter()
         {
 
@@ -115,6 +231,12 @@ namespace NetworkService.ViewModel
 
             int id;
             List<Server> tempServers = new List<Server>();
+            List<Server> tempServers2 = new List<Server>();
+
+            foreach (Server s in FilteredServers)
+            {
+                tempServers2.Add(s);
+            }
 
             FilteredServers.Clear();
             foreach (Server s in Servers)
@@ -188,11 +310,42 @@ namespace NetworkService.ViewModel
                     }
                 }
             }
+            else
+            {
+                if (id_Filter != null)
+                {
+                    if (Id_Filter.Equals(""))
+                    {
+                        ActiveFilter = Visibility.Hidden;
+                    }
+                }
+            }
+
             FilteredServers.Clear();
 
             foreach(Server s in tempServers)
             {
                 FilteredServers.Add(s);
+            }
+
+            int pom;
+            if (Id_Filter != null)
+            {
+                if (!Id_Filter.Equals(""))
+                {
+                    if(!int.TryParse(Id_Filter,out pom))
+                    {
+                        ActiveFilter = Visibility.Hidden;
+
+                        FilteredServers.Clear();
+
+                        foreach (Server s in tempServers2)
+                        {
+                            ActiveFilter = Visibility.Visible;
+                            FilteredServers.Add(s);
+                        }
+                    }
+                }
             }
 
             if(invalidIdFilter != null) 
@@ -210,6 +363,38 @@ namespace NetworkService.ViewModel
 
         }
 
+        #endregion
+
+        #region Delete Functions
+
+        private void AbbortDeleteAttempt()
+        {
+            OpacityBackGround = false;
+            DeleteConfirm = Visibility.Collapsed;
+        }
+
+        private void TrueRemoveList()
+        {
+            Messenger.Default.Send<NotificationContent>(CreateDeleteToastNotification());
+
+            OpacityBackGround = false;
+            DeleteConfirm = Visibility.Collapsed;
+
+            foreach (Server s in ToDeleteList)
+            {
+                if (Servers.Contains(s))
+                {
+                    Servers.Remove(s);
+                }
+
+                if (FilteredServers.Contains(s))
+                {
+                    FilteredServers.Remove(s);
+                }
+            }
+            HideTheSideTabs();
+            ToDeleteList.Clear();
+        }
 
         public void AddToDeleteList(Server server)
         {
@@ -236,7 +421,10 @@ namespace NetworkService.ViewModel
             }
 
         }
+        #endregion
 
+        #region Add Functions
+        
         private void OnAdd()
         {
             int id;
@@ -310,6 +498,10 @@ namespace NetworkService.ViewModel
             dispatcherTimer.Start();
         }
 
+        #endregion
+
+        #region Hide/Show Tabs Functions
+
         private void HideTheSideTabs()
         {
             AbbortDeleteAttempt();
@@ -332,6 +524,116 @@ namespace NetworkService.ViewModel
 
         #endregion
 
+        #region Changing The View State
+
+        private void ChangingTheViewState(string updateMessage)
+        {
+            if (updateMessage.Equals("DefaultEntityTable"))
+            {
+                HideTheSideTabs();
+                HideKeyboardFunc();
+            }
+            else if (updateMessage.Equals("AddEntityTable"))
+            {
+                HideTheSideTabs();
+                ShowAddTab();
+            }else if (updateMessage.Equals("FilterEntityTable")){
+                HideTheSideTabs();
+                ShowFilterTab();
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Values For KeyBoard
+
+        private Visibility lowerCaseKeyboardVisibility = Visibility.Hidden;
+        private Visibility upperCaseKeyboardVisibility = Visibility.Hidden;
+        private Visibility capsLockIndiciator = Visibility.Hidden;
+        private string propertyNameToType;
+        private bool keyBoardVisibility=false;
+
+        public bool KeyBoardVisibility
+        {
+            get { return keyBoardVisibility; }
+            set
+            {
+                if (value != keyBoardVisibility)
+                {
+                    keyBoardVisibility = value;
+                    OnPropertyChanged(nameof(KeyBoardVisibility));
+                }
+            }
+        }
+
+        public string PropertyNameToType
+        {
+            get
+            {
+                return propertyNameToType;
+            }
+            set
+            {
+                if (value != propertyNameToType)
+                {
+                    propertyNameToType = value;
+                    OnPropertyChanged(nameof(PropertyNameToType));
+                }
+            }
+        }
+        
+        public Visibility LowerCaseKeyboardVisibility
+        {
+            get
+            {
+                return lowerCaseKeyboardVisibility;
+            }
+            set
+            {
+                if (value != lowerCaseKeyboardVisibility)
+                {
+                    lowerCaseKeyboardVisibility = value;
+                    OnPropertyChanged(nameof(LowerCaseKeyboardVisibility));
+                }
+            }
+        }
+
+        public Visibility UpperCaseKeyboardVisibility
+        {
+            get
+            {
+                return upperCaseKeyboardVisibility;
+            }
+            set
+            {
+                if (value != upperCaseKeyboardVisibility)
+                {
+                    upperCaseKeyboardVisibility = value;
+                    OnPropertyChanged(nameof(UpperCaseKeyboardVisibility));
+                }
+            }
+        }
+
+        public Visibility CapsLockIndiciator
+        {
+            get
+            {
+                return capsLockIndiciator; 
+            }
+            set
+            {
+                if(value!= capsLockIndiciator)
+                {
+                    capsLockIndiciator = value;
+                    OnPropertyChanged(nameof(CapsLockIndiciator));
+                }
+            }
+        }
+
+
+        #endregion
+
         #region Values For Delete
 
         private Visibility deleteConfirm = Visibility.Hidden;
@@ -349,12 +651,17 @@ namespace NetworkService.ViewModel
                 OnPropertyChanged(nameof(DeleteConfirm));
             }
         }
-
         #endregion
 
         #region Values For Filter
 
-        private string id_Filter;
+        private string id_Filter = "";
+        private string invalidIdFilter;
+        private Visibility activeFilter = Visibility.Hidden;
+        private bool lessThan;
+        private bool equal;
+        private bool greaterThan;
+        private ServerType serverTypeFilter;
 
         public string Id_Filter
         {
@@ -370,10 +677,7 @@ namespace NetworkService.ViewModel
                     OnPropertyChanged(nameof(Id_Filter));
                 }
             }
-
         }
-
-        private Visibility activeFilter = Visibility.Hidden;
 
         public Visibility ActiveFilter
         {
@@ -392,8 +696,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private string invalidIdFilter;
-
         public string InvalidIdFilter
         {
             get
@@ -410,8 +712,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private ServerType serverTypeFilter;
-
         public ServerType ServerTypeFilter
         {
             get 
@@ -427,12 +727,7 @@ namespace NetworkService.ViewModel
                     OnPropertyChanged(nameof(ServerTypeFilter));
                 }
             }
-
         }
-
-        private bool lessThan;
-        private bool equal;
-        private bool greaterThan;
 
         public bool LessThan
         {
@@ -448,7 +743,6 @@ namespace NetworkService.ViewModel
                     OnPropertyChanged(nameof(LessThan));
                 }
             }
-        
         }
 
         public bool Equal
@@ -465,7 +759,6 @@ namespace NetworkService.ViewModel
                     OnPropertyChanged(nameof(Equal));
                 }
             }
-
         }
 
         public bool GreaterThan
@@ -482,13 +775,14 @@ namespace NetworkService.ViewModel
                     OnPropertyChanged(nameof(GreaterThan));
                 }
             }
-
         }
         #endregion
 
         #region Values For Add Entity
 
         private Server addServer = new Server();
+        private string idAddServer="";
+        private string invalidIdAddServer="";
 
         public Server AddServer
         {
@@ -506,10 +800,7 @@ namespace NetworkService.ViewModel
                 }
 
             }
-        
         }
-
-        private string idAddServer;
 
         public string IdAddServer
         {
@@ -527,8 +818,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private string invalidIdAddServer;
-
         public string InvalidIdAddServer
         {
             get
@@ -544,13 +833,13 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
-
         #endregion
 
         #region Values For Hiding Tabs
 
         private bool opacityBackGround = false;
+        private bool addTabVisibility = false;
+        private bool filterTabVisibility = false;
        
         public bool OpacityBackGround
         {
@@ -569,8 +858,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private bool filterTabVisibility = false;
-
         public bool FilterTabVisibility
         {
             get
@@ -588,8 +875,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-        private bool addTabVisibility = false;
-
         public bool AddTabVisibility
         {
             get
@@ -606,7 +891,6 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
         #endregion
 
         #region Constructor
@@ -620,7 +904,6 @@ namespace NetworkService.ViewModel
             FilteredServers = new ObservableCollection<Server>();
             ToDeleteList= new List<Server>();
 
-
             //Init the commands
             AddEntity = new MyICommand(OnAdd);
             ShowAdd = new MyICommand(ShowAddTab);
@@ -630,9 +913,31 @@ namespace NetworkService.ViewModel
             TrueRemoveSelected = new MyICommand(TrueRemoveList);
             AddToDelete = new MyICommand<Server>(AddToDeleteList);
             AbortDelete = new MyICommand(AbbortDeleteAttempt);
-            HideTheTabs = new MyICommand(HideTheSideTabs);
             RemoveSelected = new MyICommand(RemoveSelectedServers);
+            HideTheTabs = new MyICommand(HideTheSideTabs);
+            KeyboardButtonPress = new MyICommand<string>(TypingWithKeyboard);
+            FocusTextBox = new MyICommand<string>(FocusTheTextBox);
+            HideKeyboard = new MyICommand(HideKeyboardFunc);
+
+            //Loading Values
             LoadData();
+
+            Messenger.Default.Register<string>(this, ChangingTheViewState);
+        }
+        #endregion
+
+        #region DispatcherTimer
+
+        private DispatcherTimer dispatcherTimer;
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            InvalidIdAddServer = "";
+            InvalidIdFilter = "";
+
+            AddServer.ValidationErrors["Address"] = "";
+            AddServer.ValidationErrors["Name"] = "";
+            AddServer.Refresh();
         }
 
         #endregion
@@ -661,7 +966,6 @@ namespace NetworkService.ViewModel
                 Background = new SolidColorBrush(Colors.LimeGreen),
                 Foreground = new SolidColorBrush(Colors.White),
                 CloseOnClick = true,
-
             };
 
             return notificationContent;
@@ -691,7 +995,6 @@ namespace NetworkService.ViewModel
                 Background = new SolidColorBrush(Colors.Blue),
                 Foreground = new SolidColorBrush(Colors.White),
                 CloseOnClick = true,
-
             };
 
             return notificationContent;
@@ -737,8 +1040,6 @@ namespace NetworkService.ViewModel
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 6);
             
-
-
             Equal = true;
 
             ServerTypeFilter = new ServerType("All Types", "");
@@ -755,7 +1056,6 @@ namespace NetworkService.ViewModel
             }
             
         }
-
         #endregion
     }
 }

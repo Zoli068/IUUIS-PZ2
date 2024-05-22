@@ -124,7 +124,7 @@
                     Margin="0 0 0 20"
                     Command="{Binding DataContext.NavCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                     Header="Measurement Graph"
-                    CommandParameter="networkDisplay">
+                    CommandParameter="measurementGraph">
                 </MenuItem>
             </Menu>
               

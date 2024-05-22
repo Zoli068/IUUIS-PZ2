@@ -29,6 +29,7 @@ namespace NetworkService.ViewModel
         private BindableBase currentViewModel;
         private HomeViewModel HomeViewModel;
         private NetworkEntitiesViewModel NetworkEntitiesViewModel;
+        private MeasurementGraphViewModel MeasurementGraphViewModel;
 
         public BindableBase CurrentViewModel
         {
@@ -49,7 +50,6 @@ namespace NetworkService.ViewModel
 
         private NotificationManager notificationManager;
 
-
         private void ShowToastNotification(NotificationContent notificationContent)
         {
             notificationManager.Show(notificationContent, "WindowNotificationArea", ShowXbtn: false,expirationTime: new TimeSpan(0,0,3));
@@ -68,10 +68,12 @@ namespace NetworkService.ViewModel
 
             HomeViewModel = new HomeViewModel();
             NetworkEntitiesViewModel=new NetworkEntitiesViewModel(Servers, ServerTypes);
-
+            MeasurementGraphViewModel = new MeasurementGraphViewModel(Servers);
             notificationManager = new NotificationManager();
            
             NavCommand = new MyICommand<string>(OnNav);
+            ShowShortCut = new MyICommand(ShowShortCutTab);
+            ChangeView = new MyICommand<string>(ChangeTheTableView);
             createListener();
             
             CurrentViewModel =HomeViewModel;
@@ -143,9 +145,32 @@ namespace NetworkService.ViewModel
 
         #endregion
 
-        #region Commands
-        public MyICommand<string> NavCommand { get; private set; }
+        #region ShortCut Tab Values
 
+        private bool shortCutTabVisibility = false;
+        
+        public bool ShortCutTabVisibility
+        {
+            get
+            {
+                return shortCutTabVisibility;
+            }
+            set
+            {
+                if (value != shortCutTabVisibility)
+                {
+                    shortCutTabVisibility = value;
+                    OnPropertyChanged(nameof(ShortCutTabVisibility));
+                }
+            }
+        }
+
+        #endregion
+
+        #region Commands
+        public MyICommand ShowShortCut { get; set; }
+        public MyICommand<string> NavCommand { get; private set; }
+        public MyICommand<string> ChangeView { get; set; }
 
         private void OnNav(string destination)
         {
@@ -153,9 +178,13 @@ namespace NetworkService.ViewModel
             {
                 case "home":
                     CurrentViewModel = HomeViewModel;
+                    ShortCutTabVisibility = false;
                     break;
                 case "entitiesView":
                     CurrentViewModel = NetworkEntitiesViewModel;
+                    break;
+                case "measurementGraph":
+                    CurrentViewModel = MeasurementGraphViewModel;
                     break;
                 case "networkDisplay":
                     //CurrentViewModel = networkDisplayViewModel;
@@ -163,6 +192,30 @@ namespace NetworkService.ViewModel
             }
         }
 
+
+        public void ShowShortCutTab()
+        {
+            if (!shortCutTabVisibility)
+            {
+                ShortCutTabVisibility = true;
+            }
+            else
+            {
+                ShortCutTabVisibility = false;
+            }
+        }
+
+        private void ChangeTheTableView(string state)
+        {
+            Messenger.Default.Send<string>(state);
+
+            if(state.Equals("DefaultEntityTable") || state.Equals("AddEntityTable") || state.Equals("FilterEntityTable"))
+            {
+                OnNav("entitiesView");
+            }
+
+            ShowShortCutTab();
+        }
         #endregion
 
         #region Connection to the Simulator

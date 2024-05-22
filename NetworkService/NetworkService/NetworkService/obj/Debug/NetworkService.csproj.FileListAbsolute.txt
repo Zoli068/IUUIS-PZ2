@@ -49,3 +49,5 @@ D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\N
 D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\System.ValueTuple.xml
 D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\MVVMLight.Messaging.dll
 D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\bin\Debug\MVVMLight.Messaging.xml
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\MeasurementGraphView.g.cs
+D:\Fakultet\III godina\Inzenjerstvo upotr.  -HCI\Predmetni zadatak 2\IUUIS-PZ2\NetworkService\NetworkService\NetworkService\obj\Debug\Views\MeasurementGraphView.baml

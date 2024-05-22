@@ -10,6 +10,6 @@ namespace NetworkService.ViewModel
 {
     public class HomeViewModel:BindableBase
     {
-
+        
     }
 }

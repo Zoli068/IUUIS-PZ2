@@ -30,12 +30,16 @@
         <DataTemplate DataType="{x:Type viewModel:NetworkEntitiesViewModel}">
             <views:NetworkEntitiesView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MeasurementGraphViewModel}">
+            <views:MeasurementGraphView/>
+        </DataTemplate>
     </Window.Resources>
     
     <Border 
         Background="{StaticResource UIThirdColor}"
         BorderThickness="0">
         
+            <!--#region Grid Definitions-->
 
         <Grid>
             <Grid.RowDefinitions>
@@ -49,11 +53,358 @@
                         MaxItems="1"
                         Position="TopCenter" />
 
+            <!--#endregion-->
+                      
             <!--#region ContentControl-->
             <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
             <!--#endregion-->
             
-            <!--#region MENU BAR -->
+            <!--#region ShortCut Bar-->
+
+            <Button
+                 Grid.Row="0"
+                 Grid.RowSpan="1"
+                 Panel.ZIndex="1"
+                 Command="{Binding ShowShortCut}">
+
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle 
+                                        x:Name="OpacityForTable"
+                                        Panel.ZIndex="1"
+                                        StrokeThickness="0"
+                                        Height="600"
+                                        Width="0"
+                                        Opacity="0.7"
+                                        Fill="Gray">
+
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ShortCutTabVisibility}" Value="True" >
+                                                        <DataTrigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation
+                                                                      Storyboard.TargetProperty="Width"
+                                                                      From="0"
+                                                                      To="360" Duration="0:0:0" AutoReverse="False"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+
+                                                        </DataTrigger.EnterActions>
+                                                        <DataTrigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation
+                                                          Storyboard.TargetProperty="Width"
+                                                          From="360"
+                                                          To="0" Duration="0:0:0" AutoReverse="False"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </DataTrigger.ExitActions>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>
+
+                                    </Rectangle>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+
+            </Button>
+
+            <StackPanel 
+                  Grid.Row="0"
+                  Grid.RowSpan="2"
+                  HorizontalAlignment="Left"
+                  x:Name="AddStackPanel"
+                  VerticalAlignment="Top"  
+                  Panel.ZIndex="2" 
+                  Width="0"
+                  Background="{StaticResource UIThirdColor}"
+                  Height="598.5">
+
+                <StackPanel
+                    Background="{StaticResource UIPrimaryColor}"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                            Foreground="{StaticResource UIThirdColor}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            TextAlignment="Center"
+                            Width="160"
+                            Padding="29 0 0 0"
+                            Margin="0 0 0 1"
+                               
+                            Height="35.6"
+                            FontSize="26"
+                            FontWeight="SemiBold"
+                            Text="Views"/>
+
+                    <Button
+                        Command="{Binding ShowShortCut}"
+                        Height="35.6">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+
+                                            <Border 
+                                                Background="Transparent"
+                                                Width="35"
+                                                BorderThickness="1"
+                                                CornerRadius="15"
+                                                Height="35">
+
+
+                                                <fa5:SvgAwesome
+                                                    Foreground="{StaticResource UIThirdColor}"
+                                                    Height="26"
+                                                    Icon="Solid_Times"
+                                                    />
+
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger 
+                                        Property="IsPressed" 
+                                        Value="True">
+
+                                        <Setter
+                                            Property="Effect"
+                                            Value="{StaticResource ClickedDropShadowEffect}"/>
+
+                                        <Setter Property="RenderTransform">
+                                            <Setter.Value>
+                                                <ScaleTransform ScaleX="0.980" ScaleY="0.980"  />
+                                            </Setter.Value>
+                                        </Setter>
+
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </Button.Style>
+                    </Button>
+
+                </StackPanel>
+
+
+                <Button
+                    Command="{Binding ChangeView}"
+                    CommandParameter="DefaultEntityTable"
+                    Height="55"
+                    Margin="0 20 0 0"
+                    Width="147.5">
+                    <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+
+                                    <Border 
+                                         Background="{StaticResource ButtonColor}"
+                                         CornerRadius="15">
+
+                                        <StackPanel 
+                                     Orientation="Horizontal"
+                                     HorizontalAlignment="Center">
+
+                                            <TextBlock
+                                         VerticalAlignment="Center"
+                                         TextAlignment="Center"
+                                         FontWeight="SemiBold"
+                                         FontSize="24"
+                                         Text="Entity Table"
+                                         />
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger 
+                              Property="IsPressed" 
+                              Value="True">
+
+                                <Setter
+                              Property="Effect"
+                              Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                    </Setter.Value>
+                                </Setter>
+
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                </Button>
+
+                <Button
+                    Command="{Binding ChangeView}"
+                    CommandParameter="AddEntityTable"
+                    Height="55"
+                    Margin="0 20 0 0"
+                    Width="147.5">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                             Background="{StaticResource ButtonColor}"
+                                             CornerRadius="15">
+
+                                            <StackPanel 
+                                                 Orientation="Horizontal"
+                                                 HorizontalAlignment="Center">
+
+                                                <TextBlock
+                                                     VerticalAlignment="Center"
+                                                     TextAlignment="Center"
+                                                     FontWeight="SemiBold"
+                                                     FontSize="24"
+                                                     Text="Add Entity"
+                                                     />
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                      Property="IsPressed" 
+                                      Value="True">
+
+                                    <Setter
+                                          Property="Effect"
+                                          Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button
+                    Command="{Binding ChangeView}"
+                    CommandParameter="FilterEntityTable"
+                    Height="55"
+                    Margin="0 20 0 0"
+                    Width="147.5">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                             Background="{StaticResource ButtonColor}"
+                                             CornerRadius="15">
+
+                                            <StackPanel 
+                                                 Orientation="Horizontal"
+                                                 HorizontalAlignment="Center">
+
+                                                <TextBlock
+                                                     VerticalAlignment="Center"
+                                                     TextAlignment="Center"
+                                                     FontWeight="SemiBold"
+                                                     FontSize="24"
+                                                     Text="Filter Table"
+                                                     />
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                      Property="IsPressed" 
+                                      Value="True">
+
+                                    <Setter
+                                      Property="Effect"
+                                      Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShortCutTabVisibility}"   Value="True" >
+                                <DataTrigger.EnterActions>
+
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                   Storyboard.TargetProperty="Width"
+                                                   From="0"
+                                                   To="200" Duration="0:0:0.2" AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+
+                                </DataTrigger.EnterActions>
+                                <DataTrigger.ExitActions>
+
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                              Storyboard.TargetProperty="Width"
+                                              From="200"
+                                              To="0" Duration="0:0:0.2" AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+
+            </StackPanel>
+            <!--#endregion-->
+            
+            <!--#region Mavigation BAR -->
             <Menu Width="360"
                 Grid.Row="1"
                 BorderBrush="{StaticResource UIPrimaryColor}"
@@ -61,7 +412,7 @@
                 Background="Transparent">
 
                 <MenuItem
-                        Command="{Binding NavCommand}"
+                        Command="{Binding ShowShortCut}"
                         CommandParameter="shortCut">
 
                     <MenuItem.Style>
