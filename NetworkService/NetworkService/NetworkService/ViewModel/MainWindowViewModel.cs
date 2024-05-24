@@ -190,6 +190,7 @@ namespace NetworkService.ViewModel
                     //CurrentViewModel = networkDisplayViewModel;
                     break;
             }
+            ShortCutTabVisibility=false;
         }
 
 
@@ -212,9 +213,12 @@ namespace NetworkService.ViewModel
             if(state.Equals("DefaultEntityTable") || state.Equals("AddEntityTable") || state.Equals("FilterEntityTable"))
             {
                 OnNav("entitiesView");
+                if (ShortCutTabVisibility)
+                {
+                    shortCutTabVisibility = false;
+                }
             }
 
-            ShowShortCutTab();
         }
         #endregion
 
@@ -259,11 +263,14 @@ namespace NetworkService.ViewModel
 
                             if (int.Parse(messageParts[1]) < NetworkEntitiesViewModel.Servers.Count())
                             {
-                                 NetworkEntitiesViewModel.Servers.ElementAt(int.Parse(messageParts[1])).Usage = int.Parse(messageParts[2]);
+                                 Servers.ElementAt(int.Parse(messageParts[1])).Usage = int.Parse(messageParts[2]);
+                                 Messenger.Default.Send<Server>(Servers.ElementAt(int.Parse(messageParts[1])));
+
+                                LogWriter(Servers.ElementAt(int.Parse(messageParts[1])));
                             }
 
-                            
-             
+
+
                         }
                     }, null);
                 }
@@ -281,7 +288,7 @@ namespace NetworkService.ViewModel
             using (StreamWriter sr = File.AppendText("Log.txt"))
             {
                 DateTime dateTime = DateTime.Now;
-                sr.WriteLine($"{DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss")}|{server.Identificator}|{server.Usage}");
+                sr.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}|{server.Identificator}|{server.Usage}|UPDATE|");
             }
         }
         #endregion

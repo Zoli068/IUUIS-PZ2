@@ -76,6 +76,7 @@
     <Compile Include="Assets\BindableBase.cs" />
     <Compile Include="Assets\ValidationBase.cs" />
     <Compile Include="Assets\ValidationErrors.cs" />
+    <Compile Include="Model\GraphCircle.cs" />
     <Compile Include="Model\Server.cs" />
     <Compile Include="Assets\MyICommand.cs" />
     <Compile Include="Model\ServerType.cs" />

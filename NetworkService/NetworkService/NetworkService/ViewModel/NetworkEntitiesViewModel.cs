@@ -341,7 +341,6 @@ namespace NetworkService.ViewModel
 
                         foreach (Server s in tempServers2)
                         {
-                            ActiveFilter = Visibility.Visible;
                             FilteredServers.Add(s);
                         }
                     }
@@ -391,6 +390,8 @@ namespace NetworkService.ViewModel
                 {
                     FilteredServers.Remove(s);
                 }
+                LogWriter(s);
+                Messenger.Default.Send<Server>(s);
             }
             HideTheSideTabs();
             ToDeleteList.Clear();
@@ -1056,6 +1057,19 @@ namespace NetworkService.ViewModel
             }
             
         }
+        #endregion
+
+        #region LogWriter
+
+        private void LogWriter(Server server)
+        {
+            using (StreamWriter sr = File.AppendText("Log.txt"))
+            {
+                DateTime dateTime = DateTime.Now;
+                sr.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}|{server.Identificator}|{server.Usage}|DELETE|");
+            }
+        }
+
         #endregion
     }
 }

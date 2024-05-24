@@ -16,13 +16,15 @@
         AllowsTransparency="True"
 	    WindowStartupLocation="CenterScreen"
         Height="650" Width="360">
-    <!--TODELETE MOUSELEFTBUTTONDOWN-->
     
+    <!--TODELETE MOUSELEFTBUTTONDOWN-->
     
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
 
+    <!--#region  Resources-->
+    
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
             <views:HomeView/>
@@ -34,6 +36,10 @@
             <views:MeasurementGraphView/>
         </DataTemplate>
     </Window.Resources>
+    
+    <!--#endregion-->
+    
+    <!--#region MainWindow-->
     
     <Border 
         Background="{StaticResource UIThirdColor}"
@@ -47,12 +53,17 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
-                <notifications:NotificationArea
-                        x:Name="WindowNotificationArea"
-                        Panel.ZIndex="1000"
-                        MaxItems="1"
-                        Position="TopCenter" />
 
+            <!--#endregion-->
+            
+            <!--#region  Notification Region-->
+            
+            <notifications:NotificationArea
+                    x:Name="WindowNotificationArea"
+                    Panel.ZIndex="1000"
+                    MaxItems="1"
+                    Position="TopCenter" />
+            
             <!--#endregion-->
                       
             <!--#region ContentControl-->
@@ -367,6 +378,60 @@
                     </Button.Style>
                 </Button>
 
+                <Button
+                    Command="{Binding NavCommand}"
+                    CommandParameter="measurementGraph"
+                    Height="55"
+                    Margin="0 20 0 0"
+                    Width="147.5">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                             Background="{StaticResource ButtonColor}"
+                                             CornerRadius="15">
+
+                                            <StackPanel 
+                                                     Orientation="Horizontal"
+                                                     HorizontalAlignment="Center">
+
+                                                <TextBlock
+                                                     VerticalAlignment="Center"
+                                                     TextAlignment="Center"
+                                                     FontWeight="SemiBold"
+                                                     FontSize="24"
+                                                     Text="Entity Graph"
+                                                     />
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                      Property="IsPressed" 
+                                      Value="True">
+
+                                    <Setter
+                                          Property="Effect"
+                                          Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
                 <StackPanel.Style>
                     <Style TargetType="StackPanel">
 
@@ -565,4 +630,7 @@
             
         </Grid>
     </Border>
+    
+    <!--#endregion-->
+    
 </Window>

@@ -35,7 +35,6 @@ namespace NetworkService.Model
             }
         }
 
-
         public string Path {
             get
             {

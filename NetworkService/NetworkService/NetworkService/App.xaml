@@ -15,6 +15,7 @@
         <SolidColorBrush x:Key="ButtonColor" Color="#00a7e1"/>
         <SolidColorBrush x:Key="InvalidStatusColor" Color="#dd0426"/>
         <SolidColorBrush x:Key="TextBoxBackGround" Color="#94D4EA"/>
+        <SolidColorBrush x:Key="GraphColor" Color="#00A3FF"/>
 
         <!--#endregion-->
         
@@ -50,6 +51,7 @@
             </Setter>
         </Style>
         <!--#endregion-->
+        
     </Application.Resources>
 
 </Application>

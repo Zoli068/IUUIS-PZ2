@@ -17,7 +17,7 @@
             <Border
 			    Grid.Column="0"
 			    CornerRadius="15"
-			    Margin="2 0 3 3"
+			    Margin="2 0 5 5"
                 Padding="2 2 10 2"
                 BorderThickness="0"
 			    Background="{StaticResource TextBoxBackGround}">
@@ -82,12 +82,13 @@
                     <ControlTemplate
 				        TargetType="{x:Type ComboBox}">
                         <Grid>
-
+                          
                             <ToggleButton
 						        Name="ToggleButton"
 						        Template="{StaticResource ComboBoxToggleButton}"
 						        Grid.Column="2"
 						        Focusable="false"
+                                IsEnabled="{TemplateBinding HasItems}"
 						        IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
 						        ClickMode="Press"></ToggleButton>
 
@@ -119,6 +120,7 @@
 						        IsReadOnly="{TemplateBinding IsReadOnly}" />
 
                             <Popup
+                                Margin="0 0 0 0"
 						        Name="Popup"
 						        Placement="Bottom"
 						        IsOpen="{TemplateBinding IsDropDownOpen}"
@@ -244,6 +246,7 @@
     </UserControl.Resources>
     <!--#endregion-->
     
+    <!--#region Measurment Graph-->
     
     <Grid
         Background="{StaticResource UIThirdColor}">
@@ -320,15 +323,17 @@
         </DockPanel>
         <!--#endregion-->
         
-        <!--#region View Body-->
+        <!--#region Graph Body-->
 
         <StackPanel 
             Grid.Row="1"
             VerticalAlignment="Top"
-            Margin="0 20 0 0"
+            Margin="0 30 0 0"
             Width="315">
 
+        <!--#region ComboBox Entity Selection-->
 
+                
             <Border 
                 Width="315"
                 Height="45"
@@ -336,26 +341,646 @@
                 BorderThickness="1.8"
                 BorderBrush="{StaticResource ButtonColor}"
                 Background="{StaticResource TextBoxBackGround}">
-                
-                <ComboBox 
-                    Width="315"
-                    Height="45"
-                    SelectedItem="{Binding SelectedServer}"
-                    ItemsSource="{Binding Servers}">
 
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock 
-                                FontSize="22"
-                                Text="{Binding Name}"/>
-                        </DataTemplate>
+                <Canvas>
 
-                    </ComboBox.ItemTemplate>
+                    <Button 
+                        Width="312"
+                        Height="40"
+                        Panel.ZIndex="10"
+                        Command="{Binding ComboBoxCheck}"
+                        BorderThickness="0"
+                        >
 
-                </ComboBox>
+                        <Button.Style>
+                            <Style TargetType="Button">
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+
+                                            <Border Background="Transparent">
+
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Setter Property="Visibility" Value="Hidden"/>
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Servers.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </Button.Style>
+
+                    </Button>
+                    
+                    <ComboBox
+                        Width="312"
+                        SelectedIndex="0"
+                        Height="44"
+                        SelectedItem="{Binding SelectedServer}"
+                        ItemsSource="{Binding Servers}">
+
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock 
+                                    FontSize="22"
+                                    Text="{Binding Name}"/>
+                            </DataTemplate>
+
+                        </ComboBox.ItemTemplate>
+
+                    </ComboBox>
+                </Canvas>
             </Border>
-        </StackPanel>
 
         <!--#endregion-->
+           
+        <!--#region  Graphic-->
+            
+            <Border
+                CornerRadius="15"
+                Margin="0 30 0 0"
+                Width="315"
+                BorderThickness="2"
+                Background="Transparent"
+                BorderBrush="{StaticResource UIPrimaryColor}"
+                Height="400">
+
+
+                <Canvas>
+
+                    <!--#region  Values-->
+                    
+                    <StackPanel Orientation="Horizontal">
+
+                        <Border 
+                            Height="40"
+                            Margin="3.3 3 0 0"
+                            CornerRadius="10"
+                            Width="54"
+                            Visibility="{Binding FirstCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FirstCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            
+                            <TextBlock 
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="0 0 0 2"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource UIThirdColor}"
+                                FontSize="18"
+                                Text="{Binding FirstCircle.Value}"/>
+
+                        </Border>
+
+                        <Border 
+                            Height="40"
+                            Margin="8.6 3 0 0"
+                            CornerRadius="10"
+                            Width="54" 
+                            Visibility="{Binding SecondCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SecondCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="0 0 0 2"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource UIThirdColor}"
+                                FontSize="18"
+                                Text="{Binding SecondCircle.Value}"/>
+
+                        </Border>
+
+                        <Border 
+                            Height="40"
+                            Margin="7.5 3 0 0"
+                            CornerRadius="10"
+                            Width="54" 
+                            Visibility="{Binding ThirdCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ThirdCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="0 0 0 2"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource UIThirdColor}"
+                                FontSize="18"
+                                Text="{Binding ThirdCircle.Value}"/>
+
+                        </Border>
+
+                        <Border 
+                             Height="40"
+                             Margin="9.1 3 0 0"
+                             CornerRadius="10"
+                             Width="54" 
+                             Visibility="{Binding FourthCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FourthCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                 TextAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Padding="0 0 0 2"
+                                 HorizontalAlignment="Center"
+                                 Foreground="{StaticResource UIThirdColor}"
+                                 FontSize="18"
+                                 Text="{Binding FourthCircle.Value}"/>
+
+                        </Border>
+
+
+                        <Border 
+                             Height="40"
+                             Margin="9.5 3 0 0"
+                             CornerRadius="10"
+                             Width="54" 
+                             Visibility="{Binding FifthCircle.Visibility}">
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FifthCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                 TextAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Padding="0 0 0 2"
+                                 HorizontalAlignment="Center"
+                                 Foreground="{StaticResource UIThirdColor}"
+                                 FontSize="18"
+                                 Text="{Binding FifthCircle.Value}"/>
+
+                        </Border>
+
+                    </StackPanel>
+                    
+                    <!--#endregion-->
+
+                    <!--#region Lines-->
+                    
+                    <Line
+                    X1="62"
+                    Y1="0"
+                    X2="62"
+                    Y2="398"
+                    StrokeThickness="2"
+                    Opacity="0.8"
+                    Stroke="{StaticResource UIPrimaryColor}"/>
+
+                    <Line
+                    X1="124"
+                    Y1="0"
+                    X2="124"
+                    Y2="398"
+                    StrokeThickness="2"
+                    Opacity="0.8"
+                    Stroke="{StaticResource UIPrimaryColor}"/>
+
+                    <Line
+                    X1="185"
+                    Y1="0"
+                    X2="185"
+                    Y2="398"
+                    StrokeThickness="2"
+                    Opacity="0.8"
+                    Stroke="{StaticResource UIPrimaryColor}"/>
+
+                    <Line
+                    X1="250"
+                    Y1="0"
+                    X2="250"
+                    Y2="398"
+                    StrokeThickness="2"
+                    Opacity="0.8"
+                    Stroke="{StaticResource UIPrimaryColor}"/>
+
+                    <Line
+                    X1="0"
+                    Y1="200"
+                    X2="313"
+                    Y2="200"
+                    StrokeThickness="1.2"
+                    Opacity="0.2"
+                    Stroke="{StaticResource UIPrimaryColor}"/>
+
+                    <!--#endregion-->
+
+                    <!--#region Circles-->
+                    
+                    <StackPanel
+                        Margin="0 172.6 0 0"
+                        Width="313"
+                        Height="55"
+                        Orientation="Horizontal">
+
+                        <StackPanel
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Visibility="{Binding FirstCircle.Visibility}"
+                            Width="62">
+
+                            <Ellipse
+                                Width="{Binding FirstCircle.Radius}"
+                                Height="{Binding FirstCircle.Radius}">
+
+
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding FirstCircle.Warning}" Value="True" >
+                                                    <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+
+                            </Ellipse>
+                        
+                        </StackPanel>
+
+                        <StackPanel
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Visibility="{Binding SecondCircle.Visibility}"
+                            Width="62">
+
+                            <Ellipse
+                                Width="{Binding SecondCircle.Radius}"
+                                Height="{Binding SecondCircle.Radius}">
+
+                                <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SecondCircle.Warning}" Value="True" >
+                                            <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                                </Ellipse.Style>
+
+                            </Ellipse>
+                        </StackPanel>
+
+                        <StackPanel
+                            VerticalAlignment="Center"
+                            Orientation="Vertical"
+                            Visibility="{Binding ThirdCircle.Visibility}"
+                            Width="61">
+
+                            <Ellipse
+                                Width="{Binding ThirdCircle.Radius}"
+                                Height="{Binding ThirdCircle.Radius}">
+
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ThirdCircle.Warning}" Value="True" >
+                                                <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+
+                            </Ellipse>
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Visibility="{Binding FourthCircle.Visibility}"
+                            Width="64">
+
+                            <Ellipse
+                                Width="{Binding FourthCircle.Radius}"
+                                Height="{Binding FourthCircle.Radius}">
+
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding FourthCircle.Warning}" Value="True" >
+                                                <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+
+                            </Ellipse>
+
+                        </StackPanel>
+
+                        <StackPanel
+                            Visibility="{Binding FifthCircle.Visibility}"
+                            VerticalAlignment="Center"
+                            Orientation="Vertical"
+                            Width="64">
+
+                            <Ellipse
+                                Width="{Binding FifthCircle.Radius}"
+                                Height="{Binding FifthCircle.Radius}">
+
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding FifthCircle.Warning}" Value="True" >
+                                                <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+
+                            </Ellipse>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!--#endregion-->
+                    
+                    <!--#region Time -->
+                    
+                    <StackPanel 
+                        Margin="0 349 0 0 "
+                        Orientation="Horizontal">
+
+                        <Border 
+                            Height="40"
+                            Margin="3.3 3 0 0"
+                            CornerRadius="10"
+                            Width="54" 
+                            Visibility="{Binding FirstCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FirstCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+
+                            <TextBlock 
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="0 0 0 2"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource UIThirdColor}"
+                                FontSize="13"
+                                Text="{Binding FirstCircle.Time}"/>
+
+                        </Border>
+
+                        <Border 
+                            Height="40"
+                            Margin="8.6 3 0 0"
+                            CornerRadius="10"
+                            Width="54" 
+                            Visibility="{Binding SecondCircle.Visibility}">
+
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SecondCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="0 0 0 2"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource UIThirdColor}"
+                                FontSize="13"
+                                Text="{Binding SecondCircle.Time}"/>
+
+                        </Border>
+
+                        <Border 
+                            Height="40"
+                            Margin="7.5 3 0 0"
+                            CornerRadius="10"
+                            Width="54" 
+                            Visibility="{Binding ThirdCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ThirdCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                TextAlignment="Center"
+                                VerticalAlignment="Center"
+                                Padding="0 0 0 2"
+                                HorizontalAlignment="Center"
+                                Foreground="{StaticResource UIThirdColor}"
+                                FontSize="13"
+                                Text="{Binding ThirdCircle.Time}"/>
+
+                        </Border>
+
+                        <Border 
+                             Height="40"
+                             Margin="9.1 3 0 0"
+                             CornerRadius="10"
+                             Width="54" 
+                             Visibility="{Binding FourthCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FourthCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                 TextAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Padding="0 0 0 2"
+                                 HorizontalAlignment="Center"
+                                 Foreground="{StaticResource UIThirdColor}"
+                                 FontSize="13"
+                                 Text="{Binding FourthCircle.Time}"/>
+
+                        </Border>
+
+
+                        <Border 
+                             Height="40"
+                             Margin="9.5 3 0 0"
+                             CornerRadius="10"
+                             Width="54" 
+                             Visibility="{Binding FifthCircle.Visibility}">
+
+
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding FifthCircle.Warning}" Value="True" >
+                                            <Setter Property="Background" Value="{StaticResource InvalidStatusColor}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                            <TextBlock 
+                                 TextAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Padding="0 0 0 2"
+                                 HorizontalAlignment="Center"
+                                 Foreground="{StaticResource UIThirdColor}"
+                                 FontSize="13"
+                                 Text="{Binding FifthCircle.Time}"/>
+
+                        </Border>
+                    </StackPanel>
+
+                   <!--#endregion-->
+                    
+                </Canvas>
+            </Border>
+
+        <!--#endregion-->
+
+
+        <!--#region Value Legend-->
+                
+            <Border
+                Margin="14"
+                Width="315"
+                Height="30"
+                Background="Transparent">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <Border 
+                        Width="22"
+                        Margin="15 0 0 0"
+                        Height="22"
+                        Background="{StaticResource GraphColor}">
+                        
+                    </Border>
+
+                    <TextBlock
+                        Margin="10 0 0 0"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        VerticalAlignment="Center">
+                        Valid Value
+                    </TextBlock>
+
+                    <Border 
+                        Width="22"
+                        Margin="40 0 0 0"
+                        Height="22"
+                        Background="{StaticResource InvalidStatusColor}">
+
+                    </Border>
+
+                    <TextBlock
+                        Margin="10 0 0 0"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        VerticalAlignment="Center">
+                        Invalid Value
+                    </TextBlock>
+
+                </StackPanel>
+                
+            </Border>
+                
+        </StackPanel>
+            
+            <!--#endregion-->
+        <!--#endregion-->
+        
     </Grid>
+       
+    <!--#endregion-->
+        
 </UserControl>

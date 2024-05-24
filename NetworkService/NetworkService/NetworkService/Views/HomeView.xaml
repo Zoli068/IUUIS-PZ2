@@ -13,6 +13,8 @@
         <viewModel:HomeViewModel/>
     </UserControl.DataContext>
 
+    <!--#region  Resources-->
+    
     <UserControl.Resources>
 
         <Style TargetType="{x:Type MenuItem}">
@@ -60,9 +62,11 @@
             </Style.Triggers>
         </Style>
 
-
     </UserControl.Resources>
     
+    <!--#endregion-->
+    
+    <!--#region  HomeView-->
     
     <Grid Background="{StaticResource UIThirdColor}">
 
@@ -75,7 +79,9 @@
         
         <!--#endregion-->
 
-
+        
+        <!--#region HomeView Body-->
+        
         <StackPanel 
             Grid.Row="1"
             VerticalAlignment="Bottom"
@@ -131,7 +137,10 @@
             <!--#endregion-->
             
         </StackPanel>
-        
-        
+        <!--#endregion --> 
+ 
     </Grid>
+    
+    <!--#endregion-->
+     
 </UserControl>
