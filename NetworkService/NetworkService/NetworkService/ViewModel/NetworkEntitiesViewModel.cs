@@ -374,7 +374,6 @@ namespace NetworkService.ViewModel
 
         private void TrueRemoveList()
         {
-            Messenger.Default.Send<NotificationContent>(CreateDeleteToastNotification());
 
             OpacityBackGround = false;
             DeleteConfirm = Visibility.Collapsed;
@@ -395,6 +394,7 @@ namespace NetworkService.ViewModel
             }
             HideTheSideTabs();
             ToDeleteList.Clear();
+            Messenger.Default.Send<NotificationContent>(CreateDeleteToastNotification());
         }
 
         public void AddToDeleteList(Server server)

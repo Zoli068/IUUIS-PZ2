@@ -30,7 +30,7 @@ namespace NetworkService.ViewModel
         private HomeViewModel HomeViewModel;
         private NetworkEntitiesViewModel NetworkEntitiesViewModel;
         private MeasurementGraphViewModel MeasurementGraphViewModel;
-
+        private NetworkDisplayViewModel NetworkDisplayViewModel;
         public BindableBase CurrentViewModel
         {
             get
@@ -69,6 +69,8 @@ namespace NetworkService.ViewModel
             HomeViewModel = new HomeViewModel();
             NetworkEntitiesViewModel=new NetworkEntitiesViewModel(Servers, ServerTypes);
             MeasurementGraphViewModel = new MeasurementGraphViewModel(Servers);
+            NetworkDisplayViewModel = new NetworkDisplayViewModel(Servers);
+            
             notificationManager = new NotificationManager();
            
             NavCommand = new MyICommand<string>(OnNav);
@@ -187,7 +189,7 @@ namespace NetworkService.ViewModel
                     CurrentViewModel = MeasurementGraphViewModel;
                     break;
                 case "networkDisplay":
-                    //CurrentViewModel = networkDisplayViewModel;
+                    CurrentViewModel = NetworkDisplayViewModel;
                     break;
             }
             ShortCutTabVisibility=false;

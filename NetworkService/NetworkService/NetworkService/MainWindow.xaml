@@ -35,6 +35,9 @@
         <DataTemplate DataType="{x:Type viewModel:MeasurementGraphViewModel}">
             <views:MeasurementGraphView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NetworkDisplayViewModel}">
+            <views:NetworkDisplayView/>
+        </DataTemplate>
     </Window.Resources>
     
     <!--#endregion-->
