@@ -29,7 +29,7 @@ namespace NetworkService.ViewModel
         #region Commands
 
         public MyICommand<Server> MouseLeftButtonDown { get; set; }
-        public MyICommand DropDown {  get; set; }
+        public MyICommand<string> DropDown {  get; set; }
         public MyICommand AbbortDrag {  get; set; }
 
         #region Command Functions
@@ -37,19 +37,39 @@ namespace NetworkService.ViewModel
         private void DragStarted(Server s)
         {
             DraggedServer= s;
-            OpacityForDrag = true;
-            IsDragging=true;
+            OpacityForDrag = 1;
+            IsDragging =true;
         }
 
-        private void TryToDropDown()
+        private void TryToDropDown(string value)
         {
-            Server s = DraggedServer;
+            int num = int.Parse(value);
+            ServerDisplayWrapper sdw=null;
+
+            if (DraggedServer == null)
+            {
+                return;
+            }
+
+            foreach(ServerDisplayWrapper sd in ServersAtDisplay)
+            {
+                if(sd.Index== num)
+                {
+                    sdw = sd;
+                    break;
+                }
+            }
+
+            sdw.Server = DraggedServer;
+            sdw.ServerVisibility=Visibility.Visible;
+            OnPropertyChanged(nameof(ServerDisplayWrapper));
+            DraggedServer = null;
+
             return;
         }
 
         private void ResetTheDropValues() {
-            DraggedServer = null;
-            OpacityForDrag = false;
+            OpacityForDrag = 0;
             IsDragging = false;
         }
 
@@ -59,7 +79,7 @@ namespace NetworkService.ViewModel
 
         private Server draggedServer;
         private bool isDragging;
-        private bool opacityForDrag;
+        private int opacityForDrag;
 
         public Server DraggedServer 
         {
@@ -78,18 +98,16 @@ namespace NetworkService.ViewModel
 
         }
 
-        public bool OpacityForDrag
+        public int OpacityForDrag
         {
             get
             {
                 return opacityForDrag;
             }
             set
-            {   if(value!= opacityForDrag) 
-                    {
-                        opacityForDrag = value;
-                        OnPropertyChanged(nameof(OpacityForDrag));   
-                    } 
+            {   
+                opacityForDrag = value;
+                OnPropertyChanged(nameof(OpacityForDrag));   
             }
         }
 
@@ -233,8 +251,8 @@ namespace NetworkService.ViewModel
             ServersByTypes = new ObservableCollection<ServersByType>();
             ServersAtDisplay = new ObservableCollection<ServerDisplayWrapper>();
 
-            ServersByTypes.Add(new ServersByType("File Servers"));
             ServersByTypes.Add(new ServersByType("Web Servers"));
+            ServersByTypes.Add(new ServersByType("File Servers"));
             ServersByTypes.Add(new ServersByType("Database Servers"));
 
             toDeleteList = new List<Server>();
@@ -251,9 +269,9 @@ namespace NetworkService.ViewModel
                 ServersAtDisplay.Add(new ServerDisplayWrapper(i));
             }
 
-            OpacityForDrag = false;
+            OpacityForDrag = 0;
             MouseLeftButtonDown = new MyICommand<Server>(DragStarted);
-            DropDown = new MyICommand(TryToDropDown);
+            DropDown = new MyICommand<string>(TryToDropDown);
             AbbortDrag = new MyICommand(ResetTheDropValues);
             Messenger.Default.Register<NotificationContent>(this,UpdateTheLists);
         }

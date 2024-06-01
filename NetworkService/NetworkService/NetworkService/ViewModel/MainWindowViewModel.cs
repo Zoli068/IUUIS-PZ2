@@ -86,12 +86,15 @@ namespace NetworkService.ViewModel
         {
 
             ServerType serverType = new ServerType("Web Server", "slika1");
+            serverType.Path = "/Resources/Images/WebServer.png";
             ServerTypes.Add(serverType);
 
             serverType = new ServerType("File Server", "slika1");
+            serverType.Path = "/Resources/Images/FileServer.png";
             ServerTypes.Add(serverType);
 
             serverType = new ServerType("Database Server", "slika1");
+            serverType.Path = "/Resources/Images/DataBaseServer.png";
             ServerTypes.Add(serverType);
 
             Server s1 = new Server();

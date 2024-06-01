@@ -158,5 +158,10 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Monitoring.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DataBaseServer.png" />
+    <Resource Include="Resources\Images\FileServer.png" />
+    <Resource Include="Resources\Images\WebServer.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
