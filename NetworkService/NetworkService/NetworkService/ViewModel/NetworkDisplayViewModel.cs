@@ -15,9 +15,7 @@ namespace NetworkService.ViewModel
 {
     public class NetworkDisplayViewModel:BindableBase
     {
-
         #region Lists
-
         public ObservableCollection<Server> Servers { get; set; }
         public ObservableCollection<ServersByType> ServersByTypes { get; set; }
         public ObservableCollection<ServerDisplayWrapper> ServersAtDisplay { get; set; }
@@ -27,7 +25,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Commands
-
         public MyICommand<Server> MouseLeftButtonDown { get; set; }
         public MyICommand<string> DropDown {  get; set; }
         public MyICommand<string> LineMouseLeftButtonDown {  get; set; }
@@ -36,7 +33,6 @@ namespace NetworkService.ViewModel
         public MyICommand AbbortDrag {  get; set; }
 
         #region Command Functions
-
         private void DragStarted(Server s)
         {
             DraggedServer= s;
@@ -53,7 +49,6 @@ namespace NetworkService.ViewModel
                     break;
                 }
             }
-            
         }
 
         private void TryToDropDown(string value)
@@ -62,6 +57,7 @@ namespace NetworkService.ViewModel
             endIndex = -1;
             int num = int.Parse(value);
             ServerDisplayWrapper sdw=null;
+            ServerDisplayWrapper oldWrapper = null;
 
             if (DraggedServer == null)
             {
@@ -77,8 +73,6 @@ namespace NetworkService.ViewModel
                 }
             }
 
-            ServerDisplayWrapper oldWrapper = null;
-
             foreach (ServerDisplayWrapper sd in ServersAtDisplay)
             {
                 if (DraggedServer == sd.Server)
@@ -92,22 +86,14 @@ namespace NetworkService.ViewModel
             {
                 if (sdw.Server != null)
                 {
-                    //ako iz treeview bacimo nesto u display i tamo vec bio neki element
                     DeleteServerFromDisplay(sdw);
                 }
-                //else jeste da nije bio
             }
             else
             {
-                //ako iz display stavimo na display
-                //num is the new index
-                //oldwraper.Index the old one
-
                 Point point1 = DisplayEntityPoints.ElementAt(num);
                 Point point2 = DisplayEntityPoints.ElementAt(oldWrapper.Index);
 
-
-                //ako stavimo entity na prazna mesto
                 if (ServersAtDisplay.ElementAt(num).Server == null)
                 {
                     foreach(ConnectionLine line in Lines)
@@ -125,7 +111,6 @@ namespace NetworkService.ViewModel
                         OnPropertyChanged(nameof(Lines));
                     }
 
-
                     //stupid thing but other way won't normally update
                     List<ConnectionLine> tempLines = new List<ConnectionLine>();
 
@@ -140,8 +125,6 @@ namespace NetworkService.ViewModel
                     {
                         Lines.Add(cl);
                     }
-
-
 
                     ServerDisplayWrapper sdFirst1 = new ServerDisplayWrapper(-1);
                     sdFirst1.Server = oldWrapper.Server;
@@ -158,9 +141,6 @@ namespace NetworkService.ViewModel
 
                     return;
                 }
-
-
-
 
                 foreach(ConnectionLine line in Lines)
                 {
@@ -200,6 +180,7 @@ namespace NetworkService.ViewModel
                     }
                 }
 
+                //stupid thing but other way won't normally update
                 List<ConnectionLine> tempLines2 = new List<ConnectionLine>();
 
                 foreach (ConnectionLine cl in Lines)
@@ -226,10 +207,7 @@ namespace NetworkService.ViewModel
                 sdw.Server = sdFirst.Server;
                 sdw.ServerVisibility=sdFirst.ServerVisibility;
                 sdw.AlarmVisibility = sdFirst.AlarmVisibility;
-
             }
-
-
 
             sdw.Server = DraggedServer;
             RemoveServerFromList(DraggedServer);
@@ -281,18 +259,19 @@ namespace NetworkService.ViewModel
             {
                 Lines.Remove(line);
             }
-
         }
 
         private void FinishDrawingTheLine(string index)
         {
-             endIndex = int.Parse(index);
+            endIndex = int.Parse(index);
+
             if (startIndex == endIndex)
             {
                 startIndex = -1;
                 endIndex = -1;
                 return;
             }
+
             drawTheLine();
         }
 
@@ -305,7 +284,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region DragValues
-
         private Server draggedServer;
         private bool isDragging;
         private int opacityForDrag;
@@ -355,12 +333,9 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
         #endregion
 
-
         #region LineDrawing
-
         private int startIndex;
         private int endIndex;
 
@@ -382,7 +357,6 @@ namespace NetworkService.ViewModel
             {
                 if(cl.Y1==startPoint.Y && cl.X1==startPoint.X &&cl.X2==endPoint.X && cl.Y2 == endPoint.Y)
                 {
-                    //already have, than we delete it
                     conLine = cl;
                     break;
                 }
@@ -400,15 +374,12 @@ namespace NetworkService.ViewModel
 
             conLine = new ConnectionLine(startPoint.X, endPoint.X, startPoint.Y, endPoint.Y);
             Lines.Add(conLine);
-
         }
-
         #endregion
 
         #endregion
 
         #region Update/Remove Server From Lists
-
         private void UpdateTheLists(NotificationContent content)
         {
             if(content.Message.Equals("Selected entities successfully deleted"))
@@ -435,7 +406,6 @@ namespace NetworkService.ViewModel
                     }
                 }
 
-
                 foreach (ServersByType serverByType in ServersByTypes)
                 {
                     if (serverByType.Servers.Contains(server))
@@ -454,14 +424,11 @@ namespace NetworkService.ViewModel
                     AddServerToList(server);
 
                 }
-
             }
         }
 
-
         private void updateAlArms(Server server)
         {
-
             foreach (ServerDisplayWrapper sd in ServersAtDisplay)
             {
                 if (sd.Server == server)
@@ -478,7 +445,6 @@ namespace NetworkService.ViewModel
             }
         }
 
-
         private void AddServerToList(Server s)
         {
             if (s.Type.ServerTypeName.Equals("Web Server"))
@@ -494,7 +460,6 @@ namespace NetworkService.ViewModel
                 ServersByTypes[2].Servers.Add(s);
             }  
         }
-
 
         private void RemoveServerFromList(Server s)
         {
@@ -514,7 +479,6 @@ namespace NetworkService.ViewModel
 
         private void removeServerFromDisplay()
         {
-
             foreach(ServersByType serverByType in ServersByTypes)
             {
                 foreach(Server s in serverByType.Servers)
@@ -529,9 +493,9 @@ namespace NetworkService.ViewModel
             foreach (ServerDisplayWrapper sd in ServersAtDisplay)
             {
                 if (!Servers.Contains(sd.Server))
-                    {
+                {
                         toDeleteList.Add(sd.Server);
-                    }
+                }
             }
 
             foreach(Server s in toDeleteList)
@@ -556,7 +520,6 @@ namespace NetworkService.ViewModel
                             if (line.Y1 == DisplayEntityPoints.ElementAt(sd.Index).Y && line.X1 == DisplayEntityPoints.ElementAt(sd.Index).X
                                 || line.Y2 == DisplayEntityPoints.ElementAt(sd.Index).Y && line.X2 == DisplayEntityPoints.ElementAt(sd.Index).X)
                             {
-
                                 toDeleteLines.Add(line);
                             }
                         }
@@ -569,7 +532,6 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
         #endregion
 
         #region Constructor
@@ -588,6 +550,7 @@ namespace NetworkService.ViewModel
             ServersByTypes.Add(new ServersByType("Database Servers"));
 
             toDeleteList = new List<Server>();
+
             //TODO delete at end bcs, at begining we wont have no server in system
             foreach (Server s in Servers)
             {
@@ -601,16 +564,15 @@ namespace NetworkService.ViewModel
                 }
             }
 
-            //creating the empty wrappers for servers
             for(int i = 0; i < 12; i++)
             {
                 ServersAtDisplay.Add(new ServerDisplayWrapper(i));
             }
 
-
             startIndex = -1;
             endIndex = -1;
             OpacityForDrag = 0;
+
             MouseLeftButtonDown = new MyICommand<Server>(DragStarted);
             DropDown = new MyICommand<string>(TryToDropDown);
             AbbortDrag = new MyICommand(ResetTheDropValues);
@@ -620,10 +582,7 @@ namespace NetworkService.ViewModel
 
             Messenger.Default.Register<NotificationContent>(this,UpdateTheLists);
             Messenger.Default.Register<Server>(this, updateAlArms);
-
         }
-
-
         #endregion
     }
 }

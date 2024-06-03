@@ -57,7 +57,6 @@ namespace NetworkService.Assets
 
     public class MyICommand<T> : ICommand
     {
-
         Action<T> _TargetExecuteMethod;
         Func<T, bool> _TargetCanExecuteMethod;
 
@@ -78,7 +77,6 @@ namespace NetworkService.Assets
         }
 
         #region ICommand Members
-
         bool ICommand.CanExecute(object parameter)
         {
 
@@ -105,7 +103,6 @@ namespace NetworkService.Assets
                 _TargetExecuteMethod((T)parameter);
             }
         }
-
         #endregion
     }
 }

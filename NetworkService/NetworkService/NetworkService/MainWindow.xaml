@@ -16,15 +16,12 @@
         AllowsTransparency="True"
 	    WindowStartupLocation="CenterScreen"
         Height="650" Width="360">
-    
-    <!--TODELETE MOUSELEFTBUTTONDOWN-->
-    
+        
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
 
     <!--#region  Resources-->
-    
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
             <views:HomeView/>
@@ -39,42 +36,35 @@
             <views:NetworkDisplayView/>
         </DataTemplate>
     </Window.Resources>
-    
     <!--#endregion-->
     
     <!--#region MainWindow-->
-    
     <Border 
         Background="{StaticResource UIThirdColor}"
         BorderThickness="0">
-        
-            <!--#region Grid Definitions-->
 
         <Grid>
+            
+            <!--#region Grid Definitions-->
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+            <!--#endregion-->
 
-            <!--#endregion-->
-            
             <!--#region  Notification Region-->
-            
             <notifications:NotificationArea
-                    x:Name="WindowNotificationArea"
-                    Panel.ZIndex="1000"
-                    MaxItems="1"
-                    Position="TopCenter" />
-            
+                x:Name="WindowNotificationArea"
+                Panel.ZIndex="1000"
+                MaxItems="1"
+                Position="TopCenter" />
             <!--#endregion-->
-                      
+
             <!--#region ContentControl-->
             <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel}" />
             <!--#endregion-->
-            
-            <!--#region ShortCut Bar-->
 
+            <!--#region ShortCut Bar-->
             <Button
                  Grid.Row="0"
                  Grid.RowSpan="1"
@@ -83,6 +73,7 @@
 
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
+
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate>
@@ -97,42 +88,43 @@
 
                                         <Rectangle.Style>
                                             <Style TargetType="Rectangle">
-
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding ShortCutTabVisibility}" Value="True" >
+
                                                         <DataTrigger.EnterActions>
                                                             <BeginStoryboard>
                                                                 <Storyboard>
                                                                     <DoubleAnimation
-                                                                      Storyboard.TargetProperty="Width"
-                                                                      From="0"
-                                                                      To="360" Duration="0:0:0" AutoReverse="False"/>
+                                                                          Storyboard.TargetProperty="Width"
+                                                                          From="0"
+                                                                          To="360" Duration="0:0:0" AutoReverse="False"/>
                                                                 </Storyboard>
                                                             </BeginStoryboard>
 
                                                         </DataTrigger.EnterActions>
+
                                                         <DataTrigger.ExitActions>
                                                             <BeginStoryboard>
                                                                 <Storyboard>
                                                                     <DoubleAnimation
-                                                          Storyboard.TargetProperty="Width"
-                                                          From="360"
-                                                          To="0" Duration="0:0:0" AutoReverse="False"/>
+                                                                          Storyboard.TargetProperty="Width"
+                                                                          From="360"
+                                                                          To="0" Duration="0:0:0" AutoReverse="False"/>
                                                                 </Storyboard>
                                                             </BeginStoryboard>
                                                         </DataTrigger.ExitActions>
+
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
                                         </Rectangle.Style>
-
                                     </Rectangle>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
+
                     </Style>
                 </Button.Style>
-
             </Button>
 
             <StackPanel 
@@ -157,8 +149,7 @@
                             TextAlignment="Center"
                             Width="160"
                             Padding="29 0 0 0"
-                            Margin="0 0 0 1"
-                               
+                            Margin="0 0 0 1"                   
                             Height="35.6"
                             FontSize="26"
                             FontWeight="SemiBold"
@@ -167,7 +158,6 @@
                     <Button
                         Command="{Binding ShowShortCut}"
                         Height="35.6">
-
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
 
@@ -181,7 +171,6 @@
                                                 BorderThickness="1"
                                                 CornerRadius="15"
                                                 Height="35">
-
 
                                                 <fa5:SvgAwesome
                                                     Foreground="{StaticResource UIThirdColor}"
@@ -211,13 +200,12 @@
 
                                     </Trigger>
                                 </Style.Triggers>
-                            </Style>
 
+                            </Style>
                         </Button.Style>
                     </Button>
 
                 </StackPanel>
-
 
                 <Button
                     Command="{Binding ChangeView}"
@@ -226,51 +214,52 @@
                     Margin="0 20 0 0"
                     Width="147.5">
                     <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate>
 
-                                    <Border 
-                                         Background="{StaticResource ButtonColor}"
-                                         CornerRadius="15">
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
 
-                                        <StackPanel 
-                                     Orientation="Horizontal"
-                                     HorizontalAlignment="Center">
+                                        <Border 
+                                             Background="{StaticResource ButtonColor}"
+                                             CornerRadius="15">
 
-                                            <TextBlock
-                                         VerticalAlignment="Center"
-                                         TextAlignment="Center"
-                                         FontWeight="SemiBold"
-                                         FontSize="24"
-                                         Text="Entity Table"
-                                         />
-                                        </StackPanel>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
+                                            <StackPanel 
+                                                 Orientation="Horizontal"
+                                                 HorizontalAlignment="Center">
 
-                        <Style.Triggers>
-                            <Trigger 
-                              Property="IsPressed" 
-                              Value="True">
+                                                <TextBlock
+                                                     VerticalAlignment="Center"
+                                                     TextAlignment="Center"
+                                                     FontWeight="SemiBold"
+                                                     FontSize="24"
+                                                     Text="Entity Table"/>
 
-                                <Setter
-                              Property="Effect"
-                              Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
 
-                                <Setter Property="RenderTransform">
-                                    <Setter.Value>
-                                        <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
-                                    </Setter.Value>
-                                </Setter>
+                            <Style.Triggers>
+                                <Trigger 
+                                  Property="IsPressed" 
+                                  Value="True">
 
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+                                    <Setter
+                                      Property="Effect"
+                                      Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
 
                 <Button
@@ -281,6 +270,7 @@
                     Width="147.5">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
@@ -335,6 +325,7 @@
                     Width="147.5">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
@@ -352,7 +343,7 @@
                                                      TextAlignment="Center"
                                                      FontWeight="SemiBold"
                                                      FontSize="24"
-                                                     Text="Filter Table"
+                                                     Text="Table Filter"
                                                      />
                                             </StackPanel>
                                         </Border>
@@ -389,6 +380,7 @@
                     Width="147.5">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
+
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
@@ -406,7 +398,62 @@
                                                      TextAlignment="Center"
                                                      FontWeight="SemiBold"
                                                      FontSize="24"
-                                                     Text="Entity Graph"
+                                                     Text="Graph"
+                                                     />
+                                            </StackPanel>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                            <Style.Triggers>
+                                <Trigger 
+                                      Property="IsPressed" 
+                                      Value="True">
+
+                                    <Setter
+                                          Property="Effect"
+                                          Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button
+                    Command="{Binding NavCommand}"
+                    CommandParameter="networkDisplay"
+                    Height="55"
+                    Margin="0 20 0 0"
+                    Width="147.5">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+
+                                        <Border 
+                                             Background="{StaticResource ButtonColor}"
+                                             CornerRadius="15">
+
+                                            <StackPanel 
+                                                     Orientation="Horizontal"
+                                                     HorizontalAlignment="Center">
+
+                                                <TextBlock
+                                                     VerticalAlignment="Center"
+                                                     TextAlignment="Center"
+                                                     FontWeight="SemiBold"
+                                                     FontSize="24"
+                                                     Text="Display"
                                                      />
                                             </StackPanel>
                                         </Border>
@@ -471,7 +518,7 @@
 
             </StackPanel>
             <!--#endregion-->
-            
+
             <!--#region Mavigation BAR -->
             <Menu Width="360"
                 Grid.Row="1"
@@ -488,6 +535,7 @@
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
                             <Setter Property="SnapsToDevicePixels" Value="True"/>
                             <Setter Property="Template">
+
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type MenuItem}">
                                         <Border
@@ -526,18 +574,18 @@
                             </Style.Triggers>
                         </Style>
                     </MenuItem.Style>
-                    
                 </MenuItem>
 
                 <MenuItem 
                     Command="{Binding NavCommand}"
                     CommandParameter="home">
-                    
+
                     <MenuItem.Style>
                         <Style TargetType="{x:Type MenuItem}">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
                             <Setter Property="SnapsToDevicePixels" Value="True"/>
                             <Setter Property="Template">
+
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type MenuItem}">
                                         <Border
@@ -553,7 +601,6 @@
 
                                         </Border>
                                     </ControlTemplate>
-
                                 </Setter.Value>
                             </Setter>
 
@@ -576,18 +623,18 @@
                             </Style.Triggers>
                         </Style>
                     </MenuItem.Style>
-                    
+
                 </MenuItem>
 
                 <MenuItem
-                    Command="{Binding NavCommand}"
-                    CommandParameter="undo">
+                    Command="{Binding Undo}">
 
                     <MenuItem.Style>
                         <Style TargetType="{x:Type MenuItem}">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
                             <Setter Property="SnapsToDevicePixels" Value="True"/>
                             <Setter Property="Template">
+
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type MenuItem}">
                                         <Border
@@ -603,7 +650,6 @@
 
                                         </Border>
                                     </ControlTemplate>
-
                                 </Setter.Value>
                             </Setter>
 
@@ -630,10 +676,9 @@
 
             </Menu>
             <!--#endregion-->
-            
+
         </Grid>
     </Border>
-    
-    <!--#endregion-->
+    <!--#endregion-->  
     
 </Window>

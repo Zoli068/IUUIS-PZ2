@@ -10,7 +10,6 @@ namespace NetworkService.Model
 {
     public class GraphCircle : BindableBase
     {
-
         private string _value;
         private string _time;
         private double _radius;
@@ -26,6 +25,7 @@ namespace NetworkService.Model
             _visibility = Visibility.Hidden;
         }
 
+        #region Properties
         public string Value { 
             get 
             { 
@@ -56,7 +56,6 @@ namespace NetworkService.Model
                 }
             }
         }
-
 
         public double Radius
         {
@@ -105,5 +104,6 @@ namespace NetworkService.Model
                 }
             }
         }
+        #endregion
     }
 }

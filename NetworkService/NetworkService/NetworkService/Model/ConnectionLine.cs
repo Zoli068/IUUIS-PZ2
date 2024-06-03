@@ -22,6 +22,7 @@ namespace NetworkService.Model
             this.y2 = y2;
         }
 
+        #region Properties
         public double X1 
         {
             get 
@@ -85,6 +86,6 @@ namespace NetworkService.Model
                 }
             } 
         }
-
+        #endregion
     }
 }

@@ -22,20 +22,16 @@ using System.Threading;
 namespace NetworkService.ViewModel
 {
     public class NetworkEntitiesViewModel:BindableBase
-    {
-        
+    {       
         #region Lists
-
         public ObservableCollection<Server> Servers { get; set; }
         public ObservableCollection<Server> FilteredServers { get; set; }
         public List<ServerType> ServerTypes { get; set; }
         public List<ServerType> FilterServerTypes { get; set; }
         public List<Server> ToDeleteList { get; set; }
-
         #endregion
 
         #region Commands
-
         public MyICommand ResetFilter { get; set; }
         public MyICommand ShowFilter { get; set; }
         public MyICommand ApplyFilter { get; set; } 
@@ -54,7 +50,6 @@ namespace NetworkService.ViewModel
         #region Command Functions
 
         #region Keyboard Typing
-
         private bool lastShift = false;
 
         private void TypingWithKeyboard(string value)
@@ -78,7 +73,6 @@ namespace NetworkService.ViewModel
                     oldValue = addServer.Name;
                 }
             }
-
 
             if (value.Equals("SPACE"))
             {
@@ -118,7 +112,6 @@ namespace NetworkService.ViewModel
                     {
                         lastShift = true;
                     }
-
             }
             else if (value.Equals("CAPS_LOCK"))
             {
@@ -154,13 +147,11 @@ namespace NetworkService.ViewModel
                     }
                     lastShift = false;
                 }           
-
             }
 
             if (!PropertyNameToType.Equals("AddServer.IpAddress") && !PropertyNameToType.Equals("AddServer.Name"))
             {
                 propertyInfo.SetValue(this, oldValue);
-
             }
             else
             {
@@ -178,7 +169,6 @@ namespace NetworkService.ViewModel
             {
                 HideKeyboardFunc();
                 lastShift = false;
-
             }
         }
 
@@ -198,11 +188,9 @@ namespace NetworkService.ViewModel
             LowerCaseKeyboardVisibility = Visibility.Visible;
             UpperCaseKeyboardVisibility=Visibility.Hidden;
         }
-
         #endregion
 
         #region Filter Functions
-
         private void ResetFilterValues()
         {
             dispatcherTimer.Stop();
@@ -219,17 +207,19 @@ namespace NetworkService.ViewModel
             {
                 FilteredServers.Add(s);
             }
+
             HideTheSideTabs();
+
             ActiveFilter = Visibility.Hidden;
         }
 
         private void TableFilter()
         {
-
             dispatcherTimer.Stop();
             dispatcherTimer.Start();
 
             int id;
+
             List<Server> tempServers = new List<Server>();
             List<Server> tempServers2 = new List<Server>();
 
@@ -243,7 +233,6 @@ namespace NetworkService.ViewModel
             {
                 FilteredServers.Add(s);
             }
-
 
             if (Id_Filter != null)
             {
@@ -359,13 +348,10 @@ namespace NetworkService.ViewModel
             {
                 HideTheSideTabs();
             }
-
         }
-
         #endregion
 
         #region Delete Functions
-
         private void AbbortDeleteAttempt()
         {
             OpacityBackGround = false;
@@ -374,7 +360,6 @@ namespace NetworkService.ViewModel
 
         private void TrueRemoveList()
         {
-
             OpacityBackGround = false;
             DeleteConfirm = Visibility.Collapsed;
 
@@ -420,12 +405,10 @@ namespace NetworkService.ViewModel
             {
                 Messenger.Default.Send<NotificationContent>(CreateUnsuccessfullDeleteToastNotification());
             }
-
         }
         #endregion
 
-        #region Add Functions
-        
+        #region Add Functions     
         private void OnAdd()
         {
             int id;
@@ -498,11 +481,9 @@ namespace NetworkService.ViewModel
             dispatcherTimer.Stop();
             dispatcherTimer.Start();
         }
-
         #endregion
 
         #region Hide/Show Tabs Functions
-
         private void HideTheSideTabs()
         {
             AbbortDeleteAttempt();
@@ -522,11 +503,9 @@ namespace NetworkService.ViewModel
             OpacityBackGround= true;
             FilterTabVisibility = true;
         }
-
         #endregion
 
         #region Changing The View State
-
         private void ChangingTheViewState(string updateMessage)
         {
             if (updateMessage.Equals("DefaultEntityTable"))
@@ -548,7 +527,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Values For KeyBoard
-
         private Visibility lowerCaseKeyboardVisibility = Visibility.Hidden;
         private Visibility upperCaseKeyboardVisibility = Visibility.Hidden;
         private Visibility capsLockIndiciator = Visibility.Hidden;
@@ -631,12 +609,9 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
-
         #endregion
 
         #region Values For Delete
-
         private Visibility deleteConfirm = Visibility.Hidden;
 
         public Visibility DeleteConfirm
@@ -655,7 +630,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Values For Filter
-
         private string id_Filter = "";
         private string invalidIdFilter;
         private Visibility activeFilter = Visibility.Hidden;
@@ -780,7 +754,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Values For Add Entity
-
         private Server addServer = new Server();
         private string idAddServer="";
         private string invalidIdAddServer="";
@@ -799,7 +772,6 @@ namespace NetworkService.ViewModel
                     addServer = value;
                     OnPropertyChanged(nameof(AddServer));
                 }
-
             }
         }
 
@@ -837,7 +809,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Values For Hiding Tabs
-
         private bool opacityBackGround = false;
         private bool addTabVisibility = false;
         private bool filterTabVisibility = false;
@@ -897,15 +868,13 @@ namespace NetworkService.ViewModel
         #region Constructor
 
         public NetworkEntitiesViewModel(ObservableCollection<Server> servers,List<ServerType> serverTypes) { 
-        
-            //Init the lists
+
             Servers = servers;
             ServerTypes =serverTypes;
             FilterServerTypes = new List<ServerType>();
             FilteredServers = new ObservableCollection<Server>();
             ToDeleteList= new List<Server>();
 
-            //Init the commands
             AddEntity = new MyICommand(OnAdd);
             ShowAdd = new MyICommand(ShowAddTab);
             ShowFilter = new MyICommand(ShowFilterTab);
@@ -920,7 +889,6 @@ namespace NetworkService.ViewModel
             FocusTextBox = new MyICommand<string>(FocusTheTextBox);
             HideKeyboard = new MyICommand(HideKeyboardFunc);
 
-            //Loading Values
             LoadData();
 
             Messenger.Default.Register<string>(this, ChangingTheViewState);
@@ -928,7 +896,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region DispatcherTimer
-
         private DispatcherTimer dispatcherTimer;
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -940,7 +907,6 @@ namespace NetworkService.ViewModel
             AddServer.ValidationErrors["Name"] = "";
             AddServer.Refresh();
         }
-
         #endregion
 
         #region NotificationCreators
@@ -954,12 +920,10 @@ namespace NetworkService.ViewModel
                                                                                     FontWeight=FontWeights.SemiBold, 
                                                                                     TextAlignment=TextAlignment.Center
                                                                                     },
-                TitleTextSettings=new Notification.Wpf.Base.TextContentSettings
-                                                                                {
+                TitleTextSettings=new Notification.Wpf.Base.TextContentSettings {
                                                                                 FontSize=20  ,  
                                                                                 FontWeight=FontWeights.Bold,
-                                                                                TextAlignment=TextAlignment.Center,
-                                                                                    
+                                                                                TextAlignment=TextAlignment.Center,  
                                                                                 },
                 Message = "Entity successfully added",
                 Type = NotificationType.None,
@@ -988,7 +952,6 @@ namespace NetworkService.ViewModel
                     FontSize = 20,
                     FontWeight = FontWeights.Bold,
                     TextAlignment = TextAlignment.Center,
-
                 },
                 Message = "Selected entities successfully deleted",
                 Type = NotificationType.None,
@@ -1017,9 +980,8 @@ namespace NetworkService.ViewModel
                     FontSize = 20,
                     FontWeight = FontWeights.Bold,
                     TextAlignment = TextAlignment.Center,
-
                 },
-                Message = "No entites selected for delete",
+                Message = "No entities selected for delete",
                 Type = NotificationType.None,
                 TrimType = NotificationTextTrimType.NoTrim,
                 Background = new SolidColorBrush(Colors.Red),
@@ -1033,10 +995,8 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Loading the ServerTypes
-
         public void LoadData()
         {
-
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 6);
@@ -1055,12 +1015,10 @@ namespace NetworkService.ViewModel
             {
                 FilteredServers.Add(s);
             }
-            
         }
         #endregion
 
         #region LogWriter
-
         private void LogWriter(Server server)
         {
             using (StreamWriter sr = File.AppendText("Log.txt"))
@@ -1069,7 +1027,6 @@ namespace NetworkService.ViewModel
                 sr.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}|{server.Identificator}|{server.Usage}|DELETE|");
             }
         }
-
         #endregion
     }
 }

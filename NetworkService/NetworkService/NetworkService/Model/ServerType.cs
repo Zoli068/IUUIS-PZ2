@@ -12,13 +12,13 @@ namespace NetworkService.Model
         private string _serverTypeName;
         private string _path;
 
-
         public ServerType(string serverTypeName,string path)
         {
             this._serverTypeName = serverTypeName;
             this._path = path;
-        } 
+        }
 
+        #region Properties
         public string ServerTypeName
         {
             get
@@ -49,5 +49,6 @@ namespace NetworkService.Model
                 }
             }
         }
+        #endregion
     }
 }

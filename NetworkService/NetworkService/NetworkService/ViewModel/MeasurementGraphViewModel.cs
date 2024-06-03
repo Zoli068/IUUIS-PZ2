@@ -17,11 +17,8 @@ namespace NetworkService.ViewModel
 {
     public  class MeasurementGraphViewModel:BindableBase
     {
-
         #region Lists
-
         public ObservableCollection<Server> Servers { get; set; }
-
         #endregion
 
         #region Selected Server
@@ -42,7 +39,6 @@ namespace NetworkService.ViewModel
 
                     if (value != null)
                     {
-                        //reset the graph
                         resetTheGraph();
 
                         readValuesFromTxt(value.Identificator.ToString());
@@ -58,7 +54,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region Commands
-
         public MyICommand ComboBoxCheck { get; set; }
 
         private void checkServer()
@@ -68,7 +63,6 @@ namespace NetworkService.ViewModel
                 Messenger.Default.Send<NotificationContent>(CreateNoEntityToastNotification());
             }
         }
-
         #endregion
 
         #region NotificationCreators
@@ -103,7 +97,6 @@ namespace NetworkService.ViewModel
         #endregion
 
         #region GraphCircles
-
         private GraphCircle firstCircle;
         private GraphCircle secondCircle;
         private GraphCircle thirdCircle;
@@ -115,12 +108,9 @@ namespace NetworkService.ViewModel
         public GraphCircle ThirdCircle { get => thirdCircle; set => thirdCircle = value; }
         public GraphCircle FourthCircle { get => fourthCircle; set => fourthCircle = value; }
         public GraphCircle FifthCircle { get => fifthCircle; set => fifthCircle = value; }
-
-
         #endregion
 
         #region Constructors
-
         public MeasurementGraphViewModel(ObservableCollection<Server> servers)
         {
             Servers = servers;
@@ -133,13 +123,10 @@ namespace NetworkService.ViewModel
             ComboBoxCheck = new MyICommand(checkServer);
 
             Messenger.Default.Register<Server>(this, updateTheGraph);
-
         }
-
         #endregion
 
         #region UpdateTheGraph
-
         private void updateTheGraph(Server server)
         {
             if (server != null)
@@ -166,11 +153,9 @@ namespace NetworkService.ViewModel
                 }
             }
         }
-
         #endregion
 
-        #region resetTheGraph
-
+        #region ResetTheGraph
         private void resetTheGraph()
         {
             FirstCircle = new GraphCircle();
@@ -183,14 +168,11 @@ namespace NetworkService.ViewModel
             OnPropertyChanged(nameof(SecondCircle));
             OnPropertyChanged(nameof(ThirdCircle));
             OnPropertyChanged(nameof(FourthCircle));
-            OnPropertyChanged(nameof(FifthCircle));
-                
+            OnPropertyChanged(nameof(FifthCircle));      
         }
-
         #endregion
 
-        #region readValues
-
+        #region RreadValuesFromTxt
         private void readValuesFromTxt(string id)
         {
             string[] lines = File.ReadAllLines("Log.txt");
@@ -209,14 +191,11 @@ namespace NetworkService.ViewModel
                     {
                         break;
                     }
-                    //founded value for the server
 
                     GraphCircle circle = new GraphCircle();
+
                     circle.Value = timeIdPartupdate[2] + "%";
                     circle.Time = timeIdPartupdate[0];
-
-                    //0.56 bsc the max Cricle Radius(Width) can be 56
-                    //and at 100%->56
                     circle.Radius = (double)int.Parse(timeIdPartupdate[2]) * 0.56;
                     circle.Visibility = Visibility.Visible;
 
@@ -225,8 +204,7 @@ namespace NetworkService.ViewModel
                         circle.Warning = true;
                     }
 
-
-                   if (findedValue == 0)
+                    if (findedValue == 0)
                     {
                         FirstCircle = circle;
                     } 
@@ -265,11 +243,8 @@ namespace NetworkService.ViewModel
                         break;
                     }
                 }
-
             }
-
         }
-
         #endregion
     }
 }

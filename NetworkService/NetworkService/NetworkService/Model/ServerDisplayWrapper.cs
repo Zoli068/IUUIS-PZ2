@@ -22,6 +22,7 @@ namespace NetworkService.Model
             this.index = index;
         }
 
+        #region Properties
         public int Index
         {
             get 
@@ -77,6 +78,6 @@ namespace NetworkService.Model
                 }
             }
         }
-
+        #endregion
     }
 }

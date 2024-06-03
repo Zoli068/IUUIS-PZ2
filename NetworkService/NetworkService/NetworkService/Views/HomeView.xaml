@@ -14,7 +14,6 @@
     </UserControl.DataContext>
 
     <!--#region  Resources-->
-    
     <UserControl.Resources>
 
         <Style TargetType="{x:Type MenuItem}">
@@ -63,25 +62,19 @@
         </Style>
 
     </UserControl.Resources>
-    
     <!--#endregion-->
     
     <!--#region  HomeView-->
-    
     <Grid Background="{StaticResource UIThirdColor}">
 
         <!--#region Grid Definitions-->
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
-        
         <!--#endregion-->
 
-        
         <!--#region HomeView Body-->
-        
         <StackPanel 
             Grid.Row="1"
             VerticalAlignment="Bottom"
@@ -98,13 +91,9 @@
             <Image 
                 Margin="20 45 0 70"
                 Width="220"
-                Source="/Resources/Images/Monitoring.png">
-                
-            </Image>
-            
-            
-            <!--#region Menu-->
+                Source="/Resources/Images/Monitoring.png"/>
 
+            <!--#region Menu-->
             <Menu Background="Transparent">
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -133,14 +122,12 @@
                     CommandParameter="measurementGraph">
                 </MenuItem>
             </Menu>
-              
             <!--#endregion-->
-            
+
         </StackPanel>
-        <!--#endregion --> 
- 
+        <!--#endregion -->
+
     </Grid>
-    
     <!--#endregion-->
      
 </UserControl>

@@ -3,12 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:NetworkService"
              StartupUri="MainWindow.xaml">
-    
-    
+      
     <Application.Resources>
         
-        <!--#region  Colors-->
-        
+        <!--#region  Colors-->      
         <SolidColorBrush x:Key="UIPrimaryColor" Color="#003459" />
         <SolidColorBrush x:Key="UISecondaryColor" Color="Black" />
         <SolidColorBrush x:Key="UIThirdColor" Color="#edf8fa"/>
@@ -16,7 +14,6 @@
         <SolidColorBrush x:Key="InvalidStatusColor" Color="#dd0426"/>
         <SolidColorBrush x:Key="TextBoxBackGround" Color="#94D4EA"/>
         <SolidColorBrush x:Key="GraphColor" Color="#00A3FF"/>
-
         <!--#endregion-->
         
         <!--#region Effects-->
@@ -33,8 +30,6 @@
                     Color="Gray"
                     x:Key="SecondaryClickedDropShadowEffect"
                     Direction="320"/>
-
-
         <!--#endregion-->
         
         <!--#region VerticalSeparator-->

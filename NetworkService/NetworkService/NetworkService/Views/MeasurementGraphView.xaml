@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NetworkService.Views" xmlns:fa5="http://schemas.fontawesome.com/icons/"
+             xmlns:local="clr-namespace:NetworkService.Views" 
+             xmlns:fa5="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="600" 
              d:DesignWidth="360">
 
     <!--#region Styles,Resources-->
     <UserControl.Resources>
+            
         <ControlTemplate
 	        x:Key="ComboBoxToggleButton"
 	        TargetType="{x:Type ToggleButton}">
@@ -31,58 +33,72 @@
                         Foreground="{StaticResource UISecondaryColor}"
                         Grid.Column="1"
                         Icon="Solid_ChevronDown"/>
+                    
                 </StackPanel>
-
+                
             </Border>
+            
         </ControlTemplate>
 
         <ControlTemplate
 	        x:Key="ComboBoxTextBox"
 	        TargetType="{x:Type TextBox}">
+            
             <Border
 		        x:Name="PART_ContentHost"
 		        Focusable="False"
 		        Background="{TemplateBinding Background}" />
-
+            
         </ControlTemplate>
 
         <Style
 	        x:Key="{x:Type ComboBox}"
 	        TargetType="{x:Type ComboBox}">
+            
             <Setter
 		        Property="SnapsToDevicePixels"
 		        Value="true" />
+           
             <Setter 
                 Property="MaxDropDownHeight"
                 Value="470"/>
+            
             <Setter
 		        Property="OverridesDefaultStyle"
 		        Value="true" />
+            
             <Setter
 		        Property="ScrollViewer.HorizontalScrollBarVisibility"
 		        Value="Hidden" />
+            
             <Setter
 		        Property="ScrollViewer.VerticalScrollBarVisibility"
 		        Value="Hidden" />
+            
             <Setter
 		        Property="ScrollViewer.CanContentScroll"
 		        Value="true" />
+            
             <Setter
 		        Property="MinWidth"
 		        Value="120" />
+            
             <Setter
 		        Property="MinHeight"
 		        Value="45" />
+            
             <Setter
 		        Property="Foreground"
 		        Value="White" />
+            
             <Setter
 		        Property="Template">
                 <Setter.Value>
                     <ControlTemplate
 				        TargetType="{x:Type ComboBox}">
+                        
                         <Grid>
-                          
+
                             <ToggleButton
 						        Name="ToggleButton"
 						        Template="{StaticResource ComboBoxToggleButton}"
@@ -90,8 +106,7 @@
 						        Focusable="false"
                                 IsEnabled="{TemplateBinding HasItems}"
 						        IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
-						        ClickMode="Press"></ToggleButton>
-
+						        ClickMode="Press"/>
 
                             <ContentPresenter
 						        Name="ContentSite"
@@ -104,7 +119,7 @@
                                 TextBlock.Foreground="{StaticResource UISecondaryColor}"
                                 TextBlock.FontWeight="SemiBold"
 						        VerticalAlignment="Center"
-						        HorizontalAlignment="Center" />
+						        HorizontalAlignment="Center"/>
 
                             <TextBox
 						        x:Name="PART_EditableTextBox"
@@ -133,69 +148,85 @@
 							        SnapsToDevicePixels="True"
 							        MinWidth="{TemplateBinding ActualWidth}"
 							        MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    
                                     <Border
 								        x:Name="DropDownBorder"
 								        Background="{StaticResource TextBoxBackGround}"
 								        BorderThickness="1"
 								        BorderBrush="{StaticResource ButtonColor}" />
+                                    
                                     <ScrollViewer
 								        Margin="4,6,4,6"
 								        SnapsToDevicePixels="True">
+                                        
                                         <StackPanel
 									        IsItemsHost="True"
 									        KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        
                                     </ScrollViewer>
                                 </Grid>
                             </Popup>
-                            
                         </Grid>
+                        
                         <ControlTemplate.Triggers>
+                            
                             <Trigger
 						        Property="HasItems"
 						        Value="false">
+                                
                                 <Setter
 							        TargetName="DropDownBorder"
 							        Property="MinHeight"
 							        Value="95" />
+                                
                             </Trigger>
 
                             
                             <Trigger
 						        Property="IsEnabled"
 						        Value="false">
+                                
                                 <Setter
 							        Property="Foreground"
 							        Value="{StaticResource UISecondaryColor}" />
+                                
                             </Trigger>
 
                             <Trigger
 						        SourceName="Popup"
 						        Property="Popup.AllowsTransparency"
 						        Value="true">
+                                
                                 <Setter
 							        TargetName="DropDownBorder"
 							        Property="CornerRadius"
 							        Value="15" />
+                                
                                 <Setter
 							        TargetName="DropDownBorder"
 							        Property="Margin"
 							        Value="0,5,0,0" />
+                                
                             </Trigger>
 
                             <Trigger
 						        Property="IsEditable"
 						        Value="true">
+                                
                                 <Setter
 							        Property="IsTabStop"
 							        Value="false" />
+                                
                                 <Setter
 							        TargetName="PART_EditableTextBox"
 							        Property="Visibility"
 							        Value="Visible" />
+                                
                                 <Setter
 							        TargetName="ContentSite"
 							        Property="Visibility"
 							        Value="Hidden" />
+                                
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -206,18 +237,23 @@
         <Style
 	        x:Key="{x:Type ComboBoxItem}"
 	        TargetType="{x:Type ComboBoxItem}">
+            
             <Setter
 		        Property="SnapsToDevicePixels"
 		        Value="true" />
+            
             <Setter
 		        Property="Foreground"
 		        Value="{StaticResource UISecondaryColor}" />
+            
             <Setter
 		        Property="OverridesDefaultStyle"
 		        Value="true" />
+            
             <Setter
 		        Property="FontSize"
 		        Value="15" />
+            
             <Setter
                 Property="FontWeight"
                 Value="SemiBold"/>
@@ -227,6 +263,7 @@
                 <Setter.Value>
                     <ControlTemplate
 				        TargetType="{x:Type ComboBoxItem}">
+                        
                         <Border
                             Margin="0 4 0 0"
                             Padding="0 6 0 0"
@@ -239,6 +276,7 @@
 					        SnapsToDevicePixels="true">
                             <ContentPresenter HorizontalAlignment="Center" />
                         </Border>
+                        
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -247,15 +285,16 @@
     <!--#endregion-->
     
     <!--#region Measurment Graph-->
-    
     <Grid
         Background="{StaticResource UIThirdColor}">
 
+        <!--region GridDefinitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
-
+        <!--#endregion-->
+        
         <!--#region  Title Header-->
         <DockPanel
              Width="360" 
@@ -264,20 +303,23 @@
 
             <Menu 
                 Background="Transparent">
+                
                 <MenuItem
                      Margin="1 0 0 0"
                      Command="{Binding DataContext.NavCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                      CommandParameter="home">
 
                     <MenuItem.Style>
+                        
                         <Style TargetType="{x:Type MenuItem}">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
                             <Setter Property="SnapsToDevicePixels" Value="True"/>
                             <Setter Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type        MenuItem}">
+                                    
+                                    <ControlTemplate TargetType="{x:Type MenuItem}">
 
-                                   <fa5:SvgAwesome
+                                        <fa5:SvgAwesome
                                      Height="35"
                                      Width="30" 
                                      Foreground="{StaticResource UIThirdColor}"
@@ -319,10 +361,10 @@
              FontSize="28"
              FontWeight="Semibold"
              Text="Measurement Graph"/>
-            
+
         </DockPanel>
         <!--#endregion-->
-        
+
         <!--#region Graph Body-->
 
         <StackPanel 
@@ -331,9 +373,7 @@
             Margin="0 30 0 0"
             Width="315">
 
-        <!--#region ComboBox Entity Selection-->
-
-                
+            <!--#region ComboBox Entity Selection-->
             <Border 
                 Width="315"
                 Height="45"
@@ -349,8 +389,7 @@
                         Height="40"
                         Panel.ZIndex="10"
                         Command="{Binding ComboBoxCheck}"
-                        BorderThickness="0"
-                        >
+                        BorderThickness="0">
 
                         <Button.Style>
                             <Style TargetType="Button">
@@ -359,9 +398,7 @@
                                     <Setter.Value>
                                         <ControlTemplate>
 
-                                            <Border Background="Transparent">
-
-                                            </Border>
+                                            <Border Background="Transparent"/>
 
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -370,16 +407,17 @@
                                 <Setter Property="Visibility" Value="Hidden"/>
 
                                 <Style.Triggers>
+
                                     <DataTrigger Binding="{Binding Servers.Count}" Value="0">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
-                                </Style.Triggers>
 
+                                </Style.Triggers>
                             </Style>
                         </Button.Style>
 
                     </Button>
-                    
+
                     <ComboBox
                         Width="312"
                         SelectedIndex="0"
@@ -389,21 +427,19 @@
 
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
+
                                 <TextBlock 
                                     FontSize="22"
                                     Text="{Binding Name}"/>
+
                             </DataTemplate>
-
                         </ComboBox.ItemTemplate>
-
                     </ComboBox>
                 </Canvas>
             </Border>
+            <!--#endregion-->
 
-        <!--#endregion-->
-           
-        <!--#region  Graphic-->
-            
+            <!--#region  Graphic-->
             <Border
                 CornerRadius="15"
                 Margin="0 30 0 0"
@@ -413,11 +449,9 @@
                 BorderBrush="{StaticResource UIPrimaryColor}"
                 Height="400">
 
-
                 <Canvas>
 
                     <!--#region  Values-->
-                    
                     <StackPanel Orientation="Horizontal">
 
                         <Border 
@@ -427,8 +461,8 @@
                             Width="54"
                             Visibility="{Binding FirstCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -437,8 +471,9 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
-                            
+
                             <TextBlock 
                                 TextAlignment="Center"
                                 VerticalAlignment="Center"
@@ -457,8 +492,8 @@
                             Width="54" 
                             Visibility="{Binding SecondCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -467,6 +502,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -487,8 +523,8 @@
                             Width="54" 
                             Visibility="{Binding ThirdCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -497,6 +533,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -517,8 +554,8 @@
                              Width="54" 
                              Visibility="{Binding FourthCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -527,6 +564,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -540,7 +578,6 @@
 
                         </Border>
 
-
                         <Border 
                              Height="40"
                              Margin="9.5 3 0 0"
@@ -549,6 +586,7 @@
                              Visibility="{Binding FifthCircle.Visibility}">
 
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -557,6 +595,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -571,60 +610,56 @@
                         </Border>
 
                     </StackPanel>
-                    
                     <!--#endregion-->
 
                     <!--#region Lines-->
-                    
                     <Line
-                    X1="62"
-                    Y1="0"
-                    X2="62"
-                    Y2="398"
-                    StrokeThickness="2"
-                    Opacity="0.8"
-                    Stroke="{StaticResource UIPrimaryColor}"/>
+                        X1="62"
+                        Y1="0"
+                        X2="62"
+                        Y2="398"
+                        StrokeThickness="2"
+                        Opacity="0.8"
+                        Stroke="{StaticResource UIPrimaryColor}"/>
 
                     <Line
-                    X1="124"
-                    Y1="0"
-                    X2="124"
-                    Y2="398"
-                    StrokeThickness="2"
-                    Opacity="0.8"
-                    Stroke="{StaticResource UIPrimaryColor}"/>
+                        X1="124"
+                        Y1="0"
+                        X2="124"
+                        Y2="398"
+                        StrokeThickness="2"
+                        Opacity="0.8"
+                        Stroke="{StaticResource UIPrimaryColor}"/>
 
                     <Line
-                    X1="185"
-                    Y1="0"
-                    X2="185"
-                    Y2="398"
-                    StrokeThickness="2"
-                    Opacity="0.8"
-                    Stroke="{StaticResource UIPrimaryColor}"/>
+                        X1="185"
+                        Y1="0"
+                        X2="185"
+                        Y2="398"
+                        StrokeThickness="2"
+                        Opacity="0.8"
+                        Stroke="{StaticResource UIPrimaryColor}"/>
 
                     <Line
-                    X1="250"
-                    Y1="0"
-                    X2="250"
-                    Y2="398"
-                    StrokeThickness="2"
-                    Opacity="0.8"
-                    Stroke="{StaticResource UIPrimaryColor}"/>
+                        X1="250"
+                        Y1="0"
+                        X2="250"
+                        Y2="398"
+                        StrokeThickness="2"
+                        Opacity="0.8"
+                        Stroke="{StaticResource UIPrimaryColor}"/>
 
                     <Line
-                    X1="0"
-                    Y1="200"
-                    X2="313"
-                    Y2="200"
-                    StrokeThickness="1.2"
-                    Opacity="0.2"
-                    Stroke="{StaticResource UIPrimaryColor}"/>
-
+                        X1="0"
+                        Y1="200"
+                        X2="313"
+                        Y2="200"
+                        StrokeThickness="1.2"
+                        Opacity="0.2"
+                        Stroke="{StaticResource UIPrimaryColor}"/>
                     <!--#endregion-->
 
                     <!--#region Circles-->
-                    
                     <StackPanel
                         Margin="0 172.6 0 0"
                         Width="313"
@@ -643,18 +678,18 @@
 
 
                                 <Ellipse.Style>
+
                                     <Style TargetType="Ellipse">
                                         <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding FirstCircle.Warning}" Value="True" >
-                                                    <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                                <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Ellipse.Style>
 
+                                </Ellipse.Style>
                             </Ellipse>
-                        
                         </StackPanel>
 
                         <StackPanel
@@ -668,16 +703,17 @@
                                 Height="{Binding SecondCircle.Radius}">
 
                                 <Ellipse.Style>
-                                <Style TargetType="Ellipse">
-                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SecondCircle.Warning}" Value="True" >
-                                            <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                                </Ellipse.Style>
 
+                                    <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SecondCircle.Warning}" Value="True" >
+                                                <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+
+                                </Ellipse.Style>
                             </Ellipse>
                         </StackPanel>
 
@@ -692,6 +728,7 @@
                                 Height="{Binding ThirdCircle.Radius}">
 
                                 <Ellipse.Style>
+
                                     <Style TargetType="Ellipse">
                                         <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
                                         <Style.Triggers>
@@ -700,10 +737,9 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
+
                                 </Ellipse.Style>
-
                             </Ellipse>
-
                         </StackPanel>
 
                         <StackPanel
@@ -717,6 +753,7 @@
                                 Height="{Binding FourthCircle.Radius}">
 
                                 <Ellipse.Style>
+
                                     <Style TargetType="Ellipse">
                                         <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
                                         <Style.Triggers>
@@ -725,10 +762,9 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
+
                                 </Ellipse.Style>
-
                             </Ellipse>
-
                         </StackPanel>
 
                         <StackPanel
@@ -742,6 +778,7 @@
                                 Height="{Binding FifthCircle.Radius}">
 
                                 <Ellipse.Style>
+
                                     <Style TargetType="Ellipse">
                                         <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
                                         <Style.Triggers>
@@ -750,18 +787,14 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
+
                                 </Ellipse.Style>
-
                             </Ellipse>
-
                         </StackPanel>
-
                     </StackPanel>
-
                     <!--#endregion-->
-                    
+
                     <!--#region Time -->
-                    
                     <StackPanel 
                         Margin="0 349 0 0 "
                         Orientation="Horizontal">
@@ -773,8 +806,8 @@
                             Width="54" 
                             Visibility="{Binding FirstCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -783,8 +816,8 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </Border.Style>
 
+                            </Border.Style>
 
                             <TextBlock 
                                 TextAlignment="Center"
@@ -804,9 +837,8 @@
                             Width="54" 
                             Visibility="{Binding SecondCircle.Visibility}">
 
-
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -815,6 +847,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -835,8 +868,8 @@
                             Width="54" 
                             Visibility="{Binding ThirdCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -845,6 +878,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -865,8 +899,8 @@
                              Width="54" 
                              Visibility="{Binding FourthCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -875,6 +909,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -888,7 +923,6 @@
 
                         </Border>
 
-
                         <Border 
                              Height="40"
                              Margin="9.5 3 0 0"
@@ -896,8 +930,8 @@
                              Width="54" 
                              Visibility="{Binding FifthCircle.Visibility}">
 
-
                             <Border.Style>
+
                                 <Style TargetType="Border">
                                     <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
                                     <Style.Triggers>
@@ -906,6 +940,7 @@
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
+
                             </Border.Style>
 
                             <TextBlock 
@@ -919,17 +954,13 @@
 
                         </Border>
                     </StackPanel>
+                    <!--#endregion-->
 
-                   <!--#endregion-->
-                    
                 </Canvas>
             </Border>
+            <!--#endregion-->
 
-        <!--#endregion-->
-
-
-        <!--#region Value Legend-->
-                
+            <!--#region Value Legend-->
             <Border
                 Margin="14"
                 Width="315"
@@ -942,9 +973,7 @@
                         Width="22"
                         Margin="15 0 0 0"
                         Height="22"
-                        Background="{StaticResource GraphColor}">
-                        
-                    </Border>
+                        Background="{StaticResource GraphColor}"/>
 
                     <TextBlock
                         Margin="10 0 0 0"
@@ -959,7 +988,6 @@
                         Margin="40 0 0 0"
                         Height="22"
                         Background="{StaticResource InvalidStatusColor}">
-
                     </Border>
 
                     <TextBlock
@@ -971,16 +999,12 @@
                     </TextBlock>
 
                 </StackPanel>
-                
             </Border>
-                
         </StackPanel>
-            
-            <!--#endregion-->
         <!--#endregion-->
-        
+        <!--#endregion-->
+
     </Grid>
-       
     <!--#endregion-->
         
 </UserControl>

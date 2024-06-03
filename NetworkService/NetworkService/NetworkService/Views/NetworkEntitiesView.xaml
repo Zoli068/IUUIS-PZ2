@@ -7,29 +7,22 @@
              xmlns:model="clr-namespace:NetworkService.Model"
              xmlns:assets="clr-namespace:NetworkService.Assets"
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
-             xmlns:viewModel="clr-namespace:NetworkService.ViewModel" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewModel="clr-namespace:NetworkService.ViewModel" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="600" 
              d:DesignWidth="360">
-
-   <!--TO COMMENT IF WANNA ONPROPERTY UPDATE-->
     
-    <!--<UserControl.DataContext>
-        <viewModel:NetworkEntitiesViewModel/>
-    </UserControl.DataContext>
-     -->
-    
-        <!--#region Resources-->
-    
+    <!--#region Resources-->
     <UserControl.Resources>
 
         <!--#region  Styles,Datatemplates-->
-        
         <Style x:Key="CheckBoxListViewStyle"  TargetType="{x:Type CheckBox}" >
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Background" Value="{StaticResource UIThirdColor}"/>
             <Setter Property="Template">
                 <Setter.Value>
+
                     <ControlTemplate TargetType="CheckBox">
 
                         <Border Width="25"
@@ -42,93 +35,101 @@
                                     CornerRadius="15"
                                     Height="15">
                             </Border>
+
                         </Border>
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-
                                 <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
-
                             </Trigger>
                         </ControlTemplate.Triggers>
-
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
         </Style>
-
 
         <ControlTemplate
 			x:Key="ComboBoxToggleButton"
 			TargetType="{x:Type ToggleButton}">
 
             <Border
-					Grid.Column="0"
-					CornerRadius="15"
-					Margin="2 0 4 3"
-                    Padding="2"
-                    BorderThickness="0"
-					Background="{StaticResource TextBoxBackGround}">
+				Grid.Column="0"
+				CornerRadius="15"
+				Margin="2 0 4 3"
+                Padding="2"
+                BorderThickness="0"
+				Background="{StaticResource TextBoxBackGround}">
 
                 <StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
-                    
-                <fa5:SvgAwesome
+
+                    <fa5:SvgAwesome
                     Height="16"
                     Foreground="{StaticResource UISecondaryColor}"
                     Grid.Column="1"
                     Icon="Solid_ChevronDown"/>
-                </StackPanel>
 
+                </StackPanel>
             </Border>
         </ControlTemplate>
-        
+
         <ControlTemplate
 			x:Key="ComboBoxTextBox"
 			TargetType="{x:Type TextBox}">
+            
             <Border
 				x:Name="PART_ContentHost"
 				Focusable="False"
 				Background="{TemplateBinding Background}" />
-            
+
         </ControlTemplate>
-        
+
         <Style
 			x:Key="{x:Type ComboBox}"
 			TargetType="{x:Type ComboBox}">
+            
             <Setter
 				Property="SnapsToDevicePixels"
 				Value="true" />
+            
             <Setter
 				Property="OverridesDefaultStyle"
 				Value="true" />
+            
             <Setter
 				Property="ScrollViewer.HorizontalScrollBarVisibility"
 				Value="Auto" />
+            
             <Setter
 				Property="ScrollViewer.VerticalScrollBarVisibility"
 				Value="Auto" />
+            
             <Setter
 				Property="ScrollViewer.CanContentScroll"
 				Value="true" />
+            
             <Setter
 				Property="MinWidth"
 				Value="120" />
+            
             <Setter
 				Property="MinHeight"
 				Value="20" />
+            
             <Setter
 				Property="Foreground"
 				Value="White" />
+            
             <Setter
 				Property="Template">
                 <Setter.Value>
+                    
                     <ControlTemplate
 						TargetType="{x:Type ComboBox}">
+                        
                         <Grid>
-                            
+
                             <ToggleButton
 								Name="ToggleButton"
 								Template="{StaticResource ComboBoxToggleButton}"
@@ -136,8 +137,7 @@
 								Focusable="false"
 								IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
 								ClickMode="Press"></ToggleButton>
-                            
-                            
+
                             <ContentPresenter
 								Name="ContentSite"
 								IsHitTestVisible="False"
@@ -150,7 +150,7 @@
                                 TextBlock.FontWeight="SemiBold"
 								VerticalAlignment="Center"
 								HorizontalAlignment="Center" />
-                            
+
                             <TextBox
 								x:Name="PART_EditableTextBox"
 								Style="{x:Null}"
@@ -163,7 +163,7 @@
 								Foreground="{StaticResource UISecondaryColor}"
 								Visibility="Hidden"
 								IsReadOnly="{TemplateBinding IsReadOnly}" />
-                            
+
                             <Popup
 								Name="Popup"
 								Placement="Bottom"
@@ -171,28 +171,33 @@
 								AllowsTransparency="True"
 								Focusable="False"
 								PopupAnimation="Slide">
-                                
+
                                 <Grid
 									Name="DropDown"
 									SnapsToDevicePixels="True"
 									MinWidth="{TemplateBinding ActualWidth}"
 									MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    
                                     <Border
 										x:Name="DropDownBorder"
 										Background="{StaticResource TextBoxBackGround}"
 										BorderThickness="1"
 										BorderBrush="{StaticResource ButtonColor}" />
+                                    
                                     <ScrollViewer
 										Margin="4,6,4,6"
 										SnapsToDevicePixels="True">
+                                        
                                         <StackPanel
 											IsItemsHost="True"
 											KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        
                                     </ScrollViewer>
                                 </Grid>
                             </Popup>
                         </Grid>
                         <ControlTemplate.Triggers>
+                            
                             <Trigger
 								Property="HasItems"
 								Value="false">
@@ -201,6 +206,7 @@
 									Property="MinHeight"
 									Value="95" />
                             </Trigger>
+                            
                             <Trigger
 								Property="IsEnabled"
 								Value="false">
@@ -208,11 +214,12 @@
 									Property="Foreground"
 									Value="{StaticResource UISecondaryColor}" />
                             </Trigger>
-                            
+
                             <Trigger
 								SourceName="Popup"
 								Property="Popup.AllowsTransparency"
 								Value="true">
+                                
                                 <Setter
 									TargetName="DropDownBorder"
 									Property="CornerRadius"
@@ -221,11 +228,13 @@
 									TargetName="DropDownBorder"
 									Property="Margin"
 									Value="0,4,0,0" />
+                                
                             </Trigger>
-                            
+
                             <Trigger
 								Property="IsEditable"
 								Value="true">
+                                
                                 <Setter
 									Property="IsTabStop"
 									Value="false" />
@@ -237,6 +246,7 @@
 									TargetName="ContentSite"
 									Property="Visibility"
 									Value="Hidden" />
+                                
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -247,18 +257,23 @@
         <Style
 			x:Key="{x:Type ComboBoxItem}"
 			TargetType="{x:Type ComboBoxItem}">
+            
             <Setter
 				Property="SnapsToDevicePixels"
 				Value="true" />
+            
             <Setter
 				Property="Foreground"
 				Value="{StaticResource UISecondaryColor}" />
+            
             <Setter
 				Property="OverridesDefaultStyle"
 				Value="true" />
+            
             <Setter
 				Property="FontSize"
 				Value="15" />
+            
             <Setter
                 Property="FontWeight"
                 Value="SemiBold"/>
@@ -266,8 +281,10 @@
             <Setter
 				Property="Template">
                 <Setter.Value>
+                    
                     <ControlTemplate
 						TargetType="{x:Type ComboBoxItem}">
+                        
                         <Border
                             Margin="0 4 0 0"
                             Padding="0 6 0 0"
@@ -278,7 +295,9 @@
                             BorderThickness="1.8"
                             Background="{StaticResource TextBoxBackGround}"
 							SnapsToDevicePixels="true">
+                            
                             <ContentPresenter HorizontalAlignment="Center" />
+                            
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -288,17 +307,20 @@
         <Style TargetType="{x:Type RadioButton}" >
             <Setter Property="Template">
                 <Setter.Value>
+                    
                     <ControlTemplate TargetType="{x:Type RadioButton}">
+
                         <BulletDecorator Background="Transparent" Cursor="Hand">
-                            
                             <BulletDecorator.Bullet>
+                                
                                 <Grid Height="25" Width="25">
                                     <Border Name="RadioOuter" Background="Transparent" BorderBrush="{StaticResource UIPrimaryColor}" BorderThickness="2" CornerRadius="15" />
                                     <Border CornerRadius="15" Margin="4" Name="RadioMark" Background="{StaticResource UIPrimaryColor}" Visibility="Hidden" />
                                 </Grid>
+                                
                             </BulletDecorator.Bullet>
-
                         </BulletDecorator>
+                        
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
                                 <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
@@ -309,8 +331,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
 
         <DataTemplate 
             DataType="{x:Type model:Server}">
@@ -343,7 +363,7 @@
                         Grid.RowSpan="3"
                         VerticalAlignment="Center"
                         Grid.Column="0">
-                    
+
                         <TextBlock
                             Width="26"
                             Margin="8 0 4 0"
@@ -352,13 +372,12 @@
                             TextAlignment="Center"
                             VerticalAlignment="Center"
                             Text="{Binding Identificator}"/>
-                        
-                        
+
                         <Separator 
                             Width="70"
                             Background="{StaticResource UIThirdColor}"
                             Style="{StaticResource VerticalSeparatorStyle}" />
-                        
+
                     </DockPanel>
 
                     <TextBlock
@@ -377,8 +396,7 @@
                         FontSize="15"
                         Foreground="{StaticResource UIThirdColor}"
                         VerticalAlignment="Center"
-                        Text="{Binding Path=Type.ServerTypeName}"
-                        />
+                        Text="{Binding Path=Type.ServerTypeName}"/>
 
                     <TextBlock
                         HorizontalAlignment="Center"
@@ -387,8 +405,7 @@
                         FontSize="15"
                         Foreground="{StaticResource UIThirdColor}"
                         VerticalAlignment="Center"
-                        Text="{Binding IpAddress}"
-                        />
+                        Text="{Binding IpAddress}"/>
 
                     <DockPanel
                         Grid.Row="0"
@@ -415,7 +432,7 @@
                             Width="70"
                             Background="{StaticResource UIThirdColor}"
                             Style="{StaticResource VerticalSeparatorStyle}" />
-       
+
                     </DockPanel>
 
                     <Border                         
@@ -427,35 +444,29 @@
                         Margin="0 0 6 0"
                         CornerRadius="15"
                         Background="{StaticResource UIThirdColor}">
-                        
-                        <CheckBox
-                                Command="{Binding ElementName=ServersListView,Path=DataContext.AddToDelete}"
-                                CommandParameter="{Binding}"
-                                Style="{StaticResource CheckBoxListViewStyle}"/>
-                            
-                    </Border>
 
-                    
+                        <CheckBox
+                            Command="{Binding ElementName=ServersListView,Path=DataContext.AddToDelete}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource CheckBoxListViewStyle}"/>
+
+                    </Border>
                 </Grid>
-                
             </Border>
         </DataTemplate>
-        
         <!--#endregion-->
         
     </UserControl.Resources>
-
     <!--#endregion-->
     
-        <!--#region  View Grid Definitions-->
-    
+    <!--region EntitiesView-->   
     <Grid Background="{StaticResource UIThirdColor}">
 
+        <!--#region  View Grid Definitions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="16*"/>
         </Grid.RowDefinitions>
-
         <!--#endregion-->
         
         <!--#region  Title Header-->
@@ -466,17 +477,20 @@
 
             <Menu 
                 Background="Transparent">
+
                 <MenuItem
                     Margin="1 0 0 0"
                     Command="{Binding DataContext.NavCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                     CommandParameter="home">
 
                     <MenuItem.Style>
+
                         <Style TargetType="{x:Type MenuItem}">
                             <Setter Property="OverridesDefaultStyle" Value="True"/>
                             <Setter Property="SnapsToDevicePixels" Value="True"/>
                             <Setter Property="Template">
                                 <Setter.Value>
+
                                     <ControlTemplate TargetType="{x:Type MenuItem}">
 
                                         <fa5:SvgAwesome
@@ -509,10 +523,9 @@
                             </Style.Triggers>
                         </Style>
                     </MenuItem.Style>
-
                 </MenuItem>
             </Menu>
-            
+
             <TextBlock
                 Foreground="{StaticResource UIThirdColor}"
                 HorizontalAlignment="Center"
@@ -522,10 +535,7 @@
                 FontWeight="Semibold"
                 Text="Network Entities"/>
 
-        
-
         </DockPanel>
-    
         <!--#endregion-->       
         
         <!--#region View Body-->
@@ -534,10 +544,8 @@
             VerticalAlignment="Top"
             Margin="0 10 0 0"
             Width="315">
-
-            
+         
             <!--#region Filter Button-->
-
             <StackPanel 
                 Margin="0 0 0 10"
                 HorizontalAlignment="Right"
@@ -568,14 +576,13 @@
                                                     VerticalAlignment="Center"
                                                     FontWeight="Bold"
                                                     FontSize="13"
-                                                    Text="Reset Filter "
-                                                    />
+                                                    Text="Reset Filter "/>
+
                                                 <fa5:SvgAwesome
                                                     Margin="0 0 13 0"
                                                     Height="20"
                                                     Width="18"
-                                                    Icon="Solid_Times"
-                                                    />
+                                                    Icon="Solid_Times" />
 
                                             </StackPanel>
                                         </Border>
@@ -601,7 +608,6 @@
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
-
                     </Button.Style>
                 </Button>
 
@@ -611,6 +617,7 @@
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Template">
                                 <Setter.Value>
+
                                     <ControlTemplate>
 
                                         <Border 
@@ -628,14 +635,13 @@
                                                     VerticalAlignment="Center"
                                                     FontWeight="Bold"
                                                     FontSize="13"
-                                                    Text="Filter"
-                                                    />
+                                                    Text="Filter"/>
+
                                                 <fa5:SvgAwesome
                                                     Margin="0 0 13 0"
                                                     Height="20"
                                                     Width="24"
-                                                    Icon="Solid_Filter"
-                                                    />
+                                                    Icon="Solid_Filter"/>
 
                                             </StackPanel>
                                         </Border>
@@ -661,19 +667,14 @@
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
-
                     </Button.Style>
                 </Button>
-                
             </StackPanel>
-
             <!--#endregion-->
             
             <!--#region Entity Table-->
-
-
-            <!--#region Table Header-->
             
+            <!--#region Table Header-->
             <Border
                 BorderBrush="{StaticResource UIPrimaryColor}"
                 Height="35"
@@ -698,7 +699,7 @@
                             Foreground="{StaticResource UIThirdColor}"
                             FontSize="15"
                             Text="ID"/>
-                        
+
                     </Border>
 
                     <Border 
@@ -736,7 +737,7 @@
                             Text="Usage"/>
 
                     </Border>
-                    
+
                     <Border 
                         Height="28"
                         Margin="1 0 0 0"
@@ -756,12 +757,10 @@
                     </Border>
 
                 </StackPanel>
-
             </Border>
-            
             <!--#endregion-->
-            
-            
+                
+            <!--region Entity list-->
             <Border 
                 BorderBrush="{StaticResource UIPrimaryColor}"
                 Background="Transparent"
@@ -774,36 +773,32 @@
                         ScrollViewer.VerticalScrollBarVisibility="Hidden"
                         x:Name="ServersListView"
                         BorderThickness="0"
-                        Background="Transparent"
-                        >
+                        Background="Transparent">
 
-                        <ListView.ItemContainerStyle>
-                    
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Focusable" Value="false"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <ContentPresenter />
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
+                    <ListView.ItemContainerStyle>
 
-                            </Style>
-                    
-                        </ListView.ItemContainerStyle>
-                
-                
-                
-                    </ListView>
-                
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Focusable" Value="false"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+
+                </ListView>
             </Border>
-
             <!--#endregion-->
             
-            <!--#region ADD,DELETE buttons-->
-            
+            <!--#endregion-->
+
+            <!--#region ADD,DELETE buttons-->        
             <StackPanel 
                 Margin="0 20 0 20"
                 Orientation="Horizontal">
@@ -813,7 +808,6 @@
                     Height="55" 
                     Command="{Binding ShowAdd}"
                     Width="147.5">
-
 
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -834,14 +828,15 @@
                                                     TextAlignment="Center"
                                                     FontWeight="SemiBold"
                                                     FontSize="24"
-                                                    Text="Add"
-                                                    />
+                                                    Text="Add"/>
+
                                             </StackPanel>
+
                                         </Border>
+
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-
                             <Style.Triggers>
                                 <Trigger 
                                      Property="IsPressed" 
@@ -862,7 +857,6 @@
                         </Style>
                     </Button.Style>
                 </Button>
-
 
                 <Button 
                     Command="{Binding RemoveSelected}"
@@ -888,10 +882,12 @@
                                                     TextAlignment="Center"
                                                     FontWeight="SemiBold"
                                                     FontSize="24"
-                                                    Text="Delete"
-                                                    />
+                                                    Text="Delete"/>
+                                                
                                             </StackPanel>
+                                            
                                         </Border>
+                                        
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -916,44 +912,39 @@
                         </Style>
                     </Button.Style>
                 </Button>
-                                    
             </StackPanel>
-            
             <!--#endregion -->
-
 
         </StackPanel>
         <!--#endregion-->
 
         <!--#region  Opacity-->
-
-
         <Button
-                Grid.RowSpan="2"
-                Panel.ZIndex="1"
-                Command="{Binding HideTheTabs}">
-
+            Grid.RowSpan="2"
+            Panel.ZIndex="1"
+            Command="{Binding HideTheTabs}">
 
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Template">
                         <Setter.Value>
-                        <ControlTemplate>
-                            <Rectangle 
-                                    x:Name="OpacityForTable"
-                                    Grid.Row="0"
-                                    Grid.RowSpan="2"
-                                    Panel.ZIndex="1"
-                                    StrokeThickness="0"
-                                    Height="600"
-                                    Width="0"
-                                    Fill="Gray" Opacity="0.7">
+                            <ControlTemplate>
+                                <Rectangle 
+                                x:Name="OpacityForTable"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Panel.ZIndex="1"
+                                StrokeThickness="0"
+                                Height="600"
+                                Width="0"
+                                Fill="Gray" Opacity="0.7">
 
                                     <Rectangle.Style>
                                         <Style TargetType="Rectangle">
-
                                             <Style.Triggers>
+
                                                 <DataTrigger Binding="{Binding OpacityBackGround}" Value="True" >
+
                                                     <DataTrigger.EnterActions>
                                                         <BeginStoryboard>
                                                             <Storyboard>
@@ -963,8 +954,8 @@
                                                                      To="360" Duration="0:0:0" AutoReverse="False"/>
                                                             </Storyboard>
                                                         </BeginStoryboard>
-
                                                     </DataTrigger.EnterActions>
+
                                                     <DataTrigger.ExitActions>
                                                         <BeginStoryboard>
                                                             <Storyboard>
@@ -975,23 +966,22 @@
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </DataTrigger.ExitActions>
+
                                                 </DataTrigger>
+
                                             </Style.Triggers>
                                         </Style>
                                     </Rectangle.Style>
-
                                 </Rectangle>
-                        </ControlTemplate>
-                    </Setter.Value>
+                            </ControlTemplate>
+                        </Setter.Value>
                     </Setter>
                 </Style>
             </Button.Style>
-            
         </Button>
+        <!--#endregion-->
         
-
-
-
+        <!--#region DeleteConfirmation-->
         <Border
            Grid.Row="0"
            Height="600"
@@ -1001,7 +991,6 @@
            Panel.ZIndex="4">
 
             <Grid>
-               
 
                 <Border HorizontalAlignment="Center"
                         Width="324"
@@ -1010,7 +999,6 @@
                         BorderThickness="2"
                         Background="{StaticResource UIPrimaryColor}"
                         Height="160">
-
 
                     <StackPanel>
 
@@ -1025,9 +1013,8 @@
 
                         <StackPanel
                             Margin="27 16 0 0"
-                            Orientation="Horizontal"
-                            >
-                            
+                            Orientation="Horizontal">
+
                             <Button 
                                  Command="{Binding TrueRemoveSelected}"
                                  Height="55"
@@ -1052,14 +1039,15 @@
                                                                  TextAlignment="Center"
                                                                  FontWeight="SemiBold"
                                                                  FontSize="24"
-                                                                 Text="Yes"
-                                                                 />
+                                                                 Text="Yes"/>
+
                                                         </StackPanel>
+
                                                     </Border>
+
                                                 </ControlTemplate>
                                             </Setter.Value>
                                         </Setter>
-
                                         <Style.Triggers>
                                             <Trigger 
                                               Property="IsPressed" 
@@ -1080,6 +1068,7 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
+
                             <Button
                                  Command="{Binding AbortDelete}"
                                  Margin="26 0 0 0"
@@ -1105,8 +1094,8 @@
                                                                  TextAlignment="Center"
                                                                  FontWeight="SemiBold"
                                                                  FontSize="24"
-                                                                 Text="No"
-                                                                 />
+                                                                 Text="No"/>
+
                                                         </StackPanel>
                                                     </Border>
                                                 </ControlTemplate>
@@ -1127,24 +1116,17 @@
                                                         <ScaleTransform ScaleX="0.993" ScaleY="0.983"  />
                                                     </Setter.Value>
                                                 </Setter>
-                                                
-                                                
 
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
                             </Button>
-
                         </StackPanel>
                     </StackPanel>
                 </Border>
-
             </Grid>
-            
-            
         </Border>
-
         <!--#endregion -->
 
         <!--#region Filter SideBar-->
@@ -1159,14 +1141,12 @@
             Background="{StaticResource UIThirdColor}"
             Height="600">
 
-
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
-
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding FilterTabVisibility}" Value="True" >
+                            
                             <DataTrigger.EnterActions>
-
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -1175,10 +1155,9 @@
                                               To="200" Duration="0:0:0.2" AutoReverse="False"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-
                             </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
 
+                            <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -1188,20 +1167,20 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
+                            
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </StackPanel.Style>
 
             <Border 
-                    BorderBrush="{StaticResource UIPrimaryColor}"
-                    BorderThickness="1.3 0 0 0" 
-                    Height="600" 
-                    Width="200">
+                BorderBrush="{StaticResource UIPrimaryColor}"
+                BorderThickness="1.3 0 0 0" 
+                Height="600" 
+                Width="200">
 
-                
                 <StackPanel
-                        VerticalAlignment="Top">
+                    VerticalAlignment="Top">
 
                         <StackPanel
                             Background="{StaticResource UIPrimaryColor}"
@@ -1215,54 +1194,48 @@
                                 Width="160"
                                 Padding="35 0 0 0"
                                 Margin="0 0 0 1"
-                               
                                 Height="35.6"
                                 FontSize="26"
                                 FontWeight="SemiBold"
                                 Text="Filter"/>
 
-                            <Button
+                        <Button
                                 Command="{Binding HideTheTabs}"
-                                Height="35.6"
-                                >
+                                Height="35.6">
 
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
-
-
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate>
 
                                                 <Border 
-                                                    Background="Transparent"
-                                                    Width="35"
-                                                    BorderThickness="1"
-                                                    CornerRadius="15"
-                                                    Height="35">
+                                                        Background="Transparent"
+                                                        Width="35"
+                                                        BorderThickness="1"
+                                                        CornerRadius="15"
+                                                        Height="35">
 
 
                                                     <fa5:SvgAwesome
-                                                        Foreground="{StaticResource UIThirdColor}"
-                                                        Height="26"
-                                                        Icon="Solid_Times"
-                                                        />
+                                                            Foreground="{StaticResource UIThirdColor}"
+                                                            Height="26"
+                                                            Icon="Solid_Times"/>
 
                                                 </Border>
+
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
 
-
-
                                     <Style.Triggers>
                                         <Trigger 
-                                                 Property="IsPressed" 
-                                                 Value="True">
+                                                Property="IsPressed" 
+                                                Value="True">
 
                                             <Setter
-                                                     Property="Effect"
-                                                     Value="{StaticResource ClickedDropShadowEffect}"/>
+                                                    Property="Effect"
+                                                    Value="{StaticResource ClickedDropShadowEffect}"/>
 
                                             <Setter Property="RenderTransform">
                                                 <Setter.Value>
@@ -1273,10 +1246,8 @@
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
-
                             </Button.Style>
                         </Button>
-
                     </StackPanel>
 
                     <Border 
@@ -1294,7 +1265,6 @@
                             Text="Identificator"/>
                         
                     </Border>
-
 
                     <Grid
                         Margin="30 0 0 12">
@@ -1338,12 +1308,10 @@
                             Grid.Row="1"
                             Grid.Column="1"/>
 
-
                         <RadioButton 
                             Margin="0 6 0 6"
                             IsChecked="{Binding GreaterThan}"
                             Grid.Row="2"/>
-
 
                         <TextBlock
                             Margin="0 6 0 6"
@@ -1355,7 +1323,6 @@
                             Grid.Column="1"/>
 
                     </Grid>
-
 
                     <Border
                         Background="{StaticResource TextBoxBackGround}"
@@ -1388,13 +1355,14 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Width="146">
+
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="GotFocus">
                                     <i:InvokeCommandAction Command="{Binding FocusTextBox}" CommandParameter="Id_Filter"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+
                         </TextBox>
-                        
                         
                     </Border>
 
@@ -1419,7 +1387,6 @@
                             Foreground="{StaticResource UIThirdColor}"
                             Text="Server Type"/>
 
-                        
                     </Border>
 
                     <Border 
@@ -1432,7 +1399,6 @@
 
                         <ComboBox 
                             Width="148"
-                         
                             Height="38"
                             SelectedItem="{Binding ServerTypeFilter}"
                             ItemsSource="{Binding FilterServerTypes}">
@@ -1441,7 +1407,6 @@
                                 <DataTemplate>
                                     <TextBlock Text="{Binding ServerTypeName}"/>
                                 </DataTemplate>
-                                
                             </ComboBox.ItemTemplate>
                             
                         </ComboBox>
@@ -1452,7 +1417,6 @@
                          Height="55" 
                          Command="{Binding ResetFilter}"
                          Width="147.5">
-
 
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
@@ -1473,14 +1437,15 @@
                                                          TextAlignment="Center"
                                                          FontWeight="SemiBold"
                                                          FontSize="24"
-                                                         Text="Reset"
-                                                         />
+                                                         Text="Reset"/>
+
                                                 </StackPanel>
+
                                             </Border>
+
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                           Property="IsPressed" 
@@ -1527,10 +1492,12 @@
                                                          TextAlignment="Center"
                                                          FontWeight="SemiBold"
                                                          FontSize="24"
-                                                         Text="Apply"
-                                                         />
+                                                         Text="Apply"/>
+
                                                 </StackPanel>
+
                                             </Border>
+
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -1554,11 +1521,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
-                      
-
                     </Button>
-
                 </StackPanel>
             </Border>
         </StackPanel>
@@ -1578,23 +1541,21 @@
 
             <StackPanel.Style>
                 <Style TargetType="StackPanel">
-
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding AddTabVisibility}" Value="True" >
-                        <DataTrigger.EnterActions>
-
-                            <BeginStoryboard>
-                                <Storyboard>
+                            
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
                                         <DoubleAnimation
-                                                         Storyboard.TargetProperty="Width"
-                                                         From="0"
-                                                         To="200" Duration="0:0:0.2" AutoReverse="False"/>
-                                        </Storyboard>
-                            </BeginStoryboard>
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="200" Duration="0:0:0.2" AutoReverse="False"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
 
-                        </DataTrigger.EnterActions>
-                         <DataTrigger.ExitActions>
-
+                            <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -1604,38 +1565,37 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
-                    </DataTrigger>
-                </Style.Triggers>
+                            
+                        </DataTrigger>
+                    </Style.Triggers>
                 </Style>
             </StackPanel.Style>
 
             <Border 
-                    BorderBrush="{StaticResource UIPrimaryColor}"
-                    BorderThickness="0 0 1.3 0" 
-                    Height="600" 
-                    Width="200">
-
+                BorderBrush="{StaticResource UIPrimaryColor}"
+                BorderThickness="0 0 1.3 0" 
+                Height="600" 
+                Width="200">
 
                 <StackPanel
                         VerticalAlignment="Top">
 
                     <StackPanel
-                            Background="{StaticResource UIPrimaryColor}"
-                            Orientation="Horizontal">
+                        Background="{StaticResource UIPrimaryColor}"
+                        Orientation="Horizontal">
 
                         <TextBlock
-                                Foreground="{StaticResource UIThirdColor}"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Bottom"
-                                TextAlignment="Center"
-                                Width="160"
-                                Padding="29 0 0 0"
-                                Margin="0 0 0 1"
-                               
-                                Height="35.6"
-                                FontSize="26"
-                                FontWeight="SemiBold"
-                                Text="Add Entity"/>
+                            Foreground="{StaticResource UIThirdColor}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom"
+                            TextAlignment="Center"
+                            Width="160"
+                            Padding="29 0 0 0"
+                            Margin="0 0 0 1"
+                            Height="35.6"
+                            FontSize="26"
+                            FontWeight="SemiBold"
+                            Text="Add Entity"/>
 
                         <Button
                             Command="{Binding HideTheTabs}"
@@ -1643,7 +1603,6 @@
 
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
-
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate>
@@ -1655,14 +1614,13 @@
                                                     CornerRadius="15"
                                                     Height="35">
 
-
                                                     <fa5:SvgAwesome
                                                         Foreground="{StaticResource UIThirdColor}"
                                                         Height="26"
-                                                        Icon="Solid_Times"
-                                                        />
+                                                        Icon="Solid_Times"/>
 
                                                 </Border>
+
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>
@@ -1673,8 +1631,8 @@
                                             Value="True">
 
                                             <Setter
-                                                     Property="Effect"
-                                                     Value="{StaticResource ClickedDropShadowEffect}"/>
+                                                Property="Effect"
+                                                Value="{StaticResource ClickedDropShadowEffect}"/>
 
                                             <Setter Property="RenderTransform">
                                                 <Setter.Value>
@@ -1685,10 +1643,8 @@
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
-
                             </Button.Style>
                         </Button>
-
                     </StackPanel>
 
                     <Border 
@@ -1737,11 +1693,13 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Width="146">
+                            
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="GotFocus">
                                     <i:InvokeCommandAction Command="{Binding FocusTextBox}" CommandParameter="IdAddServer"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+                            
                         </TextBox>
                     </Border>
 
@@ -1798,11 +1756,13 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Width="146">
+                            
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="GotFocus">
                                     <i:InvokeCommandAction Command="{Binding FocusTextBox}" CommandParameter="AddServer.Name"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+                            
                         </TextBox>
                     </Border>
 
@@ -1859,11 +1819,13 @@
                             Background="Transparent"
                             BorderThickness="0"
                             Width="146">
+                            
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="GotFocus">
                                     <i:InvokeCommandAction Command="{Binding FocusTextBox}" CommandParameter="AddServer.IpAddress"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
+                            
                         </TextBox>
                     </Border>
                     
@@ -1906,12 +1868,10 @@
                             SelectedItem="{Binding AddServer.Type,Mode=OneWayToSource}"
                             ItemsSource="{Binding ServerTypes}">
                             
-
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding ServerTypeName}"/>
                                 </DataTemplate>
-
                             </ComboBox.ItemTemplate>
 
                         </ComboBox>
@@ -1971,19 +1931,16 @@
                             </Style>
                         </Button.Style>
                     </Button>
-
                 </StackPanel>
             </Border>
         </StackPanel>
         <!--#endregion-->
 
         <!--#region  KeyBoard-->
-
         <Button
                 Grid.RowSpan="2"
                 Panel.ZIndex="9"
                 Command="{Binding HideKeyboard}">
-
 
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -2002,9 +1959,9 @@
 
                                     <Rectangle.Style>
                                         <Style TargetType="Rectangle">
-
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding KeyBoardVisibility}" Value="True" >
+
                                                     <DataTrigger.EnterActions>
                                                         <BeginStoryboard>
                                                             <Storyboard>
@@ -2014,8 +1971,8 @@
                                                                      To="360" Duration="0:0:0" AutoReverse="False"/>
                                                             </Storyboard>
                                                         </BeginStoryboard>
-
                                                     </DataTrigger.EnterActions>
+
                                                     <DataTrigger.ExitActions>
                                                         <BeginStoryboard>
                                                             <Storyboard>
@@ -2026,20 +1983,18 @@
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </DataTrigger.ExitActions>
+
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Rectangle.Style>
-
                                 </Rectangle>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
             </Button.Style>
-
         </Button>
-
 
         <Border 
             VerticalAlignment="Bottom"
@@ -2053,11 +2008,10 @@
 
             <Border.Style>
                 <Style TargetType="Border">
-
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding KeyBoardVisibility}" Value="True" >
+                            
                             <DataTrigger.EnterActions>
-
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -2066,10 +2020,9 @@
                                           To="242" Duration="0:0:0.1" AutoReverse="False"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-
                             </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
 
+                            <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -2079,6 +2032,7 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
+                            
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
@@ -2118,24 +2072,24 @@
                         </Setter>
                         <Style.Triggers>
                             <Trigger 
-                                    Property="IsPressed" 
-                                    Value="True">
+                                Property="IsPressed" 
+                                Value="True">
 
                                 <Setter
-                                        Property="Effect"
-                                        Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
+                                    Property="Effect"
+                                    Value="{StaticResource SecondaryClickedDropShadowEffect}"/>
 
                                 <Setter Property="RenderTransform">
                                     <Setter.Value>
                                         <ScaleTransform ScaleX="0.996" ScaleY="0.996"  />
                                     </Setter.Value>
                                 </Setter>
+                                
                             </Trigger>
                         </Style.Triggers>
                     </Style>
                 </Grid.Resources>
-                
-                
+                  
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -2147,6 +2101,7 @@
                 <StackPanel 
                     Orientation="Horizontal"
                     Grid.Row="0">
+                    
                     <Button  Content="1"></Button>
                     <Button  Content="2"></Button>
                     <Button  Content="3"></Button>
@@ -2157,11 +2112,13 @@
                     <Button  Content="8"></Button>
                     <Button  Content="9"></Button>
                     <Button  Content="0"></Button>
+                    
                 </StackPanel>
 
                 <StackPanel 
                     Orientation="Horizontal"
                     Grid.Row="1">
+                    
                     <Button  Content="Q"></Button>
                     <Button  Content="W"></Button>
                     <Button  Content="E"></Button>
@@ -2172,12 +2129,14 @@
                     <Button  Content="I"></Button>
                     <Button  Content="O"></Button>
                     <Button  Content="P"></Button>
+                    
                 </StackPanel>
 
                 <StackPanel 
                     Margin="16 0 0 0"
                     Orientation="Horizontal"
                     Grid.Row="2">
+                    
                     <Button  Content="A"></Button>
                     <Button  Content="S"></Button>
                     <Button  Content="D"></Button>
@@ -2187,31 +2146,32 @@
                     <Button  Content="J"></Button>
                     <Button  Content="K"></Button>
                     <Button  Content="L"></Button>
+                    
                 </StackPanel>
 
                 <StackPanel 
                     Orientation="Horizontal"
                     Grid.Row="3">
+                    
                     <Button
                         Margin="0 0 3 0"
                         Content="Shift">
                         <Button.Style>
                             <Style TargetType="Button">
-                                
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="Button">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
 
-                                        <Border
+                                            <Border
                                             Background="{StaticResource ButtonColor}"
                                             Margin="3 3 3 3"
                                             CornerRadius="5"
                                             Height="42"
                                             Width="45">
 
-                                            <TextBlock 
+                                                <TextBlock 
                                                 VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"
                                                 TextAlignment="Center"
@@ -2219,11 +2179,11 @@
                                                 Foreground="{StaticResource UISecondaryColor}"
                                                 Text="{TemplateBinding Content}"/>
 
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                                
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                                 <Style.Triggers>
                                     <Trigger 
                                         Property="IsPressed" 
@@ -2243,7 +2203,6 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    
                     
                     <Button  Content="Z"></Button>
                     <Button  Content="X"></Button>
@@ -2254,17 +2213,14 @@
                     <Button  Content="M"></Button>
                     <Button
                         Content="BACKSPACE"
-                        Margin="3 0 0 0"
-                        >
+                        Margin="3 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="Button">
-
                                             <Border
                                                 Background="{StaticResource ButtonColor}"
                                                 Margin="3 3 3 3"
@@ -2274,14 +2230,13 @@
 
                                                 <fa5:SvgAwesome
                                                     Height="20"
-                                                    Icon="Solid_Backspace"
-                                                    />
+                                                    Icon="Solid_Backspace"/>
 
                                             </Border>
+
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                         Property="IsPressed" 
@@ -2296,6 +2251,7 @@
                                                 <ScaleTransform ScaleX="0.996" ScaleY="0.996"  />
                                             </Setter.Value>
                                         </Setter>
+                                        
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -2303,18 +2259,15 @@
                     </Button>
                 </StackPanel>
 
-
                 <StackPanel
                     Orientation="Horizontal"
                     Grid.Row="4">
 
                     <Button
                          Content="CAPS_LOCK"
-                         Margin="0 0 0 0"
-                         >
+                         Margin="0 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2330,7 +2283,7 @@
 
                                                 <StackPanel 
                                                     Orientation="Horizontal">
-                                                
+
                                                     <TextBlock
                                                         Margin="0 0 0 0"
                                                         Width="40"
@@ -2352,14 +2305,14 @@
                                                             Fill="#e14700"
                                                             ></Ellipse>
                                                     </StackPanel>
-                                                    
-                                                </StackPanel>                                                
+
+                                                </StackPanel>
 
                                             </Border>
+
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                          Property="IsPressed" 
@@ -2382,11 +2335,9 @@
 
                     <Button
                          Content="."
-                         Margin="0 0 0 0"
-                         >
+                         Margin="0 0 0 0">
                             <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2415,12 +2366,10 @@
                                                         Foreground="{StaticResource UISecondaryColor}">
                                                     </TextBlock>
                                                 </StackPanel>
-
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                      Property="IsPressed" 
@@ -2441,14 +2390,11 @@
                         </Button.Style>
                     </Button>
 
-
                     <Button
                          Margin="6 0 0 0"
-                        Content="SPACE"
-                         >
+                        Content="SPACE">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2462,8 +2408,8 @@
                                                  Height="42"
                                                  Width="152">
 
-
                                             </Border>
+                                            
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -2482,6 +2428,7 @@
                                                 <ScaleTransform ScaleX="0.996" ScaleY="0.996"  />
                                             </Setter.Value>
                                         </Setter>
+                                        
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -2490,11 +2437,9 @@
 
                     <Button
                          Content="ENTER"
-                         Margin="6 0 0 0"
-                         >
+                         Margin="6 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2516,7 +2461,6 @@
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                          Property="IsPressed" 
@@ -2536,7 +2480,6 @@
                             </Style>
                         </Button.Style>
                     </Button>
-
                 </StackPanel>
             </Grid>
         </Border>
@@ -2553,11 +2496,10 @@
 
             <Border.Style>
                 <Style TargetType="Border">
-
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding KeyBoardVisibility}" Value="True" >
-                            <DataTrigger.EnterActions>
 
+                            <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -2566,10 +2508,9 @@
                                               To="242" Duration="0:0:0.1" AutoReverse="False"/>
                                     </Storyboard>
                                 </BeginStoryboard>
-
                             </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
 
+                            <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
@@ -2579,19 +2520,17 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
+
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Border.Style>
-
 
             <Grid 
                  VerticalAlignment="Bottom"
                  Height="240"
                  Width="360">
 
-                
-                
                 <Grid.Resources>
                     <Style TargetType="{x:Type Button}" >
                         <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
@@ -2638,7 +2577,6 @@
                     </Style>
                 </Grid.Resources>
 
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -2650,6 +2588,7 @@
                 <StackPanel 
                      Orientation="Horizontal"
                      Grid.Row="0">
+
                     <Button  Content="1"></Button>
                     <Button  Content="2"></Button>
                     <Button  Content="3"></Button>
@@ -2660,11 +2599,13 @@
                     <Button  Content="8"></Button>
                     <Button  Content="9"></Button>
                     <Button  Content="0"></Button>
+
                 </StackPanel>
 
                 <StackPanel 
                      Orientation="Horizontal"
                      Grid.Row="1">
+
                     <Button  Content="q"></Button>
                     <Button  Content="w"></Button>
                     <Button  Content="e"></Button>
@@ -2675,12 +2616,14 @@
                     <Button  Content="i"></Button>
                     <Button  Content="o"></Button>
                     <Button  Content="p"></Button>
+
                 </StackPanel>
 
                 <StackPanel 
                      Margin="16 0 0 0"
                      Orientation="Horizontal"
                      Grid.Row="2">
+
                     <Button  Content="a"></Button>
                     <Button  Content="s"></Button>
                     <Button  Content="d"></Button>
@@ -2690,17 +2633,18 @@
                     <Button  Content="j"></Button>
                     <Button  Content="k"></Button>
                     <Button  Content="l"></Button>
+
                 </StackPanel>
 
                 <StackPanel 
                      Orientation="Horizontal"
                      Grid.Row="3">
+
                     <Button
                          Margin="0 0 3 0"
                          Content="Shift">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2723,14 +2667,15 @@
                                                      Text="{TemplateBinding Content}"/>
 
                                             </Border>
+
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
 
                                 <Style.Triggers>
                                     <Trigger 
-                                            Property="IsPressed" 
-                                            Value="True">
+                                        Property="IsPressed" 
+                                        Value="True">
 
                                         <Setter
                                              Property="Effect"
@@ -2747,7 +2692,6 @@
                         </Button.Style>
                     </Button>
 
-
                     <Button  Content="z"></Button>
                     <Button  Content="x"></Button>
                     <Button  Content="c"></Button>
@@ -2757,11 +2701,9 @@
                     <Button  Content="m"></Button>
                     <Button
                          Content="BACKSPACE"
-                         Margin="3 0 0 0"
-                         >
+                         Margin="3 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2781,6 +2723,7 @@
                                                      />
 
                                             </Border>
+
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -2806,18 +2749,15 @@
                     </Button>
                 </StackPanel>
 
-
                 <StackPanel
                      Orientation="Horizontal"
                      Grid.Row="4">
 
                     <Button
                          Content="CAPS_LOCK"
-                         Margin="0 0 0 0"
-                         >
+                         Margin="0 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2857,7 +2797,6 @@
                                                     </StackPanel>
 
                                                 </StackPanel>
-
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
@@ -2885,11 +2824,9 @@
 
                     <Button
                          Content="."
-                         Margin="0 0 0 0"
-                         >
+                         Margin="0 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2923,7 +2860,6 @@
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                          Property="IsPressed" 
@@ -2944,14 +2880,11 @@
                         </Button.Style>
                     </Button>
 
-
                     <Button
                          Margin="6 0 0 0"
-                         Content="SPACE"
-                         >
+                         Content="SPACE">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -2965,12 +2898,10 @@
                                                  Height="42"
                                                  Width="152">
 
-
                                             </Border>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                          Property="IsPressed" 
@@ -2993,11 +2924,9 @@
 
                     <Button
                          Content="ENTER"
-                         Margin="6 0 0 0"
-                         >
+                         Margin="6 0 0 0">
                         <Button.Style>
                             <Style TargetType="Button">
-
                                 <Setter Property="Command" Value="{Binding KeyboardButtonPress}"/>
                                 <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Content}"/>
                                 <Setter Property="Template">
@@ -3019,7 +2948,6 @@
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
-
                                 <Style.Triggers>
                                     <Trigger 
                                          Property="IsPressed" 
@@ -3042,8 +2970,9 @@
                 </StackPanel>
             </Grid>
         </Border>
-
         <!--#endregion-->
 
     </Grid>
+    <!--#endregion-->
+    
 </UserControl>

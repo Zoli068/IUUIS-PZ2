@@ -36,7 +36,6 @@ namespace NetworkService.Assets
                         this.validationErrors.Add(fieldName, value);
                     }
                 }
-                //this.OnPropertyChanged();
                 this.OnPropertyChanged("IsValid");
             }
         }

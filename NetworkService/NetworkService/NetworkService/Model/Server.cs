@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace NetworkService.Model
 {
-
     public class Server:ValidationBase
     {
         private int _identificator;
@@ -27,7 +26,7 @@ namespace NetworkService.Model
             _usage = 0;
         }
 
-
+        #region Properties
         public int Identificator
         {
             get
@@ -109,7 +108,9 @@ namespace NetworkService.Model
                 }
             }
         }
+        #endregion
 
+        #region Validation
         protected override void ValidateSelf()
         {
             if(string.IsNullOrEmpty(this.Name))
@@ -133,12 +134,9 @@ namespace NetworkService.Model
                 if(!IPAddress.TryParse(this.IpAddress, out iP))
                 {
                     this.ValidationErrors["Address"] = "Invalid Address format";
-
                 }
-
             }
-
-
         }
+        #endregion
     }
 }
