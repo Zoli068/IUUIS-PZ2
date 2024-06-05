@@ -403,14 +403,13 @@
 
                                     <Line.Stroke>
                                         <LinearGradientBrush StartPoint="{Binding X1}" EndPoint="{Binding X2}">
-                                            <GradientStop Color="#edf8fa" Offset="0.143" />
-                                            <GradientStop Color="#edf8fa" Offset="0.143" />
+                                            <GradientStop Color="DarkSlateGray" Offset="0.143" />
                                             <GradientStop Color="#00a7e1" Offset="0.286" />
                                             <GradientStop Color="#003459" Offset="0.429" />
                                             <GradientStop Color="Black" Offset="0.572" />
                                             <GradientStop Color="#003459" Offset="0.715" />
                                             <GradientStop Color="#00a7e1" Offset="0.858" />
-                                            <GradientStop Color="#edf8fa" Offset="1" />
+                                            <GradientStop Color="DarkSlateGray" Offset="1" />
                                         </LinearGradientBrush>
                                     </Line.Stroke>
                                 </Line>

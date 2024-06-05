@@ -98,7 +98,7 @@ namespace NetworkService.ViewModel
             DestinationHistory.Push("home");
 
             //using at development
-            if (true)
+            if (false)
             {
                 Server s1 = new Server();
                 s1.Name = "Oracle";
@@ -252,6 +252,7 @@ namespace NetworkService.ViewModel
                         {
                             destination= DestinationHistory.Pop();
                         }
+                        Messenger.Default.Send<string>("DefaultEntityTable");
                         break;
 
                     case "entitiesView":
@@ -282,6 +283,7 @@ namespace NetworkService.ViewModel
                 switch (destination)
                 {
                     case "home":
+                        Messenger.Default.Send<string>("DefaultEntityTable");
                         CurrentViewModel = HomeViewModel;
                         break;
 

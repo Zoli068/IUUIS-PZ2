@@ -546,7 +546,7 @@
                                             <fa5:SvgAwesome
                                                 Height="35"
                                                 Width="30"
-                                                Foreground="{StaticResource UIPrimaryColor}"
+                                                Foreground="{StaticResource ButtonColor}"
                                                 Icon="Solid_EllipsisH"/>
 
                                         </Border>
@@ -596,7 +596,7 @@
                                             <fa5:SvgAwesome
                                                 Height="35"
                                                 Width="30"
-                                                Foreground="{StaticResource UIPrimaryColor}"
+                                                Foreground="{StaticResource ButtonColor}"
                                                 Icon="Solid_Home"/>
 
                                         </Border>
@@ -645,7 +645,7 @@
                                             <fa5:SvgAwesome
                                                 Height="35"
                                                 Width="30"
-                                                Foreground="{StaticResource UIPrimaryColor}"
+                                                Foreground="{StaticResource ButtonColor}"
                                                 Icon="Solid_UndoAlt"/>
 
                                         </Border>

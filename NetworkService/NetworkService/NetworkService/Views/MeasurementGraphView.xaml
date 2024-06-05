@@ -680,7 +680,7 @@
                                 <Ellipse.Style>
 
                                     <Style TargetType="Ellipse">
-                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Setter Property="Fill" Value="{StaticResource UIPrimaryColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding FirstCircle.Warning}" Value="True" >
                                                 <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
@@ -705,7 +705,7 @@
                                 <Ellipse.Style>
 
                                     <Style TargetType="Ellipse">
-                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Setter Property="Fill" Value="{StaticResource UIPrimaryColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding SecondCircle.Warning}" Value="True" >
                                                 <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
@@ -730,7 +730,7 @@
                                 <Ellipse.Style>
 
                                     <Style TargetType="Ellipse">
-                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Setter Property="Fill" Value="{StaticResource UIPrimaryColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding ThirdCircle.Warning}" Value="True" >
                                                 <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
@@ -755,7 +755,7 @@
                                 <Ellipse.Style>
 
                                     <Style TargetType="Ellipse">
-                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Setter Property="Fill" Value="{StaticResource UIPrimaryColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding FourthCircle.Warning}" Value="True" >
                                                 <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
@@ -780,7 +780,7 @@
                                 <Ellipse.Style>
 
                                     <Style TargetType="Ellipse">
-                                        <Setter Property="Fill" Value="{StaticResource GraphColor}"/>
+                                        <Setter Property="Fill" Value="{StaticResource UIPrimaryColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding FifthCircle.Warning}" Value="True" >
                                                 <Setter Property="Fill" Value="{StaticResource InvalidStatusColor}"/>
@@ -973,7 +973,7 @@
                         Width="22"
                         Margin="15 0 0 0"
                         Height="22"
-                        Background="{StaticResource GraphColor}"/>
+                        Background="{StaticResource UIPrimaryColor}"/>
 
                     <TextBlock
                         Margin="10 0 0 0"

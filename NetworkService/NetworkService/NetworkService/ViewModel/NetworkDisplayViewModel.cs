@@ -53,6 +53,7 @@ namespace NetworkService.ViewModel
 
         private void TryToDropDown(string value)
         {
+
             startIndex = -1;
             endIndex = -1;
             int num = int.Parse(value);
@@ -271,7 +272,7 @@ namespace NetworkService.ViewModel
                 endIndex = -1;
                 return;
             }
-
+            draggedServer = null;
             drawTheLine();
         }
 
@@ -402,8 +403,15 @@ namespace NetworkService.ViewModel
                 {
                     if (sd.Server == server)
                     {
-                        continue;
+                        postoji=true;
+                        break;
                     }
+                }
+
+                if (postoji)
+                {
+                    postoji = false;
+                    continue;
                 }
 
                 foreach (ServersByType serverByType in ServersByTypes)
@@ -422,7 +430,6 @@ namespace NetworkService.ViewModel
                 else
                 {
                     AddServerToList(server);
-
                 }
             }
         }
@@ -552,10 +559,10 @@ namespace NetworkService.ViewModel
             toDeleteList = new List<Server>();
 
             //TODO delete at end bcs, at begining we wont have no server in system
-            foreach (Server s in Servers)
-            {
-                AddServerToList(s);
-            }
+            //foreach (Server s in Servers)
+            //{
+            //  AddServerToList(s);
+            //}
 
             for (int i = 0; i < 6; i++)
             {

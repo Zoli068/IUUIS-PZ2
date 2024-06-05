@@ -172,7 +172,7 @@ namespace NetworkService.ViewModel
         }
         #endregion
 
-        #region RreadValuesFromTxt
+        #region ReadValuesFromTxt
         private void readValuesFromTxt(string id)
         {
             string[] lines = File.ReadAllLines("Log.txt");

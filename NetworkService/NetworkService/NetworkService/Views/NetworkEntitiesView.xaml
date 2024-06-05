@@ -40,7 +40,7 @@
 
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="{StaticResource UIPrimaryColor}"/>
+                                <Setter Property="Background" Value="{StaticResource ButtonColor}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -314,8 +314,8 @@
                             <BulletDecorator.Bullet>
                                 
                                 <Grid Height="25" Width="25">
-                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="{StaticResource UIPrimaryColor}" BorderThickness="2" CornerRadius="15" />
-                                    <Border CornerRadius="15" Margin="4" Name="RadioMark" Background="{StaticResource UIPrimaryColor}" Visibility="Hidden" />
+                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="{StaticResource ButtonColor}" BorderThickness="2" CornerRadius="15" />
+                                    <Border CornerRadius="15" Margin="4" Name="RadioMark" Background="{StaticResource ButtonColor}" Visibility="Hidden" />
                                 </Grid>
                                 
                             </BulletDecorator.Bullet>
@@ -324,7 +324,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
                                 <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="{StaticResource ResourceKey=UIPrimaryColor}" />
+                                <Setter TargetName="RadioOuter" Property="BorderBrush" Value="{StaticResource ResourceKey=ButtonColor}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
